@@ -35,6 +35,9 @@
 - (void)initData {
     _imgList = @[@"home_index1",@"home_index2",@"home_index3"];
     _infoArr = [NSMutableArray arrayWithCapacity:0];
+    [_infoArr addObject:@"aa"];
+    [_infoArr addObject:@"bb"];
+    [_infoArr addObject:@"cc"];
 }
 
 - (void)initCtrl {
@@ -66,6 +69,7 @@
     //tableview
     CGRect tableViewRect = _homeTableView.frame;
     _homeTableView.frame = CGRectMake(CGRectGetMinX(tableViewRect), CGRectGetMinY(tableViewRect), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 204);
+    _homeTableView.tableHeaderView = nil;
     _homeTableView.dataSource = self;
     _homeTableView.delegate = self;
     
@@ -96,8 +100,6 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     int curPageIndex = scrollView.contentOffset.x/[UIScreen mainScreen].bounds.size.width;
-    int viewWidth = [UIScreen mainScreen].bounds.size.width;
-    int scrollX = scrollView.contentOffset.x;
     _homePageCtrl.currentPage = curPageIndex;
 }
 
@@ -105,6 +107,23 @@
 {
     return 1;
 }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 30)];
+    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 30)];
+    [titleLab setText:@"文交所资讯"];
+    [titleLab setTextColor:[UIColor blackColor]];
+    [headView addSubview:titleLab];
+    return headView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 30.f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.1f;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _infoArr.count;
