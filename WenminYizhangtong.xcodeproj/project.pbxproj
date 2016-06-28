@@ -1,0 +1,546 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7B0C65621D163D7D00C54B56 /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C65611D163D7D00C54B56 /* HomeVC.m */; };
+		7B0C65651D163DB000C54B56 /* QuotationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C65641D163DB000C54B56 /* QuotationVC.m */; };
+		7B0C65681D163E2200C54B56 /* OneAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C65671D163E2200C54B56 /* OneAccountVC.m */; };
+		7B0C656B1D163E4000C54B56 /* UserCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C656A1D163E4000C54B56 /* UserCenterVC.m */; };
+		7BD756151D1CB5A7000CA7EF /* WJSTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD756141D1CB5A7000CA7EF /* WJSTool.m */; };
+		7BD7562B1D21850F000CA7EF /* tabbar_icon_equity.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD7561F1D21850F000CA7EF /* tabbar_icon_equity.png */; };
+		7BD7562C1D21850F000CA7EF /* tabbar_icon_equity_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756201D21850F000CA7EF /* tabbar_icon_equity_highlight.png */; };
+		7BD7562D1D21850F000CA7EF /* tabbar_icon_mine.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756211D21850F000CA7EF /* tabbar_icon_mine.png */; };
+		7BD7562E1D21850F000CA7EF /* tabbar_icon_mine_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756221D21850F000CA7EF /* tabbar_icon_mine_highlight.png */; };
+		7BD7562F1D21850F000CA7EF /* tabbar_icon_news.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756231D21850F000CA7EF /* tabbar_icon_news.png */; };
+		7BD756301D21850F000CA7EF /* tabbar_icon_news_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756241D21850F000CA7EF /* tabbar_icon_news_highlight.png */; };
+		7BD756311D21850F000CA7EF /* tabbar_icon_onlie.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756251D21850F000CA7EF /* tabbar_icon_onlie.png */; };
+		7BD756321D21850F000CA7EF /* tabbar_icon_onlie_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756261D21850F000CA7EF /* tabbar_icon_onlie_highlight.png */; };
+		7BD756331D21850F000CA7EF /* home_index1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756281D21850F000CA7EF /* home_index1.png */; };
+		7BD756341D21850F000CA7EF /* home_index2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756291D21850F000CA7EF /* home_index2.png */; };
+		7BD756351D21850F000CA7EF /* home_index3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD7562A1D21850F000CA7EF /* home_index3.png */; };
+		7BEC05901D1199770047A2E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC058F1D1199770047A2E3 /* main.m */; };
+		7BEC05931D1199770047A2E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC05921D1199770047A2E3 /* AppDelegate.m */; };
+		7BEC05991D1199770047A2E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEC05971D1199770047A2E3 /* Main.storyboard */; };
+		7BEC059C1D1199770047A2E3 /* WenminYizhangtong.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC059A1D1199770047A2E3 /* WenminYizhangtong.xcdatamodeld */; };
+		7BEC059E1D1199770047A2E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BEC059D1D1199770047A2E3 /* Assets.xcassets */; };
+		7BEC05A11D1199770047A2E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEC059F1D1199770047A2E3 /* LaunchScreen.storyboard */; };
+		7BEC05AD1D119A150047A2E3 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC05AC1D119A150047A2E3 /* LoginVC.m */; };
+		EECF4765AC72DB7A5B43CCED /* libPods-WenminYizhangtong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A4489DEE229721E03BB596A /* libPods-WenminYizhangtong.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5B49603E90651F861C0C50EF /* Pods-WenminYizhangtong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenminYizhangtong.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WenminYizhangtong/Pods-WenminYizhangtong.debug.xcconfig"; sourceTree = "<group>"; };
+		7A4489DEE229721E03BB596A /* libPods-WenminYizhangtong.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WenminYizhangtong.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B0C65601D163D7D00C54B56 /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
+		7B0C65611D163D7D00C54B56 /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
+		7B0C65631D163DB000C54B56 /* QuotationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotationVC.h; sourceTree = "<group>"; };
+		7B0C65641D163DB000C54B56 /* QuotationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotationVC.m; sourceTree = "<group>"; };
+		7B0C65661D163E2200C54B56 /* OneAccountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneAccountVC.h; sourceTree = "<group>"; };
+		7B0C65671D163E2200C54B56 /* OneAccountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneAccountVC.m; sourceTree = "<group>"; };
+		7B0C65691D163E4000C54B56 /* UserCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterVC.h; sourceTree = "<group>"; };
+		7B0C656A1D163E4000C54B56 /* UserCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterVC.m; sourceTree = "<group>"; };
+		7BD756131D1CB5A7000CA7EF /* WJSTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSTool.h; sourceTree = "<group>"; };
+		7BD756141D1CB5A7000CA7EF /* WJSTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSTool.m; sourceTree = "<group>"; };
+		7BD7561F1D21850F000CA7EF /* tabbar_icon_equity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_icon_equity.png; sourceTree = "<group>"; };
+		7BD756201D21850F000CA7EF /* tabbar_icon_equity_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_icon_equity_highlight.png; sourceTree = "<group>"; };
+		7BD756211D21850F000CA7EF /* tabbar_icon_mine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_icon_mine.png; sourceTree = "<group>"; };
+		7BD756221D21850F000CA7EF /* tabbar_icon_mine_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_icon_mine_highlight.png; sourceTree = "<group>"; };
+		7BD756231D21850F000CA7EF /* tabbar_icon_news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_icon_news.png; sourceTree = "<group>"; };
+		7BD756241D21850F000CA7EF /* tabbar_icon_news_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_icon_news_highlight.png; sourceTree = "<group>"; };
+		7BD756251D21850F000CA7EF /* tabbar_icon_onlie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_icon_onlie.png; sourceTree = "<group>"; };
+		7BD756261D21850F000CA7EF /* tabbar_icon_onlie_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_icon_onlie_highlight.png; sourceTree = "<group>"; };
+		7BD756281D21850F000CA7EF /* home_index1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_index1.png; sourceTree = "<group>"; };
+		7BD756291D21850F000CA7EF /* home_index2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_index2.png; sourceTree = "<group>"; };
+		7BD7562A1D21850F000CA7EF /* home_index3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_index3.png; sourceTree = "<group>"; };
+		7BEC058B1D1199770047A2E3 /* WenminYizhangtong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WenminYizhangtong.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BEC058F1D1199770047A2E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7BEC05911D1199770047A2E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7BEC05921D1199770047A2E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7BEC05981D1199770047A2E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7BEC059B1D1199770047A2E3 /* WenminYizhangtong.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WenminYizhangtong.xcdatamodel; sourceTree = "<group>"; };
+		7BEC059D1D1199770047A2E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7BEC05A01D1199770047A2E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7BEC05A21D1199770047A2E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BEC05AB1D119A150047A2E3 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		7BEC05AC1D119A150047A2E3 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		EE3AC701586E569AFE4DB6A5 /* Pods-WenminYizhangtong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenminYizhangtong.release.xcconfig"; path = "Pods/Target Support Files/Pods-WenminYizhangtong/Pods-WenminYizhangtong.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7BEC05881D1199770047A2E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EECF4765AC72DB7A5B43CCED /* libPods-WenminYizhangtong.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		394C534A7EF1194E8F833CF8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A4489DEE229721E03BB596A /* libPods-WenminYizhangtong.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3C7A2968AC3AFE8FCD4BCBCD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5B49603E90651F861C0C50EF /* Pods-WenminYizhangtong.debug.xcconfig */,
+				EE3AC701586E569AFE4DB6A5 /* Pods-WenminYizhangtong.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7B0C655C1D163C9E00C54B56 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				7B0C65601D163D7D00C54B56 /* HomeVC.h */,
+				7B0C65611D163D7D00C54B56 /* HomeVC.m */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		7B0C655D1D163CB100C54B56 /* 行情 */ = {
+			isa = PBXGroup;
+			children = (
+				7B0C65631D163DB000C54B56 /* QuotationVC.h */,
+				7B0C65641D163DB000C54B56 /* QuotationVC.m */,
+			);
+			name = "行情";
+			sourceTree = "<group>";
+		};
+		7B0C655E1D163CBB00C54B56 /* 一账通 */ = {
+			isa = PBXGroup;
+			children = (
+				7B0C65661D163E2200C54B56 /* OneAccountVC.h */,
+				7B0C65671D163E2200C54B56 /* OneAccountVC.m */,
+			);
+			name = "一账通";
+			sourceTree = "<group>";
+		};
+		7B0C655F1D163CC700C54B56 /* 个人中心 */ = {
+			isa = PBXGroup;
+			children = (
+				7BEC05AB1D119A150047A2E3 /* LoginVC.h */,
+				7BEC05AC1D119A150047A2E3 /* LoginVC.m */,
+				7B0C65691D163E4000C54B56 /* UserCenterVC.h */,
+				7B0C656A1D163E4000C54B56 /* UserCenterVC.m */,
+			);
+			name = "个人中心";
+			sourceTree = "<group>";
+		};
+		7BD756121D1CB573000CA7EF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7BD756131D1CB5A7000CA7EF /* WJSTool.h */,
+				7BD756141D1CB5A7000CA7EF /* WJSTool.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		7BD756171D2172DE000CA7EF /* images */ = {
+			isa = PBXGroup;
+			children = (
+				7BD7561E1D21850F000CA7EF /* tabbar */,
+				7BD756271D21850F000CA7EF /* home */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		7BD7561E1D21850F000CA7EF /* tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				7BD7561F1D21850F000CA7EF /* tabbar_icon_equity.png */,
+				7BD756201D21850F000CA7EF /* tabbar_icon_equity_highlight.png */,
+				7BD756211D21850F000CA7EF /* tabbar_icon_mine.png */,
+				7BD756221D21850F000CA7EF /* tabbar_icon_mine_highlight.png */,
+				7BD756231D21850F000CA7EF /* tabbar_icon_news.png */,
+				7BD756241D21850F000CA7EF /* tabbar_icon_news_highlight.png */,
+				7BD756251D21850F000CA7EF /* tabbar_icon_onlie.png */,
+				7BD756261D21850F000CA7EF /* tabbar_icon_onlie_highlight.png */,
+			);
+			path = tabbar;
+			sourceTree = "<group>";
+		};
+		7BD756271D21850F000CA7EF /* home */ = {
+			isa = PBXGroup;
+			children = (
+				7BD756281D21850F000CA7EF /* home_index1.png */,
+				7BD756291D21850F000CA7EF /* home_index2.png */,
+				7BD7562A1D21850F000CA7EF /* home_index3.png */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		7BEC05821D1199770047A2E3 = {
+			isa = PBXGroup;
+			children = (
+				7BEC058D1D1199770047A2E3 /* WenminYizhangtong */,
+				7BEC058C1D1199770047A2E3 /* Products */,
+				3C7A2968AC3AFE8FCD4BCBCD /* Pods */,
+				394C534A7EF1194E8F833CF8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		7BEC058C1D1199770047A2E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BEC058B1D1199770047A2E3 /* WenminYizhangtong.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7BEC058D1D1199770047A2E3 /* WenminYizhangtong */ = {
+			isa = PBXGroup;
+			children = (
+				7B0C655C1D163C9E00C54B56 /* 首页 */,
+				7B0C655D1D163CB100C54B56 /* 行情 */,
+				7B0C655E1D163CBB00C54B56 /* 一账通 */,
+				7B0C655F1D163CC700C54B56 /* 个人中心 */,
+				7BEC05911D1199770047A2E3 /* AppDelegate.h */,
+				7BEC05921D1199770047A2E3 /* AppDelegate.m */,
+				7BD756121D1CB573000CA7EF /* Common */,
+				7BEC05971D1199770047A2E3 /* Main.storyboard */,
+				7BEC059D1D1199770047A2E3 /* Assets.xcassets */,
+				7BEC059F1D1199770047A2E3 /* LaunchScreen.storyboard */,
+				7BEC05A21D1199770047A2E3 /* Info.plist */,
+				7BEC059A1D1199770047A2E3 /* WenminYizhangtong.xcdatamodeld */,
+				7BEC058E1D1199770047A2E3 /* Supporting Files */,
+			);
+			path = WenminYizhangtong;
+			sourceTree = "<group>";
+		};
+		7BEC058E1D1199770047A2E3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7BD756171D2172DE000CA7EF /* images */,
+				7BEC058F1D1199770047A2E3 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7BEC058A1D1199770047A2E3 /* WenminYizhangtong */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BEC05A51D1199770047A2E3 /* Build configuration list for PBXNativeTarget "WenminYizhangtong" */;
+			buildPhases = (
+				08D8BB3950FEFFD541290909 /* Check Pods Manifest.lock */,
+				7BEC05871D1199770047A2E3 /* Sources */,
+				7BEC05881D1199770047A2E3 /* Frameworks */,
+				7BEC05891D1199770047A2E3 /* Resources */,
+				EF024042F1419F4400791CE9 /* Embed Pods Frameworks */,
+				58C665927094DC72C0F4D036 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WenminYizhangtong;
+			productName = WenminYizhangtong;
+			productReference = 7BEC058B1D1199770047A2E3 /* WenminYizhangtong.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7BEC05831D1199770047A2E3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = alexyang;
+				TargetAttributes = {
+					7BEC058A1D1199770047A2E3 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 7BEC05861D1199770047A2E3 /* Build configuration list for PBXProject "WenminYizhangtong" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7BEC05821D1199770047A2E3;
+			productRefGroup = 7BEC058C1D1199770047A2E3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7BEC058A1D1199770047A2E3 /* WenminYizhangtong */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7BEC05891D1199770047A2E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BEC05A11D1199770047A2E3 /* LaunchScreen.storyboard in Resources */,
+				7BD756301D21850F000CA7EF /* tabbar_icon_news_highlight.png in Resources */,
+				7BD7562C1D21850F000CA7EF /* tabbar_icon_equity_highlight.png in Resources */,
+				7BD7562E1D21850F000CA7EF /* tabbar_icon_mine_highlight.png in Resources */,
+				7BD7562B1D21850F000CA7EF /* tabbar_icon_equity.png in Resources */,
+				7BD7562D1D21850F000CA7EF /* tabbar_icon_mine.png in Resources */,
+				7BEC059E1D1199770047A2E3 /* Assets.xcassets in Resources */,
+				7BD756351D21850F000CA7EF /* home_index3.png in Resources */,
+				7BD756331D21850F000CA7EF /* home_index1.png in Resources */,
+				7BEC05991D1199770047A2E3 /* Main.storyboard in Resources */,
+				7BD756311D21850F000CA7EF /* tabbar_icon_onlie.png in Resources */,
+				7BD756321D21850F000CA7EF /* tabbar_icon_onlie_highlight.png in Resources */,
+				7BD756341D21850F000CA7EF /* home_index2.png in Resources */,
+				7BD7562F1D21850F000CA7EF /* tabbar_icon_news.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08D8BB3950FEFFD541290909 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		58C665927094DC72C0F4D036 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WenminYizhangtong/Pods-WenminYizhangtong-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF024042F1419F4400791CE9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WenminYizhangtong/Pods-WenminYizhangtong-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7BEC05871D1199770047A2E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BEC05931D1199770047A2E3 /* AppDelegate.m in Sources */,
+				7B0C65651D163DB000C54B56 /* QuotationVC.m in Sources */,
+				7B0C656B1D163E4000C54B56 /* UserCenterVC.m in Sources */,
+				7BEC05AD1D119A150047A2E3 /* LoginVC.m in Sources */,
+				7BEC059C1D1199770047A2E3 /* WenminYizhangtong.xcdatamodeld in Sources */,
+				7B0C65621D163D7D00C54B56 /* HomeVC.m in Sources */,
+				7BEC05901D1199770047A2E3 /* main.m in Sources */,
+				7BD756151D1CB5A7000CA7EF /* WJSTool.m in Sources */,
+				7B0C65681D163E2200C54B56 /* OneAccountVC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7BEC05971D1199770047A2E3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BEC05981D1199770047A2E3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7BEC059F1D1199770047A2E3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BEC05A01D1199770047A2E3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7BEC05A31D1199770047A2E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7BEC05A41D1199770047A2E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7BEC05A61D1199770047A2E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B49603E90651F861C0C50EF /* Pods-WenminYizhangtong.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = WenminYizhangtong/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iNanhu.WenminYizhangtong;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
+			};
+			name = Debug;
+		};
+		7BEC05A71D1199770047A2E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE3AC701586E569AFE4DB6A5 /* Pods-WenminYizhangtong.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = WenminYizhangtong/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iNanhu.WenminYizhangtong;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7BEC05861D1199770047A2E3 /* Build configuration list for PBXProject "WenminYizhangtong" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BEC05A31D1199770047A2E3 /* Debug */,
+				7BEC05A41D1199770047A2E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BEC05A51D1199770047A2E3 /* Build configuration list for PBXNativeTarget "WenminYizhangtong" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BEC05A61D1199770047A2E3 /* Debug */,
+				7BEC05A71D1199770047A2E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7BEC059A1D1199770047A2E3 /* WenminYizhangtong.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7BEC059B1D1199770047A2E3 /* WenminYizhangtong.xcdatamodel */,
+			);
+			currentVersion = 7BEC059B1D1199770047A2E3 /* WenminYizhangtong.xcdatamodel */;
+			path = WenminYizhangtong.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 7BEC05831D1199770047A2E3 /* Project object */;
+}
