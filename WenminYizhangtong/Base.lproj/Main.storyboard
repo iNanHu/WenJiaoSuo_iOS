@@ -34,7 +34,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="s8m-1q-onT">
-                                <rect key="frame" x="80" y="380" width="215" height="38"/>
+                                <rect key="frame" x="80" y="298" width="215" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.38790151098919778" green="0.39503982959053574" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="登录"/>
@@ -45,24 +45,42 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tNU-do-wp2">
+                                <rect key="frame" x="251" y="493" width="100" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="忘记密码">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N0d-WA-D5f">
+                                <rect key="frame" x="13" y="493" width="100" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="注册">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="H0k-on-tf0"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="forgetPsdBtn" destination="tNU-do-wp2" id="Hrf-KW-yYW"/>
                         <outlet property="loginBtn" destination="s8m-1q-onT" id="iBG-rf-ULK"/>
                         <outlet property="nameTextFiled" destination="NxN-0Z-MZq" id="6rb-ZN-kFx"/>
                         <outlet property="psdTextFiled" destination="yNq-rm-Tig" id="A6K-RT-nNI"/>
+                        <outlet property="registerBtn" destination="N0d-WA-D5f" id="zfU-ES-zE3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-594.93333333333328" y="758.75333333333333"/>
+            <point key="canvasLocation" x="-626.5" y="1731.5"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Home Tab BarVC-->
         <scene sceneID="oUJ-sf-fvq">
             <objects>
-                <tabBarController id="ka6-ee-RMZ" sceneMemberID="viewController">
+                <tabBarController id="ka6-ee-RMZ" customClass="WJSHomeTabBarVC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="cYl-zy-Qg4"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="9Ae-YD-Iur">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -78,13 +96,13 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9h-cu-xRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-245.06666666666666" y="758.75333333333333"/>
+            <point key="canvasLocation" x="-626.5" y="937.5"/>
         </scene>
         <!--首页-->
         <scene sceneID="EmO-ci-K8O">
             <objects>
                 <navigationController id="pWd-a3-6QJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首页" image="tabbar_icon_news.png" selectedImage="tabbar_icon_news_highlight.png" id="tzw-8h-CsY"/>
+                    <tabBarItem key="tabBarItem" title="首页" id="tzw-8h-CsY"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Um-rl-VtD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -105,25 +123,10 @@
                     <view key="view" contentMode="scaleToFill" id="18S-Q9-YTF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ILg-JI-s1i">
-                                <rect key="frame" x="0.0" y="203" width="375" height="415"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ncy-e2-OZn">
-                                <rect key="frame" x="0.0" y="64" width="375" height="140"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </scrollView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="首页" id="Rdy-RH-dJT"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="homeScrollView" destination="ncy-e2-OZn" id="giT-Zu-8C8"/>
-                        <outlet property="homeTableView" destination="ILg-JI-s1i" id="8cO-1l-R2I"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bo-sb-GMu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -133,7 +136,7 @@
         <scene sceneID="nLu-kP-pID">
             <objects>
                 <navigationController id="bxc-dh-mxn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="一账通" image="tabbar_icon_onlie.png" selectedImage="tabbar_icon_onlie_highlight.png" id="JKC-0D-pVz"/>
+                    <tabBarItem key="tabBarItem" title="一账通" id="JKC-0D-pVz"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ioY-tG-hqc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -145,7 +148,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fsf-20-2jd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121.33333333333333" y="684.9133333333333"/>
+            <point key="canvasLocation" x="120.5" y="740.5"/>
         </scene>
         <!--一账通-->
         <scene sceneID="jKB-jH-6PZ">
@@ -181,13 +184,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x51-kv-n8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="425.33333333333331" y="684.9133333333333"/>
+            <point key="canvasLocation" x="739.5" y="774.5"/>
         </scene>
         <!--行情-->
         <scene sceneID="GBm-4Y-P8J">
             <objects>
                 <navigationController id="goM-0M-HMC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="行情" image="tabbar_icon_equity.png" selectedImage="tabbar_icon_equity_highlight.png" id="WSs-Oy-v6R"/>
+                    <tabBarItem key="tabBarItem" title="行情" id="WSs-Oy-v6R"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JnG-id-4Pb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -215,13 +218,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gy0-Ay-wEY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="425.33333333333331" y="-14.673333333333334"/>
+            <point key="canvasLocation" x="739.5" y="12.5"/>
         </scene>
         <!--个人中心-->
         <scene sceneID="xDR-am-JtW">
             <objects>
                 <navigationController id="6sN-at-bP0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="个人中心" image="tabbar_icon_mine.png" selectedImage="tabbar_icon_mine_highlight.png" id="xD3-0a-jBV"/>
+                    <tabBarItem key="tabBarItem" title="个人中心" id="xD3-0a-jBV"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kBt-1n-gK1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -233,7 +236,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HFP-V4-jTK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121.33333333333333" y="1381.6600000000001"/>
+            <point key="canvasLocation" x="120.5" y="1576.5"/>
         </scene>
         <!--个人中心-->
         <scene sceneID="boI-sB-Jdh">
@@ -249,17 +252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ov0-4r-Vdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="425.33333333333331" y="1381.6600000000001"/>
+            <point key="canvasLocation" x="761.5" y="1576.5"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="tabbar_icon_equity.png" width="40" height="40"/>
-        <image name="tabbar_icon_equity_highlight.png" width="40" height="40"/>
-        <image name="tabbar_icon_mine.png" width="40" height="40"/>
-        <image name="tabbar_icon_mine_highlight.png" width="40" height="40"/>
-        <image name="tabbar_icon_news.png" width="40" height="40"/>
-        <image name="tabbar_icon_news_highlight.png" width="40" height="40"/>
-        <image name="tabbar_icon_onlie.png" width="40" height="40"/>
-        <image name="tabbar_icon_onlie_highlight.png" width="40" height="40"/>
-    </resources>
 </document>

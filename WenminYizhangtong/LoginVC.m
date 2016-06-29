@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextFiled;
 @property (weak, nonatomic) IBOutlet UITextField *psdTextFiled;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
+@property (weak, nonatomic) IBOutlet UIButton *forgetPsdBtn;
 
 @end
 
