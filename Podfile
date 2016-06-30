@@ -7,5 +7,8 @@ target 'WenminYizhangtong' do
 pod 'ASIHTTPRequest', '~> 1.8.2'
 pod 'hpple', '~>0.2.0'
 pod 'GDataXML-HTML', '~>1.3.0'
+pod 'AFNetworking', '~>3.1.0'
+pod 'SDWebImage', '~>3.8.1'
+pod 'JPush', '~>2.1.7'
 end
 

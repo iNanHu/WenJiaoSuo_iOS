@@ -58,4 +58,8 @@
 #define WJSINFO_TITLE       @"WJSInfoTitleName"
 #define WJSINFO_DETAIL      @"WJSInfoDetail"
 
+//网络请求的回调信息
+typedef void (^SuccBlock)(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject);
+typedef void (^FailBlock)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error);
+
 #endif /* WJSCommonDefine_h */

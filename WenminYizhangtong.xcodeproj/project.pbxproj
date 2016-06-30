@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A4DFBBA1D24E13C0003CA7A /* WJSLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4DFBB91D24E13C0003CA7A /* WJSLoginVC.m */; };
+		5A4DFBBD1D24E1500003CA7A /* WJSFindPsdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4DFBBC1D24E1500003CA7A /* WJSFindPsdVC.m */; };
+		5A4DFBC01D24E1610003CA7A /* WJSRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4DFBBF1D24E1610003CA7A /* WJSRegisterVC.m */; };
+		5A4DFBC41D24EDB80003CA7A /* WJSDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4DFBC31D24EDB80003CA7A /* WJSDataManager.m */; };
 		7B0C65621D163D7D00C54B56 /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C65611D163D7D00C54B56 /* HomeVC.m */; };
 		7B0C65651D163DB000C54B56 /* QuotationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C65641D163DB000C54B56 /* QuotationVC.m */; };
 		7B0C65681D163E2200C54B56 /* OneAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C65671D163E2200C54B56 /* OneAccountVC.m */; };
@@ -37,6 +41,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5A4DFBB81D24E13C0003CA7A /* WJSLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSLoginVC.h; sourceTree = "<group>"; };
+		5A4DFBB91D24E13C0003CA7A /* WJSLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSLoginVC.m; sourceTree = "<group>"; };
+		5A4DFBBB1D24E1500003CA7A /* WJSFindPsdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSFindPsdVC.h; sourceTree = "<group>"; };
+		5A4DFBBC1D24E1500003CA7A /* WJSFindPsdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSFindPsdVC.m; sourceTree = "<group>"; };
+		5A4DFBBE1D24E1610003CA7A /* WJSRegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSRegisterVC.h; sourceTree = "<group>"; };
+		5A4DFBBF1D24E1610003CA7A /* WJSRegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSRegisterVC.m; sourceTree = "<group>"; };
+		5A4DFBC21D24EDB80003CA7A /* WJSDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSDataManager.h; sourceTree = "<group>"; };
+		5A4DFBC31D24EDB80003CA7A /* WJSDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSDataManager.m; sourceTree = "<group>"; };
 		5B49603E90651F861C0C50EF /* Pods-WenminYizhangtong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenminYizhangtong.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WenminYizhangtong/Pods-WenminYizhangtong.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4489DEE229721E03BB596A /* libPods-WenminYizhangtong.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WenminYizhangtong.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B0C65601D163D7D00C54B56 /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
@@ -106,6 +118,28 @@
 				EE3AC701586E569AFE4DB6A5 /* Pods-WenminYizhangtong.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		5A4DFBAB1D24E04C0003CA7A /* 登录注册 */ = {
+			isa = PBXGroup;
+			children = (
+				5A4DFBB81D24E13C0003CA7A /* WJSLoginVC.h */,
+				5A4DFBB91D24E13C0003CA7A /* WJSLoginVC.m */,
+				5A4DFBBB1D24E1500003CA7A /* WJSFindPsdVC.h */,
+				5A4DFBBC1D24E1500003CA7A /* WJSFindPsdVC.m */,
+				5A4DFBBE1D24E1610003CA7A /* WJSRegisterVC.h */,
+				5A4DFBBF1D24E1610003CA7A /* WJSRegisterVC.m */,
+			);
+			name = "登录注册";
+			sourceTree = "<group>";
+		};
+		5A4DFBC11D24ED920003CA7A /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				5A4DFBC21D24EDB80003CA7A /* WJSDataManager.h */,
+				5A4DFBC31D24EDB80003CA7A /* WJSDataManager.m */,
+			);
+			name = DataManager;
 			sourceTree = "<group>";
 		};
 		7B0C655C1D163C9E00C54B56 /* 首页 */ = {
@@ -215,6 +249,8 @@
 		7BEC058D1D1199770047A2E3 /* WenminYizhangtong */ = {
 			isa = PBXGroup;
 			children = (
+				5A4DFBC11D24ED920003CA7A /* DataManager */,
+				5A4DFBAB1D24E04C0003CA7A /* 登录注册 */,
 				7B0C655C1D163C9E00C54B56 /* 首页 */,
 				7B0C655D1D163CB100C54B56 /* 行情 */,
 				7B0C655E1D163CBB00C54B56 /* 一账通 */,
@@ -248,12 +284,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BEC05A51D1199770047A2E3 /* Build configuration list for PBXNativeTarget "WenminYizhangtong" */;
 			buildPhases = (
-				08D8BB3950FEFFD541290909 /* Check Pods Manifest.lock */,
+				08D8BB3950FEFFD541290909 /* [CP] Check Pods Manifest.lock */,
 				7BEC05871D1199770047A2E3 /* Sources */,
 				7BEC05881D1199770047A2E3 /* Frameworks */,
 				7BEC05891D1199770047A2E3 /* Resources */,
-				EF024042F1419F4400791CE9 /* Embed Pods Frameworks */,
-				58C665927094DC72C0F4D036 /* Copy Pods Resources */,
+				EF024042F1419F4400791CE9 /* [CP] Embed Pods Frameworks */,
+				58C665927094DC72C0F4D036 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -323,14 +359,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		08D8BB3950FEFFD541290909 /* Check Pods Manifest.lock */ = {
+		08D8BB3950FEFFD541290909 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,14 +374,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		58C665927094DC72C0F4D036 /* Copy Pods Resources */ = {
+		58C665927094DC72C0F4D036 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,14 +389,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WenminYizhangtong/Pods-WenminYizhangtong-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EF024042F1419F4400791CE9 /* Embed Pods Frameworks */ = {
+		EF024042F1419F4400791CE9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,8 +413,12 @@
 			files = (
 				7BEC05931D1199770047A2E3 /* AppDelegate.m in Sources */,
 				7B0C65651D163DB000C54B56 /* QuotationVC.m in Sources */,
+				5A4DFBBD1D24E1500003CA7A /* WJSFindPsdVC.m in Sources */,
 				7B9403301D22D77700DBA882 /* WJSHomeTabBarVC.m in Sources */,
 				7B0C656B1D163E4000C54B56 /* UserCenterVC.m in Sources */,
+				5A4DFBBA1D24E13C0003CA7A /* WJSLoginVC.m in Sources */,
+				5A4DFBC41D24EDB80003CA7A /* WJSDataManager.m in Sources */,
+				5A4DFBC01D24E1610003CA7A /* WJSRegisterVC.m in Sources */,
 				7BEC05AD1D119A150047A2E3 /* LoginVC.m in Sources */,
 				7BEC059C1D1199770047A2E3 /* WenminYizhangtong.xcdatamodeld in Sources */,
 				7B0C65621D163D7D00C54B56 /* HomeVC.m in Sources */,
