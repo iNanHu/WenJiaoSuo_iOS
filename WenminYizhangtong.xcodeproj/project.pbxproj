@@ -36,7 +36,6 @@
 		7BEC059C1D1199770047A2E3 /* WenminYizhangtong.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC059A1D1199770047A2E3 /* WenminYizhangtong.xcdatamodeld */; };
 		7BEC059E1D1199770047A2E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BEC059D1D1199770047A2E3 /* Assets.xcassets */; };
 		7BEC05A11D1199770047A2E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEC059F1D1199770047A2E3 /* LaunchScreen.storyboard */; };
-		7BEC05AD1D119A150047A2E3 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC05AC1D119A150047A2E3 /* LoginVC.m */; };
 		EECF4765AC72DB7A5B43CCED /* libPods-WenminYizhangtong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A4489DEE229721E03BB596A /* libPods-WenminYizhangtong.a */; };
 /* End PBXBuildFile section */
 
@@ -86,8 +85,6 @@
 		7BEC059D1D1199770047A2E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7BEC05A01D1199770047A2E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7BEC05A21D1199770047A2E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7BEC05AB1D119A150047A2E3 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
-		7BEC05AC1D119A150047A2E3 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		EE3AC701586E569AFE4DB6A5 /* Pods-WenminYizhangtong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenminYizhangtong.release.xcconfig"; path = "Pods/Target Support Files/Pods-WenminYizhangtong/Pods-WenminYizhangtong.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,8 +172,6 @@
 		7B0C655F1D163CC700C54B56 /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
-				7BEC05AB1D119A150047A2E3 /* LoginVC.h */,
-				7BEC05AC1D119A150047A2E3 /* LoginVC.m */,
 				7B0C65691D163E4000C54B56 /* UserCenterVC.h */,
 				7B0C656A1D163E4000C54B56 /* UserCenterVC.m */,
 			);
@@ -419,7 +414,6 @@
 				5A4DFBBA1D24E13C0003CA7A /* WJSLoginVC.m in Sources */,
 				5A4DFBC41D24EDB80003CA7A /* WJSDataManager.m in Sources */,
 				5A4DFBC01D24E1610003CA7A /* WJSRegisterVC.m in Sources */,
-				7BEC05AD1D119A150047A2E3 /* LoginVC.m in Sources */,
 				7BEC059C1D1199770047A2E3 /* WenminYizhangtong.xcdatamodeld in Sources */,
 				7B0C65621D163D7D00C54B56 /* HomeVC.m in Sources */,
 				7BEC05901D1199770047A2E3 /* main.m in Sources */,

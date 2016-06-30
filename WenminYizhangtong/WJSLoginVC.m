@@ -7,6 +7,8 @@
 //
 
 #import "WJSLoginVC.h"
+#import "WJSCommonDefine.h"
+#import "WJSDataManager.h"
 
 @interface WJSLoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *nameTextFiled;
@@ -24,12 +26,27 @@
 }
 
 - (void)Login {
+    
     if ([_nameTextFiled.text isEqualToString:@""]) {
         return;
     }
     if ([_psdTextFiled.text isEqualToString:@""]) {
         return;
     }
+    
+    NSString *usrName = _nameTextFiled.text;
+    NSString *usrPsd = _psdTextFiled.text;
+    
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        [self loginResult:0];
+    };
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+    
+    };
+    [[WJSDataManager shareInstance]loginUserAccWithUserName:usrName andUserPsd:usrPsd andSucc:succBlock andFail:failBlock];
+}
+
+- (void)loginResult:(NSInteger) result {
     
 }
 
