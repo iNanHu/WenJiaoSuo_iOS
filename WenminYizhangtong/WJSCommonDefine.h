@@ -9,6 +9,8 @@
 #ifndef WJSCommonDefine_h
 #define WJSCommonDefine_h
 
+#import <Foundation/NSURLSession.h>
+
 #define iOS8                     ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 #define iPhone6                  (([UIScreen mainScreen].bounds.size.width == 750) ? YES : NO)
 #define iPhone6P                 (([UIScreen mainScreen].bounds.size.width == 1080) ? YES : NO)
@@ -58,6 +60,18 @@
 #define WJSINFO_TITLE       @"WJSInfoTitleName"
 #define WJSINFO_DETAIL      @"WJSInfoDetail"
 
+#define JSON_RES_SUCC       @"success"
+#define JSON_RES_FAIL       @"error"
+
+//行情信息
+#define QUOTA_NAME          @"name"
+#define QUOTA_STATUS        @"status"
+#define QUOTA_SALES         @"transaction"
+#define QUOTA_PRICE         @"price"
+#define QUOTA_ALL_PRICE     @"capitalization"
+#define QUOTA_RATE          @"rate"
+
+#define NAV_TO_HOMEVC       @"Nav_To_HomeVC"
 //网络请求的回调信息
 typedef void (^SuccBlock)(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject);
 typedef void (^FailBlock)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error);

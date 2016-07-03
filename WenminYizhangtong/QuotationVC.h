@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QuotationVC : UIViewController
+@interface QuotationVC : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

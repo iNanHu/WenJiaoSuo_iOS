@@ -6,6 +6,7 @@
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
 
+#import "WJSTool.h"
 #import "WJSRegisterVC.h"
 #import "WJSDataManager.h"
 
@@ -23,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,12 +44,24 @@
         NSLog(@"用户名不能为空！");
         return ;
     }
+    
+    if (![WJSTool validateMobile:strName]) {
+        NSLog(@"手机号不能为空！");
+    }
     if([strEmail isEqualToString:@""]) {
         NSLog(@"邮箱地址不能为空！");
         return ;
     }
+    if (![WJSTool validateEmail:strEmail]) {
+        NSLog(@"邮箱格式错误！");
+        return ;
+    }
     if ([strPsd isEqualToString:@""]) {
         NSLog(@"密码不能为空！");
+        return ;
+    }
+    if (![WJSTool validatePassword:strPsd]) {
+        NSLog(@"密码格式错误！");
         return ;
     }
     if ([strConfirmPsd isEqualToString:@""]) {
@@ -60,11 +74,26 @@
     }
     SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         NSLog(@"处理成功：%@",responseObject);
+        [self registerResult:responseObject];
     };
     FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
         NSLog(@"处理失败：%@",error);
     };
-    [[WJSDataManager shareInstance]registerUserAccWithUserName:strName andInviteId:strInviteId andUserEmail:strEmail andUserPsd:strPsd andSucc:succBlock andFail:failBlock];
+    NSString *strMD5Psd = [WJSTool getMD5Val:strPsd];
+    [[WJSDataManager shareInstance]registerUserAccWithUserName:strName andInviteId:strInviteId andUserEmail:strEmail andUserPsd:strMD5Psd andSucc:succBlock andFail:failBlock];
+}
+
+- (void)registerResult:(NSDictionary *)result {
+    
+    NSString *resVal = [result objectForKey:@"msg"];
+    if ([resVal isEqualToString:JSON_RES_SUCC]) {
+        NSString *uId = [result objectForKey:@"data"];
+        [[WJSDataModel shareInstance] setUId:uId];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        NSString *errMsg = [result objectForKey:@"data"];
+        NSLog(@"注册失败，error[%@]",errMsg);
+    }
 }
 
 @end

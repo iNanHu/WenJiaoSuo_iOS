@@ -38,7 +38,7 @@
     NSString *usrPsd = _psdTextFiled.text;
     
     SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        [self loginResult:0];
+        [self loginResult:responseObject];
     };
     FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
     
@@ -46,8 +46,17 @@
     [[WJSDataManager shareInstance]loginUserAccWithUserName:usrName andUserPsd:usrPsd andSucc:succBlock andFail:failBlock];
 }
 
-- (void)loginResult:(NSInteger) result {
-    
+- (void)loginResult:(NSDictionary *) result {
+    NSString *resVal = [result objectForKey:@"msg"];
+    if ([resVal isEqualToString:JSON_RES_SUCC]) {
+        NSString *uId = [result objectForKey:@"data"];
+        [[WJSDataModel shareInstance] setUId:uId];
+        
+        [self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
+    } else {
+        NSString *errMsg = [result objectForKey:@"data"];
+        NSLog(@"登录失败，error[%@]",errMsg);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,14 +64,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:NAV_TO_HOMEVC]) {
+        
+    }
 }
-*/
+
 
 @end

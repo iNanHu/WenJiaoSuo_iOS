@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WJSDataModel.h"
 #import "WJSCommonDefine.h"
 
 @interface WJSDataManager : NSObject

@@ -6,6 +6,7 @@
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
 #import <ASIFormDataRequest.h>
+#import <CommonCrypto/CommonCrypto.h>
 #import <TFHpple.h>
 #import "WJSTool.h"
 
@@ -55,13 +56,25 @@
     }
 }
 
-- (BOOL)validateMobile{
++ (NSString *)getMD5Val:(NSString *)strVal {
+    const char *original_str = [strVal UTF8String];//string为摘要内容，转成char
+    
+    /****系统api~~~~*****/
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(original_str, (CC_LONG)strlen(original_str), result);//调通系统md5加密
+    NSMutableString *hash = [NSMutableString string];
+    for (int i = 0; i < 16; i++)
+        [hash appendFormat:@"%02x", result[i]];
+    return hash ;//校验码
+}
+
++ (BOOL)validateMobile:(NSString *)phoneNum {
     
     NSString *MOBILE = @"^1[34578]\\d{9}$";
     
     NSPredicate *regexTestMobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",MOBILE];
     
-    if ([regexTestMobile evaluateWithObject:self]) {
+    if ([regexTestMobile evaluateWithObject:phoneNum]) {
         return YES;
     }else {
         return NO;

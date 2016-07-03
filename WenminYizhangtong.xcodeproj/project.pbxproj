@@ -26,6 +26,9 @@
 		7B94033E1D2350E300DBA882 /* tabbar_icon_news@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B9403361D2350E300DBA882 /* tabbar_icon_news@2x.png */; };
 		7B94033F1D2350E300DBA882 /* tabbar_icon_onlie_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B9403371D2350E300DBA882 /* tabbar_icon_onlie_highlight@2x.png */; };
 		7B9403401D2350E300DBA882 /* tabbar_icon_onlie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B9403381D2350E300DBA882 /* tabbar_icon_onlie@2x.png */; };
+		7B9403821D28056B00DBA882 /* WJSDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9403811D28056B00DBA882 /* WJSDataModel.m */; };
+		7B9403861D29082100DBA882 /* LiuXSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9403851D29082100DBA882 /* LiuXSegmentView.m */; };
+		7B9403881D2916FC00DBA882 /* QuotationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B9403871D2916FC00DBA882 /* QuotationCell.xib */; };
 		7BD756151D1CB5A7000CA7EF /* WJSTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD756141D1CB5A7000CA7EF /* WJSTool.m */; };
 		7BD756331D21850F000CA7EF /* home_index1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756281D21850F000CA7EF /* home_index1.png */; };
 		7BD756341D21850F000CA7EF /* home_index2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756291D21850F000CA7EF /* home_index2.png */; };
@@ -71,6 +74,11 @@
 		7B9403361D2350E300DBA882 /* tabbar_icon_news@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_icon_news@2x.png"; sourceTree = "<group>"; };
 		7B9403371D2350E300DBA882 /* tabbar_icon_onlie_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_icon_onlie_highlight@2x.png"; sourceTree = "<group>"; };
 		7B9403381D2350E300DBA882 /* tabbar_icon_onlie@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_icon_onlie@2x.png"; sourceTree = "<group>"; };
+		7B9403801D28056B00DBA882 /* WJSDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSDataModel.h; sourceTree = "<group>"; };
+		7B9403811D28056B00DBA882 /* WJSDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSDataModel.m; sourceTree = "<group>"; };
+		7B9403841D29082100DBA882 /* LiuXSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiuXSegmentView.h; sourceTree = "<group>"; };
+		7B9403851D29082100DBA882 /* LiuXSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiuXSegmentView.m; sourceTree = "<group>"; };
+		7B9403871D2916FC00DBA882 /* QuotationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuotationCell.xib; sourceTree = "<group>"; };
 		7BD756131D1CB5A7000CA7EF /* WJSTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSTool.h; sourceTree = "<group>"; };
 		7BD756141D1CB5A7000CA7EF /* WJSTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSTool.m; sourceTree = "<group>"; };
 		7BD756281D21850F000CA7EF /* home_index1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_index1.png; sourceTree = "<group>"; };
@@ -135,6 +143,8 @@
 			children = (
 				5A4DFBC21D24EDB80003CA7A /* WJSDataManager.h */,
 				5A4DFBC31D24EDB80003CA7A /* WJSDataManager.m */,
+				7B9403801D28056B00DBA882 /* WJSDataModel.h */,
+				7B9403811D28056B00DBA882 /* WJSDataModel.m */,
 			);
 			name = DataManager;
 			sourceTree = "<group>";
@@ -156,6 +166,7 @@
 			children = (
 				7B0C65631D163DB000C54B56 /* QuotationVC.h */,
 				7B0C65641D163DB000C54B56 /* QuotationVC.m */,
+				7B9403871D2916FC00DBA882 /* QuotationCell.xib */,
 			);
 			name = "行情";
 			sourceTree = "<group>";
@@ -176,6 +187,15 @@
 				7B0C656A1D163E4000C54B56 /* UserCenterVC.m */,
 			);
 			name = "个人中心";
+			sourceTree = "<group>";
+		};
+		7B9403831D29082100DBA882 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				7B9403841D29082100DBA882 /* LiuXSegmentView.h */,
+				7B9403851D29082100DBA882 /* LiuXSegmentView.m */,
+			);
+			path = Widgets;
 			sourceTree = "<group>";
 		};
 		7BD756121D1CB573000CA7EF /* Common */ = {
@@ -244,6 +264,7 @@
 		7BEC058D1D1199770047A2E3 /* WenminYizhangtong */ = {
 			isa = PBXGroup;
 			children = (
+				7B9403831D29082100DBA882 /* Widgets */,
 				5A4DFBC11D24ED920003CA7A /* DataManager */,
 				5A4DFBAB1D24E04C0003CA7A /* 登录注册 */,
 				7B0C655C1D163C9E00C54B56 /* 首页 */,
@@ -344,6 +365,7 @@
 				7B94033C1D2350E300DBA882 /* tabbar_icon_mine@2x.png in Resources */,
 				7BEC05991D1199770047A2E3 /* Main.storyboard in Resources */,
 				7B94033D1D2350E300DBA882 /* tabbar_icon_news_highlight@2x.png in Resources */,
+				7B9403881D2916FC00DBA882 /* QuotationCell.xib in Resources */,
 				7B94032D1D22D60D00DBA882 /* defCellImg.png in Resources */,
 				7B94033E1D2350E300DBA882 /* tabbar_icon_news@2x.png in Resources */,
 				7BD756341D21850F000CA7EF /* home_index2.png in Resources */,
@@ -409,6 +431,7 @@
 				7BEC05931D1199770047A2E3 /* AppDelegate.m in Sources */,
 				7B0C65651D163DB000C54B56 /* QuotationVC.m in Sources */,
 				5A4DFBBD1D24E1500003CA7A /* WJSFindPsdVC.m in Sources */,
+				7B9403861D29082100DBA882 /* LiuXSegmentView.m in Sources */,
 				7B9403301D22D77700DBA882 /* WJSHomeTabBarVC.m in Sources */,
 				7B0C656B1D163E4000C54B56 /* UserCenterVC.m in Sources */,
 				5A4DFBBA1D24E13C0003CA7A /* WJSLoginVC.m in Sources */,
@@ -418,6 +441,7 @@
 				7B0C65621D163D7D00C54B56 /* HomeVC.m in Sources */,
 				7BEC05901D1199770047A2E3 /* main.m in Sources */,
 				7BD756151D1CB5A7000CA7EF /* WJSTool.m in Sources */,
+				7B9403821D28056B00DBA882 /* WJSDataModel.m in Sources */,
 				7B0C65681D163E2200C54B56 /* OneAccountVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

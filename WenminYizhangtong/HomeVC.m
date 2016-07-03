@@ -7,6 +7,7 @@
 //
 #import "WJSTool.h"
 #import "WJSCommonDefine.h"
+#import "WJSDataManager.h"
 #import "HomeVC.h"
 
 #define SCROLL_HEIGHT 140
@@ -47,6 +48,20 @@
     [_infoArr addObject:@{ WJSINFO_IMGURL:@"", WJSINFO_TITLE:@"博商文交所", WJSINFO_DETAIL:@"福利特区，范德萨发卡机了发送的记录方式记录积分楼上的" }];
     [_infoArr addObject:@{ WJSINFO_IMGURL:@"", WJSINFO_TITLE:@"东北文交所", WJSINFO_DETAIL:@"福利特区，范德萨发卡机了发送的记录方式记录积分楼上的" }];
     [_infoArr addObject:@{ WJSINFO_IMGURL:@"", WJSINFO_TITLE:@"武汉文交所", WJSINFO_DETAIL:@"福利特区，范德萨发卡机了发送的记录方式记录积分楼上的" }];
+    
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSString *strResVal = [responseObject objectForKey:@"msg"];
+        if ([strResVal isEqualToString:JSON_RES_SUCC]) {
+            NSArray *arr = [responseObject objectForKey:@"data"];
+            [[WJSDataModel shareInstance] setArrWJSList:arr];
+        } else {
+            NSLog(@"文交所列表获取失败！");
+        }
+    };
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        NSLog(@"error: %@",error);
+    };
+    [[WJSDataManager shareInstance] getWJSInfoListWithSucc:succBlock andFail:failBlock];
 }
 
 - (void)initCtrl {
@@ -92,7 +107,7 @@
     
     _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(AutoChangeScrollVIewIndex) userInfo:nil repeats:YES];
     
-    self.automaticallyAdjustsScrollViewInsets=NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
 }
 
@@ -178,8 +193,6 @@
 - (void)setCellModel:(UITableViewCell *)cell withInfo:(NSDictionary *)dicInfo {
     
     if (!dicInfo) return ;
-    
-    
     
     NSString *strImgUrl = [dicInfo objectForKey:WJSINFO_IMGURL];
     NSString *strTitleName = [dicInfo objectForKey:WJSINFO_TITLE];

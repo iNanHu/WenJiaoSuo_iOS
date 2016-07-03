@@ -76,6 +76,7 @@
                         <outlet property="nameTextFiled" destination="NxN-0Z-MZq" id="6rb-ZN-kFx"/>
                         <outlet property="psdTextFiled" destination="yNq-rm-Tig" id="A6K-RT-nNI"/>
                         <outlet property="registerBtn" destination="N0d-WA-D5f" id="zfU-ES-zE3"/>
+                        <segue destination="ka6-ee-RMZ" kind="push" identifier="Nav_To_HomeVC" id="5If-Cd-e9a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -211,12 +212,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.33939499616060886" green="0.30036386578504681" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="提交"/>
+                                <connections>
+                                    <action selector="comitBtnClick:" destination="w7M-DS-pd9" eventType="touchUpInside" id="XCK-k4-2oj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="找回密码" id="0pD-1f-zl6"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="regEmailText" destination="IoG-8x-Svh" id="NEN-yK-cDe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMK-A1-3Il" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
