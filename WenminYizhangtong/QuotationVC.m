@@ -7,9 +7,11 @@
 //
 
 #import "QuotationVC.h"
+#import "WJSTool.h"
 #import "WJSDataManager.h"
 #import "LiuXSegmentView.h"
 
+#define QUOTATION_SERV_ADDR @"http://www.youbicard.com/plus/data/index.php?eid="
 #define TABLEVIEWCELLID @"tableviewcellId"
 
 @interface QuotationVC ()
@@ -17,6 +19,7 @@
 @property (nonatomic, strong) LiuXSegmentView *segmentView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *arrViews;
+@property (nonatomic, strong) NSArray *arrQuotaInfo;
 @property (nonatomic, strong) NSArray *arrListData;
 @end
 
@@ -31,13 +34,18 @@
 - (void)initData {
     
     _segDataArr = [NSMutableArray arrayWithCapacity:0];
-    NSArray *arrTemp = [[WJSDataModel shareInstance] arrWJSList];
-    for (NSDictionary *dic in arrTemp) {
-        NSString *name = [dic objectForKey:@"name"];
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"QuotationInfo" ofType:@"plist"];
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    _arrQuotaInfo = [NSArray arrayWithArray:[data objectForKey:@"quotationInfoList"]];
+    for(int i = 0; i < [_arrQuotaInfo count]; i++)
+    {
+        NSDictionary *dic = [_arrQuotaInfo objectAtIndex:i];
+        NSString *name = [dic objectForKey:@"Name"];
+        NSLog(@"name: %@",name);
         [_segDataArr addObject:name];
     }
-    
-    _segDataArr = [NSMutableArray arrayWithArray:@[@"南京",@"中南",@"南方",@"中艺",@"渤商",@"吉林",@"福利特"]];
+    NSString *strUrl = [NSString stringWithFormat:@"%@%d",QUOTATION_SERV_ADDR,2];
+    [WJSTool urlstring:strUrl];
 //    NSString *name = [dicInfo objectForKey:QUOTA_NAME];
 //    NSString *status = [dicInfo objectForKey:QUOTA_STATUS];
 //    NSString *sales = [dicInfo objectForKey:QUOTA_SALES];

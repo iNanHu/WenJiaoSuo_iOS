@@ -29,6 +29,7 @@
 		7B9403821D28056B00DBA882 /* WJSDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9403811D28056B00DBA882 /* WJSDataModel.m */; };
 		7B9403861D29082100DBA882 /* LiuXSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9403851D29082100DBA882 /* LiuXSegmentView.m */; };
 		7B9403881D2916FC00DBA882 /* QuotationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B9403871D2916FC00DBA882 /* QuotationCell.xib */; };
+		7B94038A1D2ADA3600DBA882 /* QuotationInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B9403891D2ADA3600DBA882 /* QuotationInfo.plist */; };
 		7BD756151D1CB5A7000CA7EF /* WJSTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD756141D1CB5A7000CA7EF /* WJSTool.m */; };
 		7BD756331D21850F000CA7EF /* home_index1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756281D21850F000CA7EF /* home_index1.png */; };
 		7BD756341D21850F000CA7EF /* home_index2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756291D21850F000CA7EF /* home_index2.png */; };
@@ -79,6 +80,7 @@
 		7B9403841D29082100DBA882 /* LiuXSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiuXSegmentView.h; sourceTree = "<group>"; };
 		7B9403851D29082100DBA882 /* LiuXSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiuXSegmentView.m; sourceTree = "<group>"; };
 		7B9403871D2916FC00DBA882 /* QuotationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuotationCell.xib; sourceTree = "<group>"; };
+		7B9403891D2ADA3600DBA882 /* QuotationInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = QuotationInfo.plist; sourceTree = "<group>"; };
 		7BD756131D1CB5A7000CA7EF /* WJSTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSTool.h; sourceTree = "<group>"; };
 		7BD756141D1CB5A7000CA7EF /* WJSTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSTool.m; sourceTree = "<group>"; };
 		7BD756281D21850F000CA7EF /* home_index1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_index1.png; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			children = (
 				7BD756171D2172DE000CA7EF /* images */,
 				7BEC058F1D1199770047A2E3 /* main.m */,
+				7B9403891D2ADA3600DBA882 /* QuotationInfo.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				7BEC05A11D1199770047A2E3 /* LaunchScreen.storyboard in Resources */,
 				7BEC059E1D1199770047A2E3 /* Assets.xcassets in Resources */,
 				7B9403291D22CAEF00DBA882 /* WJSInfoCell.xib in Resources */,
+				7B94038A1D2ADA3600DBA882 /* QuotationInfo.plist in Resources */,
 				7B9403391D2350E300DBA882 /* tabbar_icon_equity_highlight@2x.png in Resources */,
 				7B94033F1D2350E300DBA882 /* tabbar_icon_onlie_highlight@2x.png in Resources */,
 				7BD756351D21850F000CA7EF /* home_index3.png in Resources */,

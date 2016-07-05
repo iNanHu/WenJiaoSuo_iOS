@@ -21,10 +21,45 @@
                                                            URLWithString: strurl]
                                                  encoding:enc error:&error]
                         dataUsingEncoding:NSUTF8StringEncoding];
-    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
-    NSArray *elements  = [xpathParser searchWithXPathQuery:@"//title"]; // get the title
+    NSString *strHtmlData = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    NSString *strHead = @"<h3 class=\"indextitle\"><a> 总览</a></h3>";
+    NSString *strEnd = @"<h3 class=\"indextitle\"><a> 综合指数分时线</a></h3>";
+    NSRange rangeHead = [strHtmlData rangeOfString:strHead];
+    NSRange rangeEnd = [strHtmlData rangeOfString:strEnd];
+    NSInteger keyStart = rangeHead.location + rangeHead.length;
+    NSInteger keyLen = rangeEnd.location - keyStart;
+    NSRange rangeKey = NSMakeRange(keyStart, keyLen);
+    NSString *strKeyData = [strHtmlData substringWithRange:rangeKey];
+    strKeyData = [strKeyData stringByReplacingOccurrencesOfString:@"\r\n" withString:@""];
+    strKeyData = [strKeyData stringByReplacingOccurrencesOfString:@" " withString:@""];
+    rangeHead = [strKeyData rangeOfString:@"<ul>"];
+    rangeEnd = [strKeyData rangeOfString:@"</ul>"];
+    keyStart = rangeHead.location + rangeHead.length;
+    keyLen = rangeEnd.location - keyStart;
+    rangeKey = NSMakeRange(keyStart, keyLen);
+    strKeyData = [strKeyData substringWithRange:rangeKey];
+    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:[strKeyData dataUsingEncoding:NSUTF8StringEncoding]];
+    NSArray *elements  = [xpathParser searchWithXPathQuery:@"//li"]; // get the title
     NSLog(@"%lu",(unsigned long)[elements count]);
     TFHppleElement *element = [elements objectAtIndex:0];
+    
+    for(int i = 0; i < [elements count]; i++) {
+        TFHppleElement *element = [elements objectAtIndex:i];
+        NSString *strRaw = [element raw];
+        NSRange rangeRaw = [self rangeWithSrc:strRaw withHead:@"<span>" andEnd:@"</span>"];
+        if (rangeRaw.location == NSNotFound) {
+            rangeRaw = [self rangeWithSrc:strRaw withHead:@"<spanclass>" andEnd:@"</spanclass>"];
+        }
+        if (rangeRaw.location == NSNotFound) {
+            rangeRaw = [self rangeWithSrc:strRaw withHead:@"<spanclass=\"t-green\">" andEnd:@"</span>"];
+        }
+        if (rangeRaw.location == NSNotFound) {
+            rangeRaw = [self rangeWithSrc:strRaw withHead:@"<spanclass=\"t-red\">" andEnd:@"</span>"];
+        }
+        if (rangeRaw.location == NSNotFound) continue;
+        NSString *keyVal = [strRaw substringWithRange:rangeRaw];
+        NSLog(@"keyVal: %@",keyVal);
+    }
     
     NSString *content = [element content];
     NSString *tagname = [element tagName];
@@ -34,6 +69,17 @@
     NSLog(@"attr is = %@",attr);
     
     return content;
+}
+
++ (NSRange)rangeWithSrc:(NSString *)strSrc withHead:(NSString *)strHead andEnd:(NSString *)strEnd {
+    NSRange rangeHead = [strSrc rangeOfString:strHead];
+    NSRange rangeEnd = [strSrc rangeOfString:strEnd];
+    
+    NSInteger keyStart = rangeHead.location + rangeHead.length;
+    NSInteger keyLen = rangeEnd.location - keyStart;
+    NSRange rangeKey = NSMakeRange(keyStart, keyLen);
+    
+    return rangeKey;
 }
 
 +(void)getPostResult:(NSString*)startqi{
