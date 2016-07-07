@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+static NSString *appKey = @"f0d1a95d835d3c87cf2a3f94";
+static NSString *channel = @"App Store";
+static BOOL isProduction = FALSE;
 
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    UILabel *_infoLabel;
+    UILabel *_tokenLabel;
+    UILabel *_udidLabel;
+}
 @property (strong, nonatomic) UIWindow *window;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
