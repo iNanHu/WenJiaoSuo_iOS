@@ -7,6 +7,7 @@
 //
 
 #import "WJSLoginVC.h"
+#import "WJSTool.h"
 #import "WJSCommonDefine.h"
 #import "WJSDataManager.h"
 
@@ -43,7 +44,8 @@
     FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
     
     };
-    [[WJSDataManager shareInstance]loginUserAccWithUserName:usrName andUserPsd:usrPsd andSucc:succBlock andFail:failBlock];
+    NSString *strMD5Psd = [WJSTool getMD5Val:usrPsd];
+    [[WJSDataManager shareInstance]loginUserAccWithUserName:usrName andUserPsd:strMD5Psd andSucc:succBlock andFail:failBlock];
 }
 
 - (void)loginResult:(NSDictionary *) result {

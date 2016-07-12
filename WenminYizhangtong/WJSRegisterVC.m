@@ -38,42 +38,45 @@
     NSString *strEmail = _emailText.text;
     NSString *strPsd = _psdText.text;
     NSString *strConfirmPsd = _confirmPsdText.text;
-    NSString *strInviteId;
+    NSString *strInviteId = @"0";
     
-    if ([strName isEqualToString:@""]) {
-        NSLog(@"用户名不能为空！");
-        return ;
-    }
-    
-    if (![WJSTool validateMobile:strName]) {
-        NSLog(@"手机号不能为空！");
-    }
-    if([strEmail isEqualToString:@""]) {
-        NSLog(@"邮箱地址不能为空！");
-        return ;
-    }
-    if (![WJSTool validateEmail:strEmail]) {
-        NSLog(@"邮箱格式错误！");
-        return ;
-    }
-    if ([strPsd isEqualToString:@""]) {
-        NSLog(@"密码不能为空！");
-        return ;
-    }
-    if (![WJSTool validatePassword:strPsd]) {
-        NSLog(@"密码格式错误！");
-        return ;
-    }
-    if ([strConfirmPsd isEqualToString:@""]) {
-        NSLog(@"确认密码不能为空！");
-        return ;
-    }
-    if ([strConfirmPsd isEqualToString:strPsd]) {
-        NSLog(@"两次密码不一致，请重新输入！");
-        return;
-    }
+//    if ([strName isEqualToString:@""]) {
+//        NSLog(@"用户名不能为空！");
+//        return ;
+//    }
+//    
+//    if (![WJSTool validateMobile:strName]) {
+//        NSLog(@"手机号不能为空！");
+//    }
+//    if([strEmail isEqualToString:@""]) {
+//        NSLog(@"邮箱地址不能为空！");
+//        return ;
+//    }
+//    if (![WJSTool validateEmail:strEmail]) {
+//        NSLog(@"邮箱格式错误！");
+//        return ;
+//    }
+//    if ([strPsd isEqualToString:@""]) {
+//        NSLog(@"密码不能为空！");
+//        return ;
+//    }
+//    if (![WJSTool validatePassword:strPsd]) {
+//        NSLog(@"密码格式错误！");
+//        return ;
+//    }
+//    if ([strConfirmPsd isEqualToString:@""]) {
+//        NSLog(@"确认密码不能为空！");
+//        return ;
+//    }
+//    if (![strConfirmPsd isEqualToString:strPsd]) {
+//        NSLog(@"两次密码不一致，请重新输入！");
+//        return;
+//    }
     SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        NSLog(@"处理成功：%@",responseObject);
+        
+        NSString *msg = [responseObject objectForKey:@"msg"];
+        NSString *data = [responseObject objectForKey:@"data"];
+        NSLog(@"处理成功：[msg:%@,data:%@]",msg,data);
         [self registerResult:responseObject];
     };
     FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){

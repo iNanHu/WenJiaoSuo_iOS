@@ -167,6 +167,24 @@
     return 0.1f;
 }
 
+- (void)getWJSInfoList {
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSString *resVal = [responseObject objectForKey:@"msg"];
+        if ([resVal isEqualToString:JSON_RES_SUCC]) {
+            NSString *uId = [responseObject objectForKey:@"data"];
+            NSLog(@"返回成功，%@",uId);
+        } else {
+            NSString *errMsg = [responseObject objectForKey:@"data"];
+            NSLog(@"获取失败，error[%@]",errMsg);
+        }
+    };
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        
+    };
+    
+    [[WJSDataManager shareInstance]getWJSInfoListWithSucc:succBlock andFail:failBlock];
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _infoArr.count;
@@ -227,7 +245,8 @@
 {
     UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell) {
-        ;
+        //[self getWJSInfoList];
+        [self uploadFile];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -237,6 +256,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)uploadFile {
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSString *resVal = [responseObject objectForKey:@"msg"];
+        if ([resVal isEqualToString:JSON_RES_SUCC]) {
+            NSString *uId = [responseObject objectForKey:@"data"];
+            NSLog(@"返回成功，%@",uId);
+        } else {
+            NSString *errMsg = [responseObject objectForKey:@"data"];
+            NSLog(@"获取失败，error[%@]",errMsg);
+        }
+    };
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        
+    };
+    NSString *strImg = @"home_index1";
+    UIImage *img = [UIImage imageNamed:strImg];
+    NSData *imgData = UIImagePNGRepresentation(img);
+    
+    [[WJSDataManager shareInstance]upWJSFileWithFile:imgData andSucc:succBlock andFail:failBlock];
+}
 
 @end
