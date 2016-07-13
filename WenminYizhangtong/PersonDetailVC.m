@@ -7,13 +7,8 @@
 //
 
 #import "PersonDetailVC.h"
-#import "TWSelectCityView.h"
-#import "PickerChoiceView.h"
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AVFoundation/AVFoundation.h>
-#import <MediaPlayer/MediaPlayer.h>
 
-@interface PersonDetailVC ()<TFPickerDelegate,UIImagePickerControllerDelegate>
+@interface PersonDetailVC ()
 @property (weak, nonatomic) IBOutlet UITextField *userNameText;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumText;
 @property (weak, nonatomic) IBOutlet UIButton *sexBtn;
@@ -184,23 +179,16 @@
 //从摄像头获取视频或图片
 - (void)selectImageFromCamera
 {
-    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    //录制视频时长，默认10s
-    self.imagePickerController.videoMaximumDuration = 15;
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    //判断是否有摄像头
+    if(![UIImagePickerController isSourceTypeAvailable:sourceType])
+    {
+        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
     
-    //相机类型（拍照、录像...）字符串需要做相应的类型转换
-    self.imagePickerController.mediaTypes = @[(NSString *)kUTTypeMovie,(NSString *)kUTTypeImage];
-    
-    //视频上传质量
-    //UIImagePickerControllerQualityTypeHigh高清
-    //UIImagePickerControllerQualityTypeMedium中等质量
-    //UIImagePickerControllerQualityTypeLow低质量
-    //UIImagePickerControllerQualityType640x480
-    self.imagePickerController.videoQuality = UIImagePickerControllerQualityTypeHigh;
-    
-    //设置摄像头模式（拍照，录制视频）为录像模式
-    self.imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
-    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+    self.imagePickerController.sourceType = sourceType;
+    self.imagePickerController.allowsEditing = YES;
+    [self presentViewController:self.imagePickerController animated:YES completion:nil];  //需要以模态的形式展示
 }
 //从相册获取图片或视频
 - (void)selectImageFromAlbum
@@ -214,12 +202,43 @@
 #pragma mark UIImagePickerControllerDelegate
 //该代理方法仅适用于只选取图片时
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo {
-    NSLog(@"选择完毕----image:%@-----info:%@",image,editingInfo);
+    //NSLog(@"选择完毕----image:%@-----info:%@",image,editingInfo);
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self performSelector:@selector(saveImage:) withObject:image];
+}
+-(void)saveImage:(UIImage *)image {
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    if(imageData == nil)
+    {
+        imageData = UIImageJPEGRepresentation(image, 1.0);
+    }
+    
+    NSDate *date = [NSDate date];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *fileName = [[formatter stringFromDate:date] stringByAppendingPathExtension:@"png"];
+    
+    NSURL *saveURL = [[self documentsDirectory] URLByAppendingPathComponent:fileName];
+    
+    BOOL bRet = [imageData writeToURL:saveURL atomically:YES];
+    NSString *imgName = [NSString stringWithFormat:@"%ld",(long)_selectIndex];
+    NSDictionary *dic = @{@"imgName":imgName,@"imgData":imageData};
+    [_arrData addObject:dic];
+}
+
+-(NSURL *)documentsDirectory {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];
+    NSURL *docURL = [NSURL URLWithString:documentsDirectory];
+    return docURL;
 }
 
 #pragma mark 图片保存完毕的回调
 - (void) image: (UIImage *) image didFinishSavingWithError:(NSError *) error contextInfo: (void *)contextInf{
-    
+    NSLog(@"didFinishSaveImage selIndex:%d",_selectIndex);
 }
 
 
