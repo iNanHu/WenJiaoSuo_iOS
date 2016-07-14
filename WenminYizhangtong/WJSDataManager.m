@@ -49,7 +49,7 @@
 - (void)commitDetailUserInfoWithUId:(NSString *)uid andUsrName:(NSString *)usrname andSex:(NSString *)sex
                        andCertiType:(NSString *)certifitype andCertiNum:(NSString *)certinum andTelPhone:(NSString *)telphone
                        andAddress:(NSString *)address andBankName:(NSString *)bankname andAccNum:(NSString *)accountNum
-                         andBankLoc:(NSString *)banklocation andBranchName:(NSString *)branchname andCertiFrontImg:(NSData *)certiFrontImg andCertiBackImg:(NSString *)certiBackImg andBankCardImg:(NSData *)bankcardImg
+                         andBankLoc:(NSString *)banklocation andBranchName:(NSString *)branchname andCertiFrontImg:(NSData *)certiFrontImg andCertiBackImg:(NSData *)certiBackImg andBankCardImg:(NSData *)bankcardImg
                        andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock{
     
     NSString *strUrl = [NSString stringWithFormat:@"%@user/info",SERV_ADDR];

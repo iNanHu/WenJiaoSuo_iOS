@@ -6,9 +6,16 @@
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
 
+#define CertiFrontUrl @"certiFrontUrl"
+#define CertiBackUrl @"certiBackUrl"
+#define BankFrontUrl @"bankFrontUrl"
+
 #import "PersonDetailVC.h"
+#import "WJSDataManager.h"
+#import "WJSDataModel.h"
 
 @interface PersonDetailVC ()
+@property (weak, nonatomic) IBOutlet UITextField *textInviteId;
 @property (weak, nonatomic) IBOutlet UITextField *userNameText;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumText;
 @property (weak, nonatomic) IBOutlet UIButton *sexBtn;
@@ -28,7 +35,7 @@
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
 
 //data
-@property (nonatomic, strong) NSMutableArray *arrData;
+@property (nonatomic, strong) NSMutableDictionary *dicImgData;
 @property (nonatomic, assign) NSInteger selectIndex;
 @end
 
@@ -42,7 +49,8 @@
 }
 
 - (void)initData {
-    _arrData = [NSMutableArray arrayWithCapacity:3];
+    
+    _dicImgData = [[NSMutableDictionary alloc] init];
 }
 
 - (UIImagePickerController *)imagePickerController {
@@ -70,6 +78,7 @@
 
 - (void)commitUserDetailInfo {
     NSMutableDictionary *dicUserDetail = [[NSMutableDictionary alloc]init];
+    NSString *strInviteId = _textInviteId.text;
     NSString *strUserName = _userNameText.text;
     NSString *strPhoneNum = _phoneNumText.text;
     NSString *strSex = _sexBtn.currentTitle;
@@ -80,11 +89,36 @@
     NSString *strBankAccount = _bankAccountText.text;
     NSString *strBankBranchName = _branchNameText.text;
     NSString *strBankAddress = [NSString stringWithFormat:@"%@%@",_bankAddressEditBtn.currentTitle,_bankAddressText.text];
-    NSString *strCertiFrontName = @"";
-    NSString *strCertiBackName = @"";
-    NSString *strBankCardFrontName = @"";
-    [dicUserDetail setObject:strUserName forKey:@"username"];
+    UIImage *certiFrontImg = [_dicImgData objectForKey:CertiFrontUrl];
+    UIImage *certiBackImg = [_dicImgData objectForKey:CertiBackUrl];
+    UIImage *bankFrontImg = [_dicImgData objectForKey:BankFrontUrl];
+    NSData *certiFrontData = UIImagePNGRepresentation(certiFrontImg);
+    NSData *certiBackData = UIImagePNGRepresentation(certiBackImg);
+    NSData *bankFrontData = UIImagePNGRepresentation(bankFrontImg);
+    
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        [self personCommitResult:responseObject];
+    };
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        
+    };
+    
+    [[WJSDataManager shareInstance]commitDetailUserInfoWithUId:strInviteId andUsrName:strUserName andSex:strSex andCertiType:strCertiType andCertiNum:strCertiNum andTelPhone:strPhoneNum andAddress:strAddress andBankName:strBankName andAccNum:strBankAccount andBankLoc:strBankAddress andBranchName:strBankBranchName andCertiFrontImg:certiFrontData andCertiBackImg:certiBackData andBankCardImg:bankFrontData andSucc:succBlock andFail:failBlock];
 }
+
+- (void)personCommitResult:(NSDictionary *) result {
+    NSString *resVal = [result objectForKey:@"msg"];
+    if ([resVal isEqualToString:JSON_RES_SUCC]) {
+        NSString *uId = [result objectForKey:@"data"];
+        [[WJSDataModel shareInstance] setUId:uId];
+        
+        [self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
+    } else {
+        NSString *errMsg = [result objectForKey:@"data"];
+        NSLog(@"一账通: error[%@]",errMsg);
+    }
+}
+
 
 - (void)showSexView {
     
@@ -202,31 +236,32 @@
 #pragma mark UIImagePickerControllerDelegate
 //该代理方法仅适用于只选取图片时
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo {
-    //NSLog(@"选择完毕----image:%@-----info:%@",image,editingInfo);
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
-    [self performSelector:@selector(saveImage:) withObject:image];
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
--(void)saveImage:(UIImage *)image {
+//-(void)saveImage:(UIImage *)image {
+//    
+//    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+//    NSData *imageData = UIImagePNGRepresentation(image);
+//    if(imageData == nil)
+//    {
+//        imageData = UIImageJPEGRepresentation(image, 1.0);
+//    }
+//    
+//    NSDate *date = [NSDate date];
+//    
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+//    NSString *fileName = [[formatter stringFromDate:date] stringByAppendingPathExtension:@"png"];
     
-    NSData *imageData = UIImagePNGRepresentation(image);
-    if(imageData == nil)
-    {
-        imageData = UIImageJPEGRepresentation(image, 1.0);
-    }
+//    NSURL *saveURL = [[self documentsDirectory] URLByAppendingPathComponent:fileName];
     
-    NSDate *date = [NSDate date];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyyMMddHHmmss"];
-    NSString *fileName = [[formatter stringFromDate:date] stringByAppendingPathExtension:@"png"];
-    
-    NSURL *saveURL = [[self documentsDirectory] URLByAppendingPathComponent:fileName];
-    
-    BOOL bRet = [imageData writeToURL:saveURL atomically:YES];
-    NSString *imgName = [NSString stringWithFormat:@"%ld",(long)_selectIndex];
-    NSDictionary *dic = @{@"imgName":imgName,@"imgData":imageData};
-    [_arrData addObject:dic];
-}
+    //BOOL bRet = [imageData writeToURL:saveURL atomically:YES];
+//    NSString *imgName = [NSString stringWithFormat:@"%ld",(long)_selectIndex];
+//    NSDictionary *dic = @{@"imgName":imgName,@"imgData":imageData};
+//    [_arrData addObject:dic];
+//}
 
 -(NSURL *)documentsDirectory {
     
@@ -238,7 +273,15 @@
 
 #pragma mark 图片保存完毕的回调
 - (void) image: (UIImage *) image didFinishSavingWithError:(NSError *) error contextInfo: (void *)contextInf{
-    NSLog(@"didFinishSaveImage selIndex:%d",_selectIndex);
+    
+    NSLog(@"didFinishSaveImage selIndex:%ld",(long)_selectIndex);
+    if(_selectIndex == 0) {
+        [_dicImgData setObject:image forKey:CertiFrontUrl];
+    } else if(_selectIndex == 1) {
+        [_dicImgData setObject:image forKey:CertiBackUrl];
+    } else if(_selectIndex == 2){
+        [_dicImgData setObject:image forKey:BankFrontUrl];
+    }
 }
 
 
