@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="5CP-kC-qx8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="NPu-Df-fKK">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -81,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-558.5" y="1746.5"/>
+            <point key="canvasLocation" x="-560.5" y="1746.5"/>
         </scene>
         <!--注册-->
         <scene sceneID="BkR-uM-rYj">
@@ -312,7 +312,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="zsZ-wE-Rtv">
-                                <rect key="frame" x="0.0" y="-1" width="375" height="773"/>
+                                <rect key="frame" x="0.0" y="-184" width="375" height="800"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OZ6-fq-iAi">
@@ -431,7 +431,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uq3-my-0RG">
-                                        <rect key="frame" x="160" y="596" width="95" height="30"/>
+                                        <rect key="frame" x="123" y="596" width="95" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="上传"/>
                                     </button>
@@ -443,7 +443,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ptR-xQ-3an">
-                                        <rect key="frame" x="160" y="634" width="98" height="30"/>
+                                        <rect key="frame" x="121" y="634" width="98" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="上传"/>
                                     </button>
@@ -454,11 +454,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gm6-m7-uf7">
-                                        <rect key="frame" x="160" y="677" width="95" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="上传"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8zk-j7-M4m">
                                         <rect key="frame" x="137" y="726" width="101" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -486,6 +481,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mN2-71-hIY">
                                         <rect key="frame" x="116" y="311" width="249" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="地址"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3r2-Jn-PmB">
                                         <rect key="frame" x="25" y="311" width="80" height="30"/>
@@ -504,6 +500,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BZg-vp-baG">
                                         <rect key="frame" x="122" y="515" width="243" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="地址"/>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="QQm-vG-i8I">
                                         <rect key="frame" x="122" y="558" width="243" height="30"/>
@@ -524,6 +521,23 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="d1i-i6-A81">
+                                        <rect key="frame" x="210" y="592" width="165" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="w0H-fn-sv2">
+                                        <rect key="frame" x="210" y="631" width="165" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="jUA-ph-94j">
+                                        <rect key="frame" x="210" y="673" width="165" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gm6-m7-uf7">
+                                        <rect key="frame" x="122" y="677" width="95" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="上传"/>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -538,13 +552,17 @@
                         <outlet property="bankAddressEditBtn" destination="BZg-vp-baG" id="aq4-kL-m2U"/>
                         <outlet property="bankAddressText" destination="QQm-vG-i8I" id="GrD-Ib-2az"/>
                         <outlet property="bankCardFrontBtn" destination="gm6-m7-uf7" id="dKQ-xu-fDz"/>
+                        <outlet property="bankFrontImgView" destination="jUA-ph-94j" id="HNQ-2W-FzD"/>
                         <outlet property="bankTypeBtn" destination="zCG-5N-5or" id="uFI-dm-1LU"/>
                         <outlet property="branchNameText" destination="cgr-Jv-Bqd" id="Oi6-Qm-cZJ"/>
                         <outlet property="certiBackBtn" destination="ptR-xQ-3an" id="20m-pN-eI5"/>
+                        <outlet property="certiBackImgView" destination="w0H-fn-sv2" id="pCO-xG-OSM"/>
                         <outlet property="certiFrontBtn" destination="uq3-my-0RG" id="ROf-7M-QHv"/>
+                        <outlet property="certiFrontImgView" destination="d1i-i6-A81" id="ihj-TU-31J"/>
                         <outlet property="certificateBtn" destination="573-qe-qha" id="rXQ-PI-gzr"/>
                         <outlet property="certificateNumText" destination="r0Y-wC-9NP" id="8ED-89-zsY"/>
                         <outlet property="commitBtn" destination="8zk-j7-M4m" id="QWJ-um-x4E"/>
+                        <outlet property="personScrollView" destination="zsZ-wE-Rtv" id="Wib-lA-LEd"/>
                         <outlet property="phoneNumText" destination="4hQ-H5-duv" id="Y1c-Xr-Zva"/>
                         <outlet property="sexBtn" destination="Aeh-6k-cqI" id="UK1-YN-pdT"/>
                         <outlet property="textInviteId" destination="eM7-i3-ixH" id="rRE-e1-fhD"/>
@@ -553,7 +571,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oun-xb-fO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1243.5" y="668.5"/>
+            <point key="canvasLocation" x="1236.5" y="740.5"/>
         </scene>
         <!--一账通-->
         <scene sceneID="jKB-jH-6PZ">
@@ -569,7 +587,7 @@
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                             </webView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="AdR-9q-B8f">
-                                <rect key="frame" x="98" y="81" width="177" height="29"/>
+                                <rect key="frame" x="6" y="81" width="177" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.34131823792759153" green="0.24899417823703296" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <segments>
@@ -578,13 +596,22 @@
                                 </segments>
                                 <color key="tintColor" red="0.97785833535754318" green="0.96469565089136688" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uxs-ZE-Jz7">
+                                <rect key="frame" x="251" y="80" width="116" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="提交信息">
+                                    <color key="titleColor" red="0.26817359588415857" green="0.32325553371371052" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="一账通" id="b7q-MZ-NRq"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="personDetailBtn" destination="Uxs-ZE-Jz7" id="GBf-BB-osb"/>
                         <outlet property="regAccWebView" destination="7Gj-am-xFI" id="smi-Yl-mOI"/>
+                        <segue destination="5CP-kC-qx8" kind="push" identifier="NavToPersonDetail" id="XoL-sB-8Ge"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x51-kv-n8l" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,7 +14,7 @@
 #import "WJSDataManager.h"
 #import "WJSDataModel.h"
 
-@interface PersonDetailVC ()
+@interface PersonDetailVC () <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textInviteId;
 @property (weak, nonatomic) IBOutlet UITextField *userNameText;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumText;
@@ -33,10 +33,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *bankCardFrontBtn;
 @property (weak, nonatomic) IBOutlet UIButton *commitBtn;
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
+@property (weak, nonatomic) IBOutlet UIScrollView *personScrollView;
+@property (weak, nonatomic) IBOutlet UIImageView *certiFrontImgView;
+@property (weak, nonatomic) IBOutlet UIImageView *certiBackImgView;
+@property (weak, nonatomic) IBOutlet UIImageView *bankFrontImgView;
 
 //data
 @property (nonatomic, strong) NSMutableDictionary *dicImgData;
 @property (nonatomic, assign) NSInteger selectIndex;
+@property (nonatomic, assign) NSInteger imgType;
 @end
 
 @implementation PersonDetailVC
@@ -51,6 +56,7 @@
 - (void)initData {
     
     _dicImgData = [[NSMutableDictionary alloc] init];
+    _imgType = -1;
 }
 
 - (UIImagePickerController *)imagePickerController {
@@ -65,20 +71,34 @@
 
 - (void)initCtrl {
     
+    //ScrollView
+    _personScrollView.frame = CGRectMake(0, 40, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - 40);
+    _personScrollView.contentSize = CGSizeMake(UI_SCREEN_WIDTH, 800);
+    // 设置内容的边缘和Indicators边缘
+    _personScrollView.contentInset = UIEdgeInsetsMake(0, 40, 40, 0);
+    _personScrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 40, 0, 0);
+    [_personScrollView flashScrollIndicators];
+    _personScrollView.directionalLockEnabled = YES;
+    _personScrollView.delegate = self;
+    
     [_sexBtn addTarget:self action:@selector(showSexView) forControlEvents:UIControlEventTouchUpInside];
     [_certificateBtn addTarget:self action:@selector(showCertificateTypeView) forControlEvents:UIControlEventTouchUpInside];
     [_bankTypeBtn addTarget:self action:@selector(showBankNameView) forControlEvents:UIControlEventTouchUpInside];
     [_addressEditBtn addTarget:self action:@selector(showAddressView) forControlEvents:UIControlEventTouchUpInside];
     [_bankAddressEditBtn addTarget:self action:@selector(showBankBranchAddressView) forControlEvents:UIControlEventTouchUpInside];
     [_commitBtn addTarget:self action:@selector(commitUserDetailInfo) forControlEvents:UIControlEventTouchUpInside];
-    [_certiFrontBtn addTarget:self action:@selector(openMenu) forControlEvents:UIControlEventTouchUpInside];
-    [_certiBackBtn addTarget:self action:@selector(openMenu) forControlEvents:UIControlEventTouchUpInside];
-    [_bankCardFrontBtn addTarget:self action:@selector(openMenu) forControlEvents:UIControlEventTouchUpInside];
+    [_certiFrontBtn addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
+    _certiFrontBtn.tag = 0;
+    [_certiBackBtn addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
+    _certiBackBtn.tag = 1;
+    [_bankCardFrontBtn addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
+    _bankCardFrontBtn.tag = 2;
 }
 
 - (void)commitUserDetailInfo {
-    NSMutableDictionary *dicUserDetail = [[NSMutableDictionary alloc]init];
-    NSString *strInviteId = _textInviteId.text;
+    
+    //NSString *strInviteId = _textInviteId.text;
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
     NSString *strUserName = _userNameText.text;
     NSString *strPhoneNum = _phoneNumText.text;
     NSString *strSex = _sexBtn.currentTitle;
@@ -96,23 +116,37 @@
     NSData *certiBackData = UIImagePNGRepresentation(certiBackImg);
     NSData *bankFrontData = UIImagePNGRepresentation(bankFrontImg);
     
+    if ([strSex isEqualToString:@"男"]) {
+        strSex = @"0";
+    } else {
+        strSex = @"1";
+    }
+    
+    [_certiFrontImgView setImage:certiFrontImg];
+    [_certiBackImgView setImage:certiBackImg];
+    [_bankFrontImgView setImage:bankFrontImg];
+    
     SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         [self personCommitResult:responseObject];
     };
     FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
-        
+        NSLog(@"提交个人详情失败！");
     };
-    
-    [[WJSDataManager shareInstance]commitDetailUserInfoWithUId:strInviteId andUsrName:strUserName andSex:strSex andCertiType:strCertiType andCertiNum:strCertiNum andTelPhone:strPhoneNum andAddress:strAddress andBankName:strBankName andAccNum:strBankAccount andBankLoc:strBankAddress andBranchName:strBankBranchName andCertiFrontImg:certiFrontData andCertiBackImg:certiBackData andBankCardImg:bankFrontData andSucc:succBlock andFail:failBlock];
+    if (!strUid || [strUid isEqualToString:@""]) {
+        NSLog(@"一账通：用户Uid不能为空！");
+    }
+    [[WJSDataManager shareInstance]commitDetailUserInfoWithUId:strUid andUsrName:strUserName andSex:strSex andCertiType:strCertiType andCertiNum:strCertiNum andTelPhone:strPhoneNum andAddress:strAddress andBankName:strBankName andAccNum:strBankAccount andBankLoc:strBankAddress andBranchName:strBankBranchName andCertiFrontImg:certiFrontData andCertiBackImg:certiBackData andBankCardImg:bankFrontData andSucc:succBlock andFail:failBlock];
 }
 
 - (void)personCommitResult:(NSDictionary *) result {
+    NSLog(@"提交个人详情成功！");
     NSString *resVal = [result objectForKey:@"msg"];
     if ([resVal isEqualToString:JSON_RES_SUCC]) {
         NSString *uId = [result objectForKey:@"data"];
-        [[WJSDataModel shareInstance] setUId:uId];
+        NSLog(@"一账通：success[%@]",uId);
+        //[[WJSDataModel shareInstance] setUId:uId];
         
-        [self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
+        //[self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];
         NSLog(@"一账通: error[%@]",errMsg);
@@ -170,16 +204,17 @@
     }];
 }
 
-- (void)openMenu {
-    //在这里呼出下方菜单按钮项
+- (void)openMenu:(id)sender {
+  
     _myActionSheet = [[UIActionSheet alloc]
                      initWithTitle:nil
                      delegate:self
                      cancelButtonTitle:@"取消"
                      destructiveButtonTitle:nil
                      otherButtonTitles:@"打开照相机",@"从手机相册获取", nil];
-    //刚才少写了这一句
     [_myActionSheet showInView:self.view];
+    UIButton *selBtn = (UIButton *)sender;
+    _imgType = selBtn.tag;
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     
@@ -198,15 +233,56 @@
     }
 }
 
+// 是否支持滑动至顶部
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+// 滑动到顶部时调用该方法
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
+{
+    //NSLog(@"scrollViewDidScrollToTop");
+}
+
+// scrollView 已经滑动
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    //NSLog(@"scrollViewDidScroll");
+}
+
+// scrollView 开始拖动
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+    //NSLog(@"scrollViewWillBeginDragging");
+}
+
+// scrollView 结束拖动
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    //NSLog(@"scrollViewDidEndDragging");
+}
+
+// scrollView 开始减速（以下两个方法注意与以上两个方法加以区别）
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    
+    //NSLog(@"scrollViewWillBeginDecelerating");
+}
+
+// scrollview 减速停止
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    //NSLog(@"scrollViewDidEndDecelerating");
+}
+
 - (void)PickerSelectorIndixString:(NSString *)str {
     
-    //[_arrData setObject:str atIndexedSubscript:_selectIndex];
     if (_selectIndex == 0) {
         [_sexBtn setTitle:str forState:UIControlStateNormal];
     } else if(_selectIndex == 1) {
         [_certificateBtn setTitle:str forState:UIControlStateNormal];
-    } else {
-        [_bankAddressEditBtn setTitle:str forState:UIControlStateNormal];
+    } else if(_selectIndex == 2){
+        [_bankTypeBtn setTitle:str forState:UIControlStateNormal];
     }
 }
 
@@ -225,11 +301,9 @@
     [self presentViewController:self.imagePickerController animated:YES completion:nil];  //需要以模态的形式展示
 }
 //从相册获取图片或视频
-- (void)selectImageFromAlbum
-{
-    //NSLog(@"相册");
-    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+- (void)selectImageFromAlbum {
     
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [self presentViewController:_imagePickerController animated:YES completion:nil];
 }
 
@@ -240,28 +314,6 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
-//-(void)saveImage:(UIImage *)image {
-//    
-//    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-//    NSData *imageData = UIImagePNGRepresentation(image);
-//    if(imageData == nil)
-//    {
-//        imageData = UIImageJPEGRepresentation(image, 1.0);
-//    }
-//    
-//    NSDate *date = [NSDate date];
-//    
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"yyyyMMddHHmmss"];
-//    NSString *fileName = [[formatter stringFromDate:date] stringByAppendingPathExtension:@"png"];
-    
-//    NSURL *saveURL = [[self documentsDirectory] URLByAppendingPathComponent:fileName];
-    
-    //BOOL bRet = [imageData writeToURL:saveURL atomically:YES];
-//    NSString *imgName = [NSString stringWithFormat:@"%ld",(long)_selectIndex];
-//    NSDictionary *dic = @{@"imgName":imgName,@"imgData":imageData};
-//    [_arrData addObject:dic];
-//}
 
 -(NSURL *)documentsDirectory {
     
@@ -274,12 +326,12 @@
 #pragma mark 图片保存完毕的回调
 - (void) image: (UIImage *) image didFinishSavingWithError:(NSError *) error contextInfo: (void *)contextInf{
     
-    NSLog(@"didFinishSaveImage selIndex:%ld",(long)_selectIndex);
-    if(_selectIndex == 0) {
+    NSLog(@"didFinishSaveImage selIndex:%ld",(long)_imgType);
+    if(_imgType == 0) {
         [_dicImgData setObject:image forKey:CertiFrontUrl];
-    } else if(_selectIndex == 1) {
+    } else if(_imgType == 1) {
         [_dicImgData setObject:image forKey:CertiBackUrl];
-    } else if(_selectIndex == 2){
+    } else if(_imgType == 2){
         [_dicImgData setObject:image forKey:BankFrontUrl];
     }
 }

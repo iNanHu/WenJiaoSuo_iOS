@@ -42,27 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WenminYizhangtong/HomeVC.m"
-            timestampString = "489856199.085145"
+            timestampString = "490235606.269972"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "-getWJSInfoList"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WenminYizhangtong/HomeVC.m"
-            timestampString = "489857106.346315"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "-uploadFile"
             landmarkType = "5">
          </BreakpointContent>
@@ -70,16 +54,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WenminYizhangtong/WJSDataManager.m"
-            timestampString = "489858767.373117"
+            filePath = "WenminYizhangtong/PersonDetailVC.m"
+            timestampString = "490421862.799549"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "-upWJSFileWithFile:andSucc:andFail:"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
+            landmarkName = "-PickerSelectorIndixString:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

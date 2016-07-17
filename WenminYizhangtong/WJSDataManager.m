@@ -52,9 +52,8 @@
                          andBankLoc:(NSString *)banklocation andBranchName:(NSString *)branchname andCertiFrontImg:(NSData *)certiFrontImg andCertiBackImg:(NSData *)certiBackImg andBankCardImg:(NSData *)bankcardImg
                        andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock{
     
-    NSString *strUrl = [NSString stringWithFormat:@"%@user/info",SERV_ADDR];
-    NSDictionary *dicParams = @{@"uid":uid,
-                                @"realname":usrname,
+    NSString *strUrl = [NSString stringWithFormat:@"%@user/complete",SERV_ADDR];
+    NSDictionary *dicParams = @{@"realname":usrname,
                                 @"sex":sex,
                                 @"certificate_type":certifitype,
                                 @"certificate_number":certinum,
@@ -64,10 +63,40 @@
                                 @"account_number":accountNum,
                                 @"bank_location":banklocation,
                                 @"branch_name":branchname,
-                                @"certificate_front_image":certiFrontImg,
-                                @"certificate_back_image":certiBackImg,
-                                @"bank_card_image":bankcardImg};
-    [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+                                };
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    // 设置时间格式
+    formatter.dateFormat = @"yyyyMMddHHmmss";
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    NSString *fileName0 = [NSString stringWithFormat:@"%@0.png", str];
+    NSString *fileName1 = [NSString stringWithFormat:@"%@1.png", str];
+    NSString *fileName2 = [NSString stringWithFormat:@"%@2.png", str];
+    NSSet *accetContentTypes = [NSSet setWithObjects:@"application/json",
+                                @"text/html",
+                                @"text/json",
+                                @"text/javascript",
+                                @"text/plain",nil];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = accetContentTypes;
+    
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    [manager.requestSerializer setValue:uid forHTTPHeaderField:@"access-token"];
+    
+    [manager POST:strUrl parameters:dicParams constructingBodyWithBlock:^(id<AFMultipartFormData> _Nonnull formData) {
+        [formData appendPartWithFileData:certiFrontImg name:@"file" fileName:@"certificate_front_image" mimeType:@"image/png"];
+        [formData appendPartWithFileData:certiBackImg name:@"file" fileName:@"certificate_back_image" mimeType:@"image/png"];
+        [formData appendPartWithFileData:bankcardImg name:@"file" fileName:@"bank_card_image" mimeType:@"image/png"];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        //NSLog(@"%f",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+        // 回到主队列刷新UI,用户自定义的进度条
+        // dispatch_async(dispatch_get_main_queue(), ^{
+        //    self.progressView.progress = 1.0 *
+        //    uploadProgress.completedUnitCount / uploadProgress.totalUnitCount;
+        // });
+    } success:succBlock failure:failBlock];
+
 }
 
 - (void)applyWJSInfoWithWjsId:(NSString *)wjsId andUId:(NSString *)uid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
@@ -149,7 +178,7 @@
         formatter.dateFormat = @"yyyyMMddHHmmss";
         NSString *str = [formatter stringFromDate:[NSDate date]];
         NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
-        NSDictionary *dicParams = @{@"file":fileName};
+        //NSDictionary *dicParams = @{@"file":fileName};
         NSSet *accetContentTypes = [NSSet setWithObjects:@"application/json",
                                     @"text/html",
                                     @"text/json",
@@ -159,34 +188,15 @@
         manager.responseSerializer.acceptableContentTypes = accetContentTypes;
         //formData: 专门用于拼接需要上传的数据,在此位置生成一个要上传的数据体
         [manager POST:strUrl parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> _Nonnull formData) {
-                // 在网络开发中，上传文件时，是文件不允许被覆盖，文件重名
-                // 要解决此问题，
-                // 可以在上传时使用当前的系统事件作为文件名
-
-                //上传
-                /*
-                           此方法参数
-                               1. 要上传的[二进制数据]
-                               2. 对应网站上[upload.php中]处理文件的[字段"file"]
-                               3. 要保存在服务器上的[文件名]
-                               4. 上传文件的[mimeType]
-                          */
             [formData appendPartWithFileData:file name:@"file" fileName:fileName mimeType:@"image/png"];
 
         } progress:^(NSProgress * _Nonnull uploadProgress) {
-
-            //上传进度
-            // @property int64_t totalUnitCount;     需要下载文件的总大小
-            // @property int64_t completedUnitCount; 当前已经下载的大小
-            //
-            // 给Progress添加监听 KVO
-            NSLog(@"%f",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+            //NSLog(@"%f",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
             // 回到主队列刷新UI,用户自定义的进度条
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                            self.progressView.progress = 1.0 *
-//                            uploadProgress.completedUnitCount / uploadProgress.totalUnitCount;
-//                        });
-
+            // dispatch_async(dispatch_get_main_queue(), ^{
+            //    self.progressView.progress = 1.0 *
+            //    uploadProgress.completedUnitCount / uploadProgress.totalUnitCount;
+            // });
         } success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
             NSLog(@"上传成功 %@", responseObject);
         

@@ -53,7 +53,7 @@
     if ([resVal isEqualToString:JSON_RES_SUCC]) {
         NSString *uId = [result objectForKey:@"data"];
         [[WJSDataModel shareInstance] setUId:uId];
-        
+        NSLog(@"登录成功:%@",uId);
         [self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];

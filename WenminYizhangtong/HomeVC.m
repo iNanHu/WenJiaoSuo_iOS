@@ -37,6 +37,12 @@
     [self initCtrl];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)initData {
     
     _imgList = @[@"home_index1",@"home_index2",@"home_index3"];
