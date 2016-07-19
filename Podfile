@@ -4,6 +4,7 @@
 # use_frameworks!
 
 target 'WenminYizhangtong' do
+pod 'MBProgressHUD', '~> 0.9.2'
 pod 'ASIHTTPRequest', '~> 1.8.2'
 pod 'hpple', '~>0.2.0'
 pod 'GDataXML-HTML', '~>1.3.0'

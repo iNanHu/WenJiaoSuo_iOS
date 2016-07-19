@@ -69,7 +69,16 @@
     return _imagePickerController;
 }
 
+- (void)leftAction:(UIButton *)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)initCtrl {
+    
+    //隐藏导航栏左右按钮
+    self.hidLeftButton = NO;
+    self.hidRightButton = YES;
     
     //ScrollView
     _personScrollView.frame = CGRectMake(0, 40, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - 40);
@@ -117,9 +126,9 @@
     NSData *bankFrontData = UIImagePNGRepresentation(bankFrontImg);
     
     if ([strSex isEqualToString:@"男"]) {
-        strSex = @"0";
-    } else {
         strSex = @"1";
+    } else {
+        strSex = @"2";
     }
     
     [_certiFrontImgView setImage:certiFrontImg];
@@ -179,7 +188,7 @@
     TWSelectCityView *city = [[TWSelectCityView alloc] initWithTWFrame:self.view.bounds TWselectCityTitle:@"选择地区"];
     __weak typeof(self)blockself = self;
     [city showCityView:^(NSString *proviceStr, NSString *cityStr, NSString *distr) {
-        NSString* address = [NSString stringWithFormat:@"%@->%@->%@",proviceStr,cityStr,distr];
+        NSString* address = [NSString stringWithFormat:@"%@%@%@",proviceStr,cityStr,distr];
         [blockself.addressEditBtn setTitle:address forState:UIControlStateNormal];
     }];
 }
@@ -199,7 +208,7 @@
     TWSelectCityView *city = [[TWSelectCityView alloc] initWithTWFrame:self.view.bounds TWselectCityTitle:@"选择地区"];
     __weak typeof(self)blockself = self;
     [city showCityView:^(NSString *proviceStr, NSString *cityStr, NSString *distr) {
-        NSString* address = [NSString stringWithFormat:@"%@->%@->%@",proviceStr,cityStr,distr];
+        NSString* address = [NSString stringWithFormat:@"%@%@%@",proviceStr,cityStr,distr];
         [blockself.bankAddressEditBtn setTitle:address forState:UIControlStateNormal];
     }];
 }
@@ -312,7 +321,13 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo {
     
     [picker dismissViewControllerAnimated:YES completion:nil];
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    //拍照时才会保存图片到相册
+    if (self.imagePickerController.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    } else {
+        [self selectImage:image];
+    }
+    
 }
 
 -(NSURL *)documentsDirectory {
@@ -324,7 +339,12 @@
 }
 
 #pragma mark 图片保存完毕的回调
-- (void) image: (UIImage *) image didFinishSavingWithError:(NSError *) error contextInfo: (void *)contextInf{
+- (void)image: (UIImage *) image didFinishSavingWithError:(NSError *) error contextInfo: (void *)contextInf{
+    
+    [self selectImage:image];
+}
+
+- (void)selectImage:(UIImage *) image {
     
     NSLog(@"didFinishSaveImage selIndex:%ld",(long)_imgType);
     if(_imgType == 0) {
@@ -336,12 +356,9 @@
     }
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
-
-
 
 @end

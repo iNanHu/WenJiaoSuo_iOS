@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WJSBaseVC.h"
 
-@interface OneAccountVC : UIViewController
+@interface OneAccountVC : WJSBaseVC
 
 @end

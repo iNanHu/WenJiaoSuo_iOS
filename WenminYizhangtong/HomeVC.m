@@ -29,9 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-//    NSString *strJson = [WJSTool urlstring:@"http://www.youbicard.com/plus/data/excList.php?type=4&pan=1"];
-//    NSLog(@"Json: %@",strJson);
     
     [self initData];
     [self initCtrl];
@@ -71,6 +68,10 @@
 }
 
 - (void)initCtrl {
+    
+    //隐藏导航栏左右按钮
+    self.hidLeftButton = YES;
+    self.hidRightButton = YES;
     
     UIView *headView = [UIView new];
     headView.frame = CGRectMake(0, Tab_HEIGHT, UI_SCREEN_WIDTH, SCROLL_HEIGHT + 20);
@@ -252,7 +253,8 @@
     UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell) {
         //[self getWJSInfoList];
-        [self uploadFile];
+        //[self uploadFile];
+        
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -261,6 +263,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (void)uploadFile {
     SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
@@ -276,7 +279,7 @@
     FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
         
     };
-    NSString *strImg = @"home_index1";
+    NSString *strImg = @"home_index2";
     UIImage *img = [UIImage imageNamed:strImg];
     NSData *imgData = UIImagePNGRepresentation(img);
     

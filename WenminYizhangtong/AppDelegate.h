@@ -27,6 +27,7 @@ static BOOL isProduction = FALSE;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
++ (AppDelegate *)sharedAppDelegate;
 
 
 @end

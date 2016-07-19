@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "WJSDataModel.h"
 #import "WJSCommonDefine.h"
 
@@ -30,7 +31,7 @@
 //提交文交所开户申请
 - (void)applyWJSInfoWithWjsId:(NSString *)wjsId andUId:(NSString *)uid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //获取用户详细信息
-- (void)getUserDetailInfoWithUid:(NSString *)uid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
+- (void)getUserDetailInfoWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //获取用户二维码链接
 - (void)getQRCodeWithInviteId:(NSString *)inviteId andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //改变用户头像
@@ -49,6 +50,8 @@
 - (void)getBannerWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 
 //通用接口
+//上传文件
+- (NSURLSessionUploadTask*)uploadTaskWithImage:(UIImage*)image andImageName:(NSString *)strImgName completion:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionBlock;
 //上传文件
 - (void)upWJSFileWithFile:(NSData *)file andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 @end

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WJSBaseVC.h"
+#import <MediaPlayer/MediaPlayer.h>
 
-@interface UserCenterVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface UserCenterVC : WJSBaseVC<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end

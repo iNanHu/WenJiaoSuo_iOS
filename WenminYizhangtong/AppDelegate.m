@@ -16,6 +16,11 @@
 
 @implementation AppDelegate
 
+//获取appDelegate
++ (AppDelegate *)sharedAppDelegate {
+    
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

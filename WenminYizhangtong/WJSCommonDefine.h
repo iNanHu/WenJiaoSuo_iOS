@@ -30,6 +30,8 @@
  */
 #define UI_SCREEN_HEIGHT  ([[UIScreen mainScreen] bounds].size.height)
 
+#define TT_FLIP_TRANSITION_DURATION 0.5
+
 /*
  * 设备scale
  */

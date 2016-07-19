@@ -18,6 +18,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //隐藏导航栏左右按钮
+    self.hidLeftButton = YES;
+    self.hidRightButton = YES;
+    
+    self.automaticallyAdjustsScrollViewInsets=NO;
+    
     [self initData];
 }
 
@@ -29,6 +36,8 @@
 - (void)initData {
     
     [_personDetailBtn addTarget:self action:@selector(onCommitPersonDetail) forControlEvents:UIControlEventTouchUpInside];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.youbiquan.com/frontend/open/account/1063/list.html?version=100&dataSource=ybq6"]];
+    [self.regAccWebView loadRequest:request];
 }
 
 - (void)onCommitPersonDetail {

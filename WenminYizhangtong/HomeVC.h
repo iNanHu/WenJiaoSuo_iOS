@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WJSBaseVC.h"
 
-@interface HomeVC : UIViewController
+@interface HomeVC : WJSBaseVC
 
 @end

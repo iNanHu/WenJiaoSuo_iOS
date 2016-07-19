@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WJSBaseVC.h"
 
-@interface QuotationVC : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface QuotationVC : WJSBaseVC<UITableViewDataSource,UITableViewDelegate>
 
 @end

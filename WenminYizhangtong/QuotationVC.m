@@ -64,6 +64,10 @@
 }
 - (void)initCtrl {
     
+    //隐藏导航栏左右按钮
+    self.hidLeftButton = YES;
+    self.hidRightButton = YES;
+    
     _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 2*Tab_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - 2*Tab_HEIGHT)];
     
     for (int i = 0; i < _segDataArr.count; i++) {

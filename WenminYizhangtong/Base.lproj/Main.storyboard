@@ -254,6 +254,7 @@
         <!--首页-->
         <scene sceneID="EmO-ci-K8O">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gYn-IL-S49" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="pWd-a3-6QJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="首页" id="tzw-8h-CsY"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -265,7 +266,6 @@
                         <segue destination="wIZ-SB-5ua" kind="relationship" relationship="rootViewController" id="jku-5u-LXb"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gYn-IL-S49" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="121.33333333333333" y="-718.99333333333334"/>
         </scene>
@@ -288,6 +288,7 @@
         <!--一账通-->
         <scene sceneID="nLu-kP-pID">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fsf-20-2jd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="bxc-dh-mxn" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="一账通" id="JKC-0D-pVz"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -299,9 +300,8 @@
                         <segue destination="YIy-Sr-Lma" kind="relationship" relationship="rootViewController" id="8V5-iO-827"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fsf-20-2jd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="120.5" y="740.5"/>
+            <point key="canvasLocation" x="120.5" y="798.5"/>
         </scene>
         <!--Person DetailVC-->
         <scene sceneID="HME-ip-NEb">
@@ -571,7 +571,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oun-xb-fO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1236.5" y="740.5"/>
+            <point key="canvasLocation" x="1338.5" y="798.5"/>
         </scene>
         <!--一账通-->
         <scene sceneID="jKB-jH-6PZ">
@@ -582,7 +582,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="7Gj-am-xFI">
-                                <rect key="frame" x="6" y="117" width="361" height="493"/>
+                                <rect key="frame" x="0.0" y="117" width="375" height="550"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                             </webView>
@@ -616,11 +616,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x51-kv-n8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733.5" y="740.5"/>
+            <point key="canvasLocation" x="739.5" y="798.5"/>
         </scene>
         <!--行情-->
         <scene sceneID="GBm-4Y-P8J">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RpH-D4-TWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="goM-0M-HMC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="行情" id="WSs-Oy-v6R"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -632,9 +633,8 @@
                         <segue destination="VCi-iG-wa6" kind="relationship" relationship="rootViewController" id="Re2-gu-VrO"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RpH-D4-TWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121.33333333333333" y="-14.673333333333334"/>
+            <point key="canvasLocation" x="120.5" y="44.5"/>
         </scene>
         <!--行情-->
         <scene sceneID="PlD-v3-iyK">
@@ -650,11 +650,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gy0-Ay-wEY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="739.5" y="12.5"/>
+            <point key="canvasLocation" x="739.5" y="44.5"/>
         </scene>
         <!--个人中心-->
         <scene sceneID="xDR-am-JtW">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HFP-V4-jTK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="6sN-at-bP0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="个人中心" id="xD3-0a-jBV"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -666,9 +667,8 @@
                         <segue destination="61D-5a-vcA" kind="relationship" relationship="rootViewController" id="8yf-E4-G5V"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HFP-V4-jTK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="16.5" y="1576.5"/>
+            <point key="canvasLocation" x="120.5" y="1576.5"/>
         </scene>
         <!--个人中心-->
         <scene sceneID="boI-sB-Jdh">
@@ -694,7 +694,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ov0-4r-Vdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="552.5" y="1576.5"/>
+            <point key="canvasLocation" x="739.5" y="1576.5"/>
         </scene>
     </scenes>
 </document>

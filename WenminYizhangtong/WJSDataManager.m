@@ -8,6 +8,8 @@
 
 #import "WJSDataManager.h"
 #import <AFNetworking.h>
+#import "WJSURLSessionWrapperOperation.h"
+
 #define SERV_ADDR @"http://wmyzt.applinzi.com/api/"
 
 @implementation WJSDataManager
@@ -52,51 +54,108 @@
                          andBankLoc:(NSString *)banklocation andBranchName:(NSString *)branchname andCertiFrontImg:(NSData *)certiFrontImg andCertiBackImg:(NSData *)certiBackImg andBankCardImg:(NSData *)bankcardImg
                        andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock{
     
+    UIImage *img0 = [UIImage imageWithData:certiFrontImg];
+    UIImage *img1 = [UIImage imageWithData:certiBackImg];
+    UIImage *img2 = [UIImage imageWithData:bankcardImg];
+    NSArray *arrImg = @[img0,img1,img2];
+    NSArray *arrImgName = @[@"certificate_front_image",@"certificate_back_image",@"bank_card_image"];
+    
     NSString *strUrl = [NSString stringWithFormat:@"%@user/complete",SERV_ADDR];
-    NSDictionary *dicParams = @{@"realname":usrname,
-                                @"sex":sex,
-                                @"certificate_type":certifitype,
-                                @"certificate_number":certinum,
-                                @"telphone":telphone,
-                                @"address":address,
-                                @"bank":bankname,
-                                @"account_number":accountNum,
-                                @"bank_location":banklocation,
-                                @"branch_name":branchname,
-                                };
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    // 设置时间格式
-    formatter.dateFormat = @"yyyyMMddHHmmss";
-    NSString *str = [formatter stringFromDate:[NSDate date]];
-    NSString *fileName0 = [NSString stringWithFormat:@"%@0.png", str];
-    NSString *fileName1 = [NSString stringWithFormat:@"%@1.png", str];
-    NSString *fileName2 = [NSString stringWithFormat:@"%@2.png", str];
-    NSSet *accetContentTypes = [NSSet setWithObjects:@"application/json",
-                                @"text/html",
-                                @"text/json",
-                                @"text/javascript",
-                                @"text/plain",nil];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = accetContentTypes;
+    // 准备保存结果的数组，元素个数与上传的图片个数相同，先用 NSNull 占位
+    NSMutableArray* result = [NSMutableArray array];
+    for (UIImage* image in arrImg) {
+        [result addObject:[NSNull null]];
+    }
     
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    [manager.requestSerializer setValue:uid forHTTPHeaderField:@"access-token"];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    queue.maxConcurrentOperationCount = 5;
     
-    [manager POST:strUrl parameters:dicParams constructingBodyWithBlock:^(id<AFMultipartFormData> _Nonnull formData) {
-        [formData appendPartWithFileData:certiFrontImg name:@"file" fileName:@"certificate_front_image" mimeType:@"image/png"];
-        [formData appendPartWithFileData:certiBackImg name:@"file" fileName:@"certificate_back_image" mimeType:@"image/png"];
-        [formData appendPartWithFileData:bankcardImg name:@"file" fileName:@"bank_card_image" mimeType:@"image/png"];
+    NSBlockOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{ // 回到主线程执行，方便更新 UI 等
+            NSLog(@"上传完成!");
+            NSInteger iCount = 0;
+            for (id response in result) {
+                if (response) {
+                    NSString *strMsg = [response objectForKey:@"msg"];
+                    if ([strMsg isEqualToString:@"success"]) {
+                        iCount++;
+                    }
+                }
+                NSLog(@"%@", response);
+            }
+            if (iCount == 3) {
+                
+                NSMutableDictionary *dicTemp = [[NSMutableDictionary alloc] init];
+                for (NSString *strImg in arrImgName) {
+                    for (id response in result) {
+                        NSDictionary *dic = [response objectForKey:@"data"];
+                        if (dic) {
+                            NSString *title = [dic objectForKey:@"title"];
+                            if ([title containsString:strImg]) {
+                                NSString *strUrl = [dic objectForKey:@"url"];
+                                [dicTemp setObject:strUrl forKey:strImg];
+                                break;
+                            }
+                            
+                        }
+                    }
+                }
+                NSDictionary *dicParams = @{@"realname":usrname,
+                                            @"sex":sex,
+                                            @"certificate_type":certifitype,
+                                            @"certificate_number":certinum,
+                                            @"telphone":telphone,
+                                            @"address":address,
+                                            @"bank":bankname,
+                                            @"account_number":accountNum,
+                                            @"bank_location":banklocation,
+                                            @"branch_name":branchname,
+                                            @"certificate_front_image":[dicTemp objectForKey:@"certificate_front_image"],
+                                            @"certificate_back_image":[dicTemp objectForKey:@"certificate_back_image"],
+                                            @"bank_card_image":[dicTemp objectForKey:@"bank_card_image"],
+                                            };
+                AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+                NSSet *accetContentTypes = [NSSet setWithObjects:@"application/json",
+                                            @"text/html",
+                                            @"text/json",
+                                            @"text/javascript",
+                                            @"text/plain",nil];
+                manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                manager.responseSerializer.acceptableContentTypes = accetContentTypes;
+                
+                manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+                [manager.requestSerializer setValue:uid forHTTPHeaderField:@"access-token"];
+                [manager POST:strUrl parameters:dicParams progress:nil success:succBlock failure:failBlock];
+            } else {
+                NSLog(@"提交失败！");
+            }
+            
+        }];
+    }];
+    
+    for (NSInteger i = 0; i < arrImg.count; i++) {
         
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        //NSLog(@"%f",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
-        // 回到主队列刷新UI,用户自定义的进度条
-        // dispatch_async(dispatch_get_main_queue(), ^{
-        //    self.progressView.progress = 1.0 *
-        //    uploadProgress.completedUnitCount / uploadProgress.totalUnitCount;
-        // });
-    } success:succBlock failure:failBlock];
-
+        NSURLSessionUploadTask* uploadTask = [[WJSDataManager shareInstance] uploadTaskWithImage:arrImg[i] andImageName:arrImgName[i] completion:^(NSURLResponse *response, NSDictionary* responseObject, NSError *error) {
+            if (error) {
+                NSLog(@"第 %d 张图片上传失败: %@", (int)i + 1, error);
+            } else {
+                NSString *resVal = [responseObject objectForKey:@"msg"];
+                NSString *uId = [responseObject objectForKey:@"data"];
+                NSLog(@"第 %d 张图片上传成功: %@", (int)i + 1, uId);
+                @synchronized (result) { // NSMutableArray 是线程不安全的，所以加个同步锁
+                    result[i] = responseObject;
+                }
+            }
+            
+        }];
+        
+        WJSURLSessionWrapperOperation *uploadOperation = [WJSURLSessionWrapperOperation operationWithURLSessionTask:uploadTask];
+        
+        [completionOperation addDependency:uploadOperation];
+        [queue addOperation:uploadOperation];
+    }
+    
+    [queue addOperation:completionOperation];
 }
 
 - (void)applyWJSInfoWithWjsId:(NSString *)wjsId andUId:(NSString *)uid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
@@ -107,11 +166,10 @@
     [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
-- (void)getUserDetailInfoWithUid:(NSString *)uid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
+- (void)getUserDetailInfoWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
     NSString *strUrl = [NSString stringWithFormat:@"%@user/info",SERV_ADDR];
-    NSDictionary *dicParams = @{@"uid":uid};
-    [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+    [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getQRCodeWithInviteId:(NSString *)inviteId andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
@@ -167,6 +225,37 @@
     NSString *strUrl = [NSString stringWithFormat:@"%@wjs/getlist",SERV_ADDR];
     [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
 }
+
+- (NSURLSessionUploadTask*)uploadTaskWithImage:(UIImage*)image andImageName:(NSString *)strImgName completion:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionBlock {
+    // 构造 NSURLRequest
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    // 设置时间格式
+    formatter.dateFormat = @"yyyyMMddHHmmss";
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    NSString *fileName = [NSString stringWithFormat:@"%@%@.png",strImgName,str];
+    NSError* error = NULL;
+    NSString *strUrl = [NSString stringWithFormat:@"%@common/upfile",SERV_ADDR];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:strUrl parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSData* imageData = UIImageJPEGRepresentation(image, 1.0);
+        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
+    } error:&error];
+    
+    // 可在此处配置验证信息
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSSet *accetContentTypes = [NSSet setWithObjects:@"application/json",
+                                @"text/html",
+                                @"text/json",
+                                @"text/javascript",
+                                @"text/plain",nil];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = accetContentTypes;
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:^(NSProgress * _Nonnull uploadProgress) {
+    } completionHandler:completionBlock];
+    
+    return uploadTask;
+}
+
 //通用接口
 - (void)upWJSFileWithFile:(NSData *)file andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock{
     
@@ -178,7 +267,6 @@
         formatter.dateFormat = @"yyyyMMddHHmmss";
         NSString *str = [formatter stringFromDate:[NSDate date]];
         NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
-        //NSDictionary *dicParams = @{@"file":fileName};
         NSSet *accetContentTypes = [NSSet setWithObjects:@"application/json",
                                     @"text/html",
                                     @"text/json",
@@ -189,15 +277,8 @@
         //formData: 专门用于拼接需要上传的数据,在此位置生成一个要上传的数据体
         [manager POST:strUrl parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> _Nonnull formData) {
             [formData appendPartWithFileData:file name:@"file" fileName:fileName mimeType:@"image/png"];
-
-        } progress:^(NSProgress * _Nonnull uploadProgress) {
-            //NSLog(@"%f",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
-            // 回到主队列刷新UI,用户自定义的进度条
-            // dispatch_async(dispatch_get_main_queue(), ^{
-            //    self.progressView.progress = 1.0 *
-            //    uploadProgress.completedUnitCount / uploadProgress.totalUnitCount;
-            // });
-        } success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+        } progress:nil
+        success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
             NSLog(@"上传成功 %@", responseObject);
         
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -213,15 +294,13 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    NSSet *accetContentTypes = [NSSet setWithObjects:@"application/json",
+    NSSet *acceptContentTypes = [NSSet setWithObjects:@"application/json",
                                 @"text/html",
                                 @"text/json",
                                 @"text/javascript",
                                 @"text/plain",nil];
-    //manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    //manager.responseSerializer.acceptableContentTypes = accetContentTypes;
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html",@"text/json", @"text/javascript", nil];
+    manager.responseSerializer.acceptableContentTypes = acceptContentTypes;
     [manager POST:url parameters:params progress:nil success:succBlock failure:failBlock];
 }
 
@@ -247,9 +326,15 @@
                                 @"text/html",
                                 @"text/json",
                                 @"text/javascript",
-                                @"text/plain", nil];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+                                @"text/plain",nil];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = accetContentTypes;
+    
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    if (strUid && ![strUid isEqualToString:@""]) {
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        [manager.requestSerializer setValue:strUid forHTTPHeaderField:@"access-token"];
+    }
     
     [manager GET:url parameters:nil progress:nil success:succBlock failure:failBlock];
 }

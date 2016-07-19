@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WJSBaseVC.h"
 #import "TWSelectCityView.h"
 #import "PickerChoiceView.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface PersonDetailVC : UIViewController<UIActionSheetDelegate,TFPickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface PersonDetailVC : WJSBaseVC<UIActionSheetDelegate,TFPickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UIActionSheet *myActionSheet;
 @end
