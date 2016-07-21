@@ -10,8 +10,12 @@
 #import "QYTableViewHeader.h"
 #import "WJSCommonDefine.h"
 #import "WJSDataManager.h"
+#import "WJSLoginVC.h"
+#import <UMSocial.h>
+#import <UMSocialQQHandler.h>
+#import <UMSocialWechatHandler.h>
 
-@interface UserCenterVC ()
+@interface UserCenterVC ()<UMSocialUIDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *userTableView;
 @property (strong, nonatomic) QYTableViewHeader *headView;
 @property (strong, nonatomic) UIImageView *bigImageView;
@@ -27,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    self.hidLeftButton = YES;
     [self initData];
     [self initView];
 }
@@ -77,6 +82,7 @@
     [[WJSDataManager shareInstance]getUserDetailInfoWithSucc:succBlock andFail:failBlock];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -88,7 +94,7 @@
 }
 
 - (void)initData {
-    _arrName = @[@[@"昵称"],@[@"我的等级"],@[@"关于我们",@"我要分享"],@[@"设置"]];
+    _arrName = @[@[@"昵称"],@[@"我的等级"],@[@"关于我们",@"我要分享"],@[@"设置",@"退出登录"]];
     
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -135,6 +141,42 @@
     return 45.f;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if ([_arrName[indexPath.section][indexPath.row] isEqualToString:@"我要分享"]) {
+        [self shareToSocialApp];
+    } else if([_arrName[indexPath.section][indexPath.row] isEqualToString:@"退出登录"]) {
+        [self Logout];
+    }
+}
+
+- (void)Logout{
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        [self logoutResult:responseObject];
+    };
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        
+    };
+    [[WJSDataManager shareInstance]logoutUserAccWithSucc:succBlock andFail:failBlock];
+}
+
+- (void)logoutResult:(NSDictionary *) result {
+    
+    NSString *resVal = [result objectForKey:@"msg"];
+    if ([resVal isEqualToString:JSON_RES_SUCC]) {
+        [[WJSDataModel shareInstance] setUId:@""];
+        NSLog(@"登出成功");
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        NSString *errMsg = [result objectForKey:@"data"];
+        NSLog(@"登出失败，error[%@]",errMsg);
+    }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    WJSLoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"WJSLoginVC"];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController pushViewController:loginVC animated:YES];
+}
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -228,6 +270,35 @@
     _iconImg = image;
     [_userIconBtn setBackgroundImage:image forState:UIControlStateNormal];
     
+}
+
+- (void)shareToSocialApp {
+    [UMSocialData defaultData].extConfig.title = @"文龙一账通";
+    [UMSocialData defaultData].extConfig.qqData.url = @"http://bilibili.com";
+    [UMSocialData defaultData].extConfig.qzoneData.url = @"http://bilibili.com";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"http://bilibili.com";
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://bilibili.com";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.shareText = @"我的朋友圈";
+    [UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"我的微信";
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"507fcab25270157b37000010"
+                                      shareText:@"我快要疯了"
+                                     shareImage:[UIImage imageNamed:@"haha"]
+                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone]
+                                       delegate:self];
+}
+
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        [self showAlertViewWithTitle:@"分享成功"];
+        //得到分享到的平台名
+        //NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    } else {
+        [self showAlertViewWithTitle:@"分享失败"];
+    }
 }
 
 -(NSURL *)documentsDirectory {

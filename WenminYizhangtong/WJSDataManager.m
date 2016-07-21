@@ -42,6 +42,11 @@
     [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
+- (void)logoutUserAccWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
+    NSString *strUrl = [NSString stringWithFormat:@"%@user/logout",SERV_ADDR];
+    [self postMsg:strUrl withParams:nil withSuccBlock:succBlock withFailBlock:failBlock];
+}
+
 - (void)FindPsdWithUserEmail:(NSString *)userEmail andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     NSString *strUrl = [NSString stringWithFormat:@"%@user/reset_pass",SERV_ADDR];
     NSDictionary *dicParams = @{@"email":userEmail};
@@ -301,6 +306,11 @@
                                 @"text/plain",nil];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = acceptContentTypes;
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    if (strUid && ![strUid isEqualToString:@""]) {
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        [manager.requestSerializer setValue:strUid forHTTPHeaderField:@"access-token"];
+    }
     [manager POST:url parameters:params progress:nil success:succBlock failure:failBlock];
 }
 

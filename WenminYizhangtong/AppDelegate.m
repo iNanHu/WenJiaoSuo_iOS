@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 #import <JPUSHService.h>
+#import <UMSocial.h>
+#import "WJSCommonDefine.h"
+#import <UMSocialQQHandler.h>
+#import <UMSocialWechatHandler.h>
 #import <AdSupport/AdSupport.h>
 
 @interface AppDelegate ()
@@ -39,6 +43,13 @@
                                                           UIRemoteNotificationTypeAlert)
                                               categories:nil];
     }
+    //友盟分享
+    [UMSocialData setAppKey:UMAppKey];
+    
+    //设置微信AppId、appSecret，分享url
+    [UMSocialWechatHandler setWXAppId:WxAppId appSecret:WxShareAppSecret url:@"http://www.umeng.com/social"];
+    //设置手机QQ 的AppId，Appkey，和分享URL，需要#import "UMSocialQQHandler.h"
+    [UMSocialQQHandler setQQWithAppId:QQAppId appKey:QQAppKey url:@"http://www.umeng.com/social"];
     
     //如不需要使用IDFA，advertisingIdentifier 可为nil
     [JPUSHService setupWithOption:launchOptions appKey:appKey
@@ -47,6 +58,16 @@
             advertisingIdentifier:advertisingId];
     return YES;
 }
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    if (result == FALSE) {
+        //调用其他SDK，例如支付宝SDK等
+    }
+    return result;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -72,6 +72,7 @@
     //隐藏导航栏左右按钮
     self.hidLeftButton = YES;
     self.hidRightButton = YES;
+    self.navigationItem.hidesBackButton = YES;
     
     UIView *headView = [UIView new];
     headView.frame = CGRectMake(0, Tab_HEIGHT, UI_SCREEN_WIDTH, SCROLL_HEIGHT + 20);

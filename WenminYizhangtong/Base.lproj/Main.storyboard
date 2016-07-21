@@ -254,7 +254,6 @@
         <!--首页-->
         <scene sceneID="EmO-ci-K8O">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gYn-IL-S49" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="pWd-a3-6QJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="首页" id="tzw-8h-CsY"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -266,6 +265,7 @@
                         <segue destination="wIZ-SB-5ua" kind="relationship" relationship="rootViewController" id="jku-5u-LXb"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gYn-IL-S49" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="121.33333333333333" y="-718.99333333333334"/>
         </scene>
@@ -288,7 +288,6 @@
         <!--一账通-->
         <scene sceneID="nLu-kP-pID">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fsf-20-2jd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="bxc-dh-mxn" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="一账通" id="JKC-0D-pVz"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -300,6 +299,7 @@
                         <segue destination="YIy-Sr-Lma" kind="relationship" relationship="rootViewController" id="8V5-iO-827"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fsf-20-2jd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="120.5" y="798.5"/>
         </scene>
@@ -581,23 +581,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" id="7Gj-am-xFI">
-                                <rect key="frame" x="0.0" y="117" width="375" height="550"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="AdR-9q-B8f">
-                                <rect key="frame" x="6" y="81" width="177" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.34131823792759153" green="0.24899417823703296" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <segments>
-                                    <segment title="自行开户"/>
-                                    <segment title="自动开户"/>
-                                </segments>
-                                <color key="tintColor" red="0.97785833535754318" green="0.96469565089136688" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uxs-ZE-Jz7">
-                                <rect key="frame" x="251" y="80" width="116" height="30"/>
+                                <rect key="frame" x="271" y="69" width="96" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="提交信息">
                                     <color key="titleColor" red="0.26817359588415857" green="0.32325553371371052" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -610,7 +595,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="personDetailBtn" destination="Uxs-ZE-Jz7" id="GBf-BB-osb"/>
-                        <outlet property="regAccWebView" destination="7Gj-am-xFI" id="smi-Yl-mOI"/>
                         <segue destination="5CP-kC-qx8" kind="push" identifier="NavToPersonDetail" id="XoL-sB-8Ge"/>
                     </connections>
                 </viewController>
@@ -621,7 +605,6 @@
         <!--行情-->
         <scene sceneID="GBm-4Y-P8J">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RpH-D4-TWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="goM-0M-HMC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="行情" id="WSs-Oy-v6R"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -633,6 +616,7 @@
                         <segue destination="VCi-iG-wa6" kind="relationship" relationship="rootViewController" id="Re2-gu-VrO"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RpH-D4-TWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="120.5" y="44.5"/>
         </scene>
@@ -655,7 +639,6 @@
         <!--个人中心-->
         <scene sceneID="xDR-am-JtW">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HFP-V4-jTK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="6sN-at-bP0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="个人中心" id="xD3-0a-jBV"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -667,6 +650,7 @@
                         <segue destination="61D-5a-vcA" kind="relationship" relationship="rootViewController" id="8yf-E4-G5V"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HFP-V4-jTK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="120.5" y="1576.5"/>
         </scene>

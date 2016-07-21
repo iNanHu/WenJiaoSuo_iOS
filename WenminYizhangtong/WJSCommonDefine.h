@@ -10,6 +10,12 @@
 #define WJSCommonDefine_h
 
 #import <Foundation/NSURLSession.h>
+//41E57868
+#define WxShareAppSecret @"42f3ca39d8a2d2228a90eb4ed7a76522"
+#define WxAppId @"wxe4083fddc9a7277b"
+#define QQAppId @"1105481323"
+#define QQAppKey @"2cHbXqfwpneKDypE"
+#define UMAppKey @"YELO-EBZP-YUYW-J2WC-846U-4638-4CCJ-HYH6-6P9R"
 
 #define iOS8                     ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 #define iPhone6                  (([UIScreen mainScreen].bounds.size.width == 750) ? YES : NO)

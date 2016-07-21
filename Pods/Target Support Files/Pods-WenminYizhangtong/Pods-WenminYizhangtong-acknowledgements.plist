@@ -366,6 +366,15 @@ THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright 2011 - 2016 UMeng.com. All rights reserved.
+</string>
+			<key>Title</key>
+			<string>UMengSocialCOM</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright (c) 2009 Topfunky Corporation, http://topfunky.com
 
 MIT LICENSE

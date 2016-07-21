@@ -23,7 +23,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.hidden = YES;
     [self.loginBtn addTarget:self action:@selector(Login) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)initData {
+    NSString *strUserName = [[WJSDataModel shareInstance] userPhone];
+    NSString *strUserPsd = [[WJSDataModel shareInstance] userPassword];
+    _nameTextFiled.text = strUserName;
+    _psdTextFiled.text = strUserPsd;
+    if (![strUserName isEqualToString:@""] && ![strUserPsd isEqualToString:@""]) {
+        [self Login];
+    }
 }
 
 - (void)Login {
@@ -49,10 +60,13 @@
 }
 
 - (void)loginResult:(NSDictionary *) result {
+    
     NSString *resVal = [result objectForKey:@"msg"];
     if ([resVal isEqualToString:JSON_RES_SUCC]) {
         NSString *uId = [result objectForKey:@"data"];
         [[WJSDataModel shareInstance] setUId:uId];
+        [[WJSDataModel shareInstance]setUserPhone:_nameTextFiled.text];
+        [[WJSDataModel shareInstance]setUserPassword:_psdTextFiled.text];
         NSLog(@"登录成功:%@",uId);
         [self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
     } else {

@@ -11,5 +11,6 @@ pod 'GDataXML-HTML', '~>1.3.0'
 pod 'AFNetworking', '~>3.1.0'
 pod 'SDWebImage', '~>3.8.1'
 pod 'JPush', '~>2.1.7'
+pod 'UMengSocialCOM', '~> 5.2.1'
 end
 

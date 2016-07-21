@@ -20,6 +20,8 @@
 - (void)registerUserAccWithUserName:(NSString *)userName andInviteId:(NSString *)inviteId andUserEmail:(NSString *)userEmail andUserPsd:(NSString *)userPsd andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //登录账号
 - (void)loginUserAccWithUserName:(NSString *)userName andUserPsd:(NSString *)userPsd andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
+//登出账号
+- (void)logoutUserAccWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //找回密码
 - (void)FindPsdWithUserEmail:(NSString *)userEmail andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //提交用户详细资料
