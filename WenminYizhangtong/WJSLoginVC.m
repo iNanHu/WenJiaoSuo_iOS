@@ -25,6 +25,7 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;
     [self.loginBtn addTarget:self action:@selector(Login) forControlEvents:UIControlEventTouchUpInside];
+    [self initData];
 }
 
 - (void)initData {

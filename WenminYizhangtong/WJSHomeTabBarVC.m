@@ -47,7 +47,7 @@
 - (void)setTabrItemStyleWithFontSize:(CGFloat)fontSize {
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:RGB(0x80, 0x80, 0x86), NSForegroundColorAttributeName, [UIFont fontWithName:@"Helvetica" size:fontSize],NSFontAttributeName,nil] forState:UIControlStateNormal];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:RGB(0x4D, 0x32, 0x0E), NSForegroundColorAttributeName, [UIFont fontWithName:@"Helvetica" size:fontSize],NSFontAttributeName,nil] forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:RGB(0x26, 0x82, 0xF1), NSForegroundColorAttributeName, [UIFont fontWithName:@"Helvetica" size:fontSize],NSFontAttributeName,nil] forState:UIControlStateSelected];
 }
 - (void)viewWillLayoutSubviews {
     CGRect tabFrame = self.tabBar.frame;

@@ -64,6 +64,9 @@
 		7B31B72F1D3E8055007B63AF /* 58.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B72C1D3E8055007B63AF /* 58.png */; };
 		7B31B7301D3E8055007B63AF /* 80.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B72D1D3E8055007B63AF /* 80.png */; };
 		7B31B7341D3FDB00007B63AF /* haha.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B7331D3FDB00007B63AF /* haha.png */; };
+		7B31B7391D41134E007B63AF /* AccountInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B7381D41134E007B63AF /* AccountInfoCell.xib */; };
+		7B31B73C1D4124F7007B63AF /* RegAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B31B73B1D4124F7007B63AF /* RegAccountVC.m */; };
+		7B31B73F1D4195C1007B63AF /* WJSApplyStattusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B31B73E1D4195C1007B63AF /* WJSApplyStattusVC.m */; };
 		7B9403291D22CAEF00DBA882 /* WJSInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B9403281D22CAEF00DBA882 /* WJSInfoCell.xib */; };
 		7B94032D1D22D60D00DBA882 /* defCellImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B94032C1D22D60D00DBA882 /* defCellImg.png */; };
 		7B9403301D22D77700DBA882 /* WJSHomeTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B94032F1D22D77700DBA882 /* WJSHomeTabBarVC.m */; };
@@ -188,6 +191,11 @@
 		7B31B72C1D3E8055007B63AF /* 58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 58.png; sourceTree = "<group>"; };
 		7B31B72D1D3E8055007B63AF /* 80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 80.png; sourceTree = "<group>"; };
 		7B31B7331D3FDB00007B63AF /* haha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = haha.png; sourceTree = "<group>"; };
+		7B31B7381D41134E007B63AF /* AccountInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoCell.xib; sourceTree = "<group>"; };
+		7B31B73A1D4124F7007B63AF /* RegAccountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegAccountVC.h; sourceTree = "<group>"; };
+		7B31B73B1D4124F7007B63AF /* RegAccountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegAccountVC.m; sourceTree = "<group>"; };
+		7B31B73D1D4195C1007B63AF /* WJSApplyStattusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSApplyStattusVC.h; sourceTree = "<group>"; };
+		7B31B73E1D4195C1007B63AF /* WJSApplyStattusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSApplyStattusVC.m; sourceTree = "<group>"; };
 		7B9403271D22BF3C00DBA882 /* WJSCommonDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WJSCommonDefine.h; sourceTree = "<group>"; };
 		7B9403281D22CAEF00DBA882 /* WJSInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJSInfoCell.xib; sourceTree = "<group>"; };
 		7B94032C1D22D60D00DBA882 /* defCellImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defCellImg.png; sourceTree = "<group>"; };
@@ -330,6 +338,10 @@
 				7B0C65671D163E2200C54B56 /* OneAccountVC.m */,
 				7B31B6AB1D33E0BF007B63AF /* PersonDetailVC.h */,
 				7B31B6AC1D33E0BF007B63AF /* PersonDetailVC.m */,
+				7B31B73A1D4124F7007B63AF /* RegAccountVC.h */,
+				7B31B73B1D4124F7007B63AF /* RegAccountVC.m */,
+				7B31B73D1D4195C1007B63AF /* WJSApplyStattusVC.h */,
+				7B31B73E1D4195C1007B63AF /* WJSApplyStattusVC.m */,
 			);
 			name = "一账通";
 			sourceTree = "<group>";
@@ -467,6 +479,7 @@
 				7B31B6AE1D33F593007B63AF /* TWSelectView */,
 				7B9403841D29082100DBA882 /* LiuXSegmentView.h */,
 				7B9403851D29082100DBA882 /* LiuXSegmentView.m */,
+				7B31B7381D41134E007B63AF /* AccountInfoCell.xib */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -656,6 +669,7 @@
 				7B31B6B31D33F661007B63AF /* Address.plist in Resources */,
 				7B31B72F1D3E8055007B63AF /* 58.png in Resources */,
 				7BEC059E1D1199770047A2E3 /* Assets.xcassets in Resources */,
+				7B31B7391D41134E007B63AF /* AccountInfoCell.xib in Resources */,
 				7B9403291D22CAEF00DBA882 /* WJSInfoCell.xib in Resources */,
 				7B31B7121D3D357F007B63AF /* nav_back.png in Resources */,
 				7B94038A1D2ADA3600DBA882 /* QuotationInfo.plist in Resources */,
@@ -804,6 +818,7 @@
 				7B31B6DE1D34039A007B63AF /* View+MASAdditions.m in Sources */,
 				7B31B7031D3D3398007B63AF /* UINavigationBar+Awesome.m in Sources */,
 				7B31B6F71D3D31CF007B63AF /* UIViewController+Style.m in Sources */,
+				7B31B73F1D4195C1007B63AF /* WJSApplyStattusVC.m in Sources */,
 				7B9403301D22D77700DBA882 /* WJSHomeTabBarVC.m in Sources */,
 				7B0C656B1D163E4000C54B56 /* UserCenterVC.m in Sources */,
 				5A4DFBBA1D24E13C0003CA7A /* WJSLoginVC.m in Sources */,
@@ -823,6 +838,7 @@
 				7BD756151D1CB5A7000CA7EF /* WJSTool.m in Sources */,
 				7B31B6D91D34039A007B63AF /* MASLayoutConstraint.m in Sources */,
 				7B9403821D28056B00DBA882 /* WJSDataModel.m in Sources */,
+				7B31B73C1D4124F7007B63AF /* RegAccountVC.m in Sources */,
 				7B31B6AD1D33E0BF007B63AF /* PersonDetailVC.m in Sources */,
 				7B0C65681D163E2200C54B56 /* OneAccountVC.m in Sources */,
 			);

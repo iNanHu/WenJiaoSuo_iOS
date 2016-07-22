@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "WJSBaseVC.h"
 
+#define WJSLogo @"logo"
+#define WJSLink @"link"
+#define WJSName @"name"
+#define WJSOneKey @"onekey"
+#define WJSId @"id"
+
 @interface OneAccountVC : WJSBaseVC
 
 @end

@@ -34,12 +34,6 @@
     [self initCtrl];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:YES];
-}
-
 - (void)initData {
     
     _imgList = @[@"home_index1",@"home_index2",@"home_index3"];
@@ -253,8 +247,6 @@
 {
     UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell) {
-        //[self getWJSInfoList];
-        //[self uploadFile];
         
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

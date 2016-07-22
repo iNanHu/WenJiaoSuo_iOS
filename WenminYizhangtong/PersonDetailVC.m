@@ -79,6 +79,7 @@
     //隐藏导航栏左右按钮
     self.hidLeftButton = NO;
     self.hidRightButton = YES;
+    self.title = @"完善个人信息";
     
     //ScrollView
     _personScrollView.frame = CGRectMake(0, 40, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - 40);

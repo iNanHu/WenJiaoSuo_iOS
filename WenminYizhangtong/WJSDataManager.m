@@ -163,11 +163,10 @@
     [queue addOperation:completionOperation];
 }
 
-- (void)applyWJSInfoWithWjsId:(NSString *)wjsId andUId:(NSString *)uid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
+- (void)applyWJSInfoWithWjsId:(NSString *)wjsId andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
     NSString *strUrl = [NSString stringWithFormat:@"%@user/apply_wjs",SERV_ADDR];
-    NSDictionary *dicParams = @{@"wjsid":wjsId,
-                                @"uid":uid};
+    NSDictionary *dicParams = @{@"wjsid":wjsId};
     [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
@@ -194,7 +193,7 @@
 //文交所新闻相关接口
 - (void)getWJSInfoListWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock{
     
-    NSString *strUrl = [NSString stringWithFormat:@"%@news/getlist",SERV_ADDR];
+    NSString *strUrl = [NSString stringWithFormat:@"%@wjs/getlist",SERV_ADDR];
     [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
@@ -206,6 +205,12 @@
                                 @"pagenum":pagenum,
                                 @"order":order};
     [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+}
+
+- (void)getWJSApplyStatus:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
+    
+    NSString *strUrl = [NSString stringWithFormat:@"%@wjs/get_apply_status",SERV_ADDR];
+    [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getNewDetailWithId:(NSString *)newsId andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {

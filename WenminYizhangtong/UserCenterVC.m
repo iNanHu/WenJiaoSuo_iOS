@@ -167,15 +167,15 @@
     if ([resVal isEqualToString:JSON_RES_SUCC]) {
         [[WJSDataModel shareInstance] setUId:@""];
         NSLog(@"登出成功");
+        [[WJSDataModel shareInstance] setUserPassword:@""];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        WJSLoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"WJSLoginVC"];
         [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController pushViewController:loginVC animated:YES];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];
         NSLog(@"登出失败，error[%@]",errMsg);
     }
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    WJSLoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"WJSLoginVC"];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

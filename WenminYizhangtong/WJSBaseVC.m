@@ -15,7 +15,7 @@
 
 #define TOP_BAR_HEIGHT 60
 
-@interface WJSBaseVC ()
+@interface WJSBaseVC ()<UIGestureRecognizerDelegate>
 {
     UIButton *_messageButton;
     UIButton *_leftButton;
@@ -63,13 +63,28 @@
     
     [_leftButton setFrame:CGRectMake(0, 0, 40, 40)];
     [_leftButton addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.navigationController.navigationBar setBarTintColor:RGB(0x4D, 0x32, 0x0E)];
+    //0x2682F1
+    [self.navigationController.navigationBar setBarTintColor:RGB(0x26, 0x82, 0xF1)];
     [self.view setBackgroundColor:RGB(250, 250, 250)];
     
     self.hidLeftButton = NO;
     self.hidRightButton = YES;
     
+    if ([[UIDevice currentDevice].systemVersion floatValue]>=7.0) {
+        if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+            self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+            self.navigationController.interactivePopGestureRecognizer.delegate = self;
+        }
+    }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    
+    if ([self.navigationController.viewControllers count] == 1) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -171,7 +186,7 @@
 
 -(void)setScrollRefreshView:(UIScrollView *)scrollView {
     if (!_refreshCtrl) {
-        _refreshCtrl = [SHRefreshControl attachToScrollView:scrollView target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:RGB(0x4D, 0x32, 0x0E) lineWidth:1.5 dropHeight:80 scale:1 horizontalRandomness:150 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
+        _refreshCtrl = [SHRefreshControl attachToScrollView:scrollView target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:RGB(0x26, 0x82, 0xF1) lineWidth:1.5 dropHeight:80 scale:1 horizontalRandomness:150 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
     }
     
 }

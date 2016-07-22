@@ -56,6 +56,8 @@
                           channel:channel
                  apsForProduction:isProduction
             advertisingIdentifier:advertisingId];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     return YES;
 }
 

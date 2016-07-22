@@ -31,7 +31,7 @@
                          andBankLoc:(NSString *)banklocation andBranchName:(NSString *)branchname andCertiFrontImg:(NSData *)certiFrontImg andCertiBackImg:(NSData *)certiBackImg andBankCardImg:(NSData *)bankcardImg
                             andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //提交文交所开户申请
-- (void)applyWJSInfoWithWjsId:(NSString *)wjsId andUId:(NSString *)uid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
+- (void)applyWJSInfoWithWjsId:(NSString *)wjsId andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //获取用户详细信息
 - (void)getUserDetailInfoWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //获取用户二维码链接
@@ -41,6 +41,8 @@
                     andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //获取文交所列表
 - (void)getWJSInfoListWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
+//获取用户开户状态
+- (void)getWJSApplyStatus:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //获取新闻列表
 - (void)getNewsListWithCId:(NSString *)cid andOrder:(NSString *)order andPage:(NSString *)page andPageNum:(NSString *)pagenum
                    andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
