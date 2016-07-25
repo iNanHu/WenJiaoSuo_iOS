@@ -7,18 +7,48 @@
 //
 #import <ASIFormDataRequest.h>
 #import <CommonCrypto/CommonCrypto.h>
+#import "WJSDataModel.h"
 #import <TFHpple.h>
 #import "WJSTool.h"
 
 
 @implementation WJSTool
 
-+(NSString*) urlstring:(NSString*)strurl{
++ (UIImage *)ImageWithColor:(UIColor*)bgColor andFrame:(CGRect) rect {
+    // 使用颜色创建UIImage
+    CGSize imageSize = CGSizeMake(rect.size.width, rect.size.height);
+    UIGraphicsBeginImageContextWithOptions(imageSize, 0, [UIScreen mainScreen].scale);
+    [bgColor set];
+    UIRectFill(CGRectMake(0, 0, imageSize.width, imageSize.height));
+    UIImage *pressedColorImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return pressedColorImg;
+}
+
++ (UIImage*) createRaduisImageWithColor: (UIColor*) color andFrame:(CGRect) rect
+{
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGFloat radius = CGRectGetWidth(rect)/2;
+    CGContextMoveToPoint(ctx, CGRectGetMidX(rect), CGRectGetMidY(rect));
+    CGContextSetFillColorWithColor(ctx, color.CGColor);
+    //画圆
+    CGContextAddArc(ctx, radius, radius, radius, 0, 2*M_PI, 0);
+    CGContextFillPath(ctx);
     
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
+}
+
+
++(NSDictionary *) getQuotationWithServ:(NSString*)servAddr andWJSId:(NSInteger) wjsId{
+    
+    NSString *strUrl = [NSString stringWithFormat:@"%@%ld",servAddr,(long)wjsId];
     NSError *error;
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     NSData *htmlData = [[NSString stringWithContentsOfURL:[NSURL
-                                                           URLWithString: strurl]
+                                                           URLWithString: strUrl]
                                                  encoding:enc error:&error]
                         dataUsingEncoding:NSUTF8StringEncoding];
     NSString *strHtmlData = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
@@ -41,8 +71,10 @@
     TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:[strKeyData dataUsingEncoding:NSUTF8StringEncoding]];
     NSArray *elements  = [xpathParser searchWithXPathQuery:@"//li"]; // get the title
     NSLog(@"%lu",(unsigned long)[elements count]);
-    TFHppleElement *element = [elements objectAtIndex:0];
     
+    NSArray *arrTitleName = @[@"上涨藏品数",@"下跌藏品数",@"平盘藏品数",@"交易中藏品",@"藏品总数",@"今日开盘",@"昨日收盘",@"最高指数",@"最低指数",@"成交总量",@"成交总额",@"更新时间"];
+    NSMutableDictionary *dicQuotaion = [[NSMutableDictionary alloc]init];
+    [dicQuotaion setObject:[NSNumber numberWithInteger:wjsId] forKey:@"wjsId"];
     for(int i = 0; i < [elements count]; i++) {
         TFHppleElement *element = [elements objectAtIndex:i];
         NSString *strRaw = [element raw];
@@ -59,16 +91,10 @@
         if (rangeRaw.location == NSNotFound) continue;
         NSString *keyVal = [strRaw substringWithRange:rangeRaw];
         NSLog(@"keyVal: %@",keyVal);
+        [dicQuotaion setObject:keyVal forKey:arrTitleName[i]];
     }
     
-    NSString *content = [element content];
-    NSString *tagname = [element tagName];
-    NSString *attr = [element objectForKey:@"href"];
-    NSLog(@"content = %@",content);
-    NSLog(@"tagname = %@",tagname);
-    NSLog(@"attr is = %@",attr);
-    
-    return content;
+    return [NSDictionary dictionaryWithDictionary:dicQuotaion];
 }
 
 + (NSRange)rangeWithSrc:(NSString *)strSrc withHead:(NSString *)strHead andEnd:(NSString *)strEnd {

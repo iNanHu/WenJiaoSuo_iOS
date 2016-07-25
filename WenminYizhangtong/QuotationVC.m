@@ -11,7 +11,6 @@
 #import "WJSDataManager.h"
 #import "LiuXSegmentView.h"
 
-#define QUOTATION_SERV_ADDR @"http://www.youbicard.com/plus/data/index.php?eid="
 #define TABLEVIEWCELLID @"tableviewcellId"
 
 @interface QuotationVC ()
@@ -20,7 +19,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *arrViews;
 @property (nonatomic, strong) NSArray *arrQuotaInfo;
-@property (nonatomic, strong) NSArray *arrListData;
+@property (nonatomic, strong) NSMutableArray *arrListData;
 @end
 
 @implementation QuotationVC
@@ -44,14 +43,16 @@
         NSLog(@"name: %@",name);
         [_segDataArr addObject:name];
     }
-    NSString *strUrl = [NSString stringWithFormat:@"%@%d",QUOTATION_SERV_ADDR,2];
-    [WJSTool urlstring:strUrl];
+    
 //    NSString *name = [dicInfo objectForKey:QUOTA_NAME];
 //    NSString *status = [dicInfo objectForKey:QUOTA_STATUS];
 //    NSString *sales = [dicInfo objectForKey:QUOTA_SALES];
 //    NSString *price = [dicInfo objectForKey:QUOTA_PRICE];
 //    NSString *allPrice = [dicInfo objectForKey:QUOTA_ALL_PRICE];
 //    NSString *rate = [dicInfo objectForKey:QUOTA_RATE];
+    
+    _arrListData = [[NSMutableArray alloc] init];
+    
     _arrListData = @[@{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
                      @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
                      @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
@@ -61,6 +62,7 @@
                      @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
                      @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
                      @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"}];
+    
 }
 - (void)initCtrl {
     
@@ -178,8 +180,6 @@
         [rateLab setBackgroundColor:[UIColor redColor]];
     else
         [rateLab setBackgroundColor:[UIColor greenColor]];
-    
-    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{

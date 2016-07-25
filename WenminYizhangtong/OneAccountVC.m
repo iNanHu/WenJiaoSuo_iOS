@@ -30,7 +30,7 @@
     [super viewDidLoad];
     
     //隐藏导航栏左右按钮
-    self.hidLeftButton = YES;
+    self.hidLeftButton = NO;
     self.hidRightButton = YES;
     self.navigationItem.hidesBackButton = YES;
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -49,13 +49,30 @@
     [self initData];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"申请进度查询" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
+    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBtn.frame = CGRectMake(10, 5, 100, 30);
+    [rightBtn.titleLabel setFont:[UIFont systemFontOfSize:16.f]];
+    [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [rightBtn setTitle:@"进度查询" forState:UIControlStateNormal];
+    [rightBtn setBackgroundColor:[UIColor clearColor]];
+    [rightBtn addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
+
+- (void)leftAction:(UIButton *)sender {
+    
+    [self performSegueWithIdentifier:NavToPersonDetail sender:nil];
 }
 
 - (void)rightAction {

@@ -14,7 +14,11 @@
 @property (nonatomic, copy) NSString *userPhone;
 @property (nonatomic, copy) NSString *userPassword;
 @property (nonatomic, copy) NSString *uId;
+@property (nonatomic, copy) NSArray *arrNewCategory; //分类信息
+@property (nonatomic, copy) NSMutableDictionary *dicUserInfo;
 @property (nonatomic, copy) NSArray *arrWJSList;
+@property (nonatomic, copy) NSArray *arrShuffInfo; //轮播信息
+@property (nonatomic, copy) NSMutableArray *arrQuotation; //行情信息
 
 +(id)shareInstance;
 @end

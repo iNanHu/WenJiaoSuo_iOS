@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import <JPUSHService.h>
 #import <UMSocial.h>
+#import "WJSTool.h"
+#import "WJSDataModel.h"
+#import "WJSDataManager.h"
 #import "WJSCommonDefine.h"
 #import <UMSocialQQHandler.h>
 #import <UMSocialWechatHandler.h>
@@ -58,6 +61,12 @@
             advertisingIdentifier:advertisingId];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [self getNewsCategory];
+    
+    //初始化行情信息
+    [self initQuotationInfo];
+    
     return YES;
 }
 
@@ -68,6 +77,43 @@
         //调用其他SDK，例如支付宝SDK等
     }
     return result;
+}
+
+- (void)initQuotationInfo {
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"QuotationInfo" ofType:@"plist"];
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    NSArray *arrQuotaInfo = [NSArray arrayWithArray:[data objectForKey:@"quotationInfoList"]];
+    
+    NSMutableArray *arrQuotation = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [arrQuotaInfo count]; i++)
+    {
+        NSDictionary *dic = [arrQuotaInfo objectAtIndex:i];
+        NSString *index = [dic objectForKey:@"index"];
+        NSDictionary *dicQuotation = [WJSTool getQuotationWithServ:QUOTATION_SERV_ADDR andWJSId:[index integerValue]];
+        [arrQuotation addObject:dicQuotation];
+    }
+    [[WJSDataModel shareInstance]setArrQuotation:arrQuotation];
+    
+}
+
+- (void)getNewsCategory {
+    
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSString *strResVal = [responseObject objectForKey:@"msg"];
+        if ([strResVal isEqualToString:JSON_RES_SUCC]) {
+            NSArray *arr = [responseObject objectForKey:@"data"];
+            [[WJSDataModel shareInstance] setArrNewCategory:arr];
+            NSLog(@"新闻类别获取成功！");
+        } else {
+            NSLog(@"新闻类别获取失败！");
+        }
+    };
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        NSLog(@"error: %@",error);
+    };
+    [[WJSDataManager shareInstance] getNewsCategoryInfoWithSucc:succBlock andFail:failBlock];
 }
 
 
@@ -138,8 +184,6 @@
         dict[NSLocalizedFailureReasonErrorKey] = failureReason;
         dict[NSUnderlyingErrorKey] = error;
         error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        // Replace this with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
@@ -170,8 +214,6 @@
     if (managedObjectContext != nil) {
         NSError *error = nil;
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
@@ -182,11 +224,6 @@
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     //rootViewController.deviceTokenValueLabel.text =
     [NSString stringWithFormat:@"%@", deviceToken];
-    //rootViewController.deviceTokenValueLabel.textColor =
-//    [UIColor colorWithRed:0.0 / 255
-//                    green:122.0 / 255
-//                     blue:255.0 / 255
-//                    alpha:1];
     NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
     [JPUSHService registerDeviceToken:deviceToken];
 }
@@ -202,22 +239,12 @@ didRegisterUserNotificationSettings:
 (UIUserNotificationSettings *)notificationSettings {
 }
 
-// Called when your app has been activated by the user selecting an action from
-// a local notification.
-// A nil action identifier indicates the default action.
-// You should call the completion handler as soon as you've finished handling
-// the action.
 - (void)application:(UIApplication *)application
 handleActionWithIdentifier:(NSString *)identifier
 forLocalNotification:(UILocalNotification *)notification
   completionHandler:(void (^)())completionHandler {
 }
 
-// Called when your app has been activated by the user selecting an action from
-// a remote notification.
-// A nil action identifier indicates the default action.
-// You should call the completion handler as soon as you've finished handling
-// the action.
 - (void)application:(UIApplication *)application
 handleActionWithIdentifier:(NSString *)identifier
 forRemoteNotification:(NSDictionary *)userInfo
@@ -248,8 +275,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     [JPUSHService showLocalNotificationAtFront:notification identifierKey:nil];
 }
 
-// log NSSet with UTF8
-// if not ,log will be \Uxxx
 - (NSString *)logDic:(NSDictionary *)dic {
     if (![dic count]) {
         return nil;

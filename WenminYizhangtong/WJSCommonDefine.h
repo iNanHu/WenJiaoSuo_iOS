@@ -17,6 +17,8 @@
 #define QQAppKey @"2cHbXqfwpneKDypE"
 #define UMAppKey @"YELO-EBZP-YUYW-J2WC-846U-4638-4CCJ-HYH6-6P9R"
 
+#define QUOTATION_SERV_ADDR @"http://www.youbicard.com/plus/data/index.php?eid="
+
 #define iOS8                     ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 #define iPhone6                  (([UIScreen mainScreen].bounds.size.width == 750) ? YES : NO)
 #define iPhone6P                 (([UIScreen mainScreen].bounds.size.width == 1080) ? YES : NO)
@@ -64,20 +66,26 @@
 
 //文交所资讯信息
 
-#define WJSINFO_IMGURL      @"WJSInfoImgUrl"
-#define WJSINFO_TITLE       @"WJSInfoTitleName"
-#define WJSINFO_DETAIL      @"WJSInfoDetail"
+#define WJSINFO_ID          @"content_id"
+#define WJSINFO_IMGURL      @"image"
+#define WJSINFO_TITLE       @"title"
+#define WJSINFO_DETAIL      @"description"
+#define WJSINFO_URL         @"curl"
+#define WJSINFO_TIME        @"time"
+#define WJSINFO_NAME        @"class_name"
+#define WJSINFO_INDEX       @"i"
+#define WJSINFO_VISIT_COUNT @"views"
 
 #define JSON_RES_SUCC       @"success"
 #define JSON_RES_FAIL       @"error"
 
 //行情信息
-#define QUOTA_NAME          @"name"
-#define QUOTA_STATUS        @"status"
-#define QUOTA_SALES         @"transaction"
-#define QUOTA_PRICE         @"price"
-#define QUOTA_ALL_PRICE     @"capitalization"
-#define QUOTA_RATE          @"rate"
+#define QUOTA_NAME          @"name"             //文交所名称
+#define QUOTA_STATUS        @"status"           //状态
+#define QUOTA_SALES         @"transaction"      //成交总量
+#define QUOTA_PRICE         @"price"           //成交平均值
+#define QUOTA_ALL_PRICE     @"capitalization" //成交总量
+#define QUOTA_RATE          @"rate"           //成交
 
 #define NAV_TO_HOMEVC       @"Nav_To_HomeVC"
 //网络请求的回调信息

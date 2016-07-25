@@ -7,10 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIkit/UIKit.h>
 
 @interface WJSTool : NSObject
 
-+ (NSString*) urlstring:(NSString*)strurl;
+//获取纯色图片
++ (UIImage *)ImageWithColor:(UIColor*)bgColor andFrame:(CGRect) rect;
+
++ (UIImage*) createRaduisImageWithColor: (UIColor*) color andFrame:(CGRect) rect;
+
++(NSDictionary *) getQuotationWithServ:(NSString*)servAddr andWJSId:(NSInteger) wjsId;
 //MD5加密
 + (NSString *)getMD5Val:(NSString *)strVal;
 //手机号

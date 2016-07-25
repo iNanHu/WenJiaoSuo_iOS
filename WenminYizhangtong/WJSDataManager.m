@@ -53,6 +53,7 @@
     [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
+
 - (void)commitDetailUserInfoWithUId:(NSString *)uid andUsrName:(NSString *)usrname andSex:(NSString *)sex
                        andCertiType:(NSString *)certifitype andCertiNum:(NSString *)certinum andTelPhone:(NSString *)telphone
                        andAddress:(NSString *)address andBankName:(NSString *)bankname andAccNum:(NSString *)accountNum
@@ -200,16 +201,17 @@
 - (void)getNewsListWithCId:(NSString *)cid andOrder:(NSString *)order andPage:(NSString *)page andPageNum:(NSString *)pagenum
                    andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     NSString *strUrl = [NSString stringWithFormat:@"%@news/getlist",SERV_ADDR];
-    NSDictionary *dicParams = @{@"cid":cid,
-                                @"page":page,
-                                @"pagenum":pagenum,
-                                @"order":order};
+    NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
+    if(cid) [dicParams setObject:cid forKey:@"cid"];
+    if(page) [dicParams setObject:page forKey:@"page"];
+    if(pagenum) [dicParams setObject:pagenum forKey:@"pagenum"];
+    if(order) [dicParams setObject:order forKey:@"order"];
     [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getWJSApplyStatus:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
-    NSString *strUrl = [NSString stringWithFormat:@"%@wjs/get_apply_status",SERV_ADDR];
+    NSString *strUrl = [NSString stringWithFormat:@"%@user/get_apply_status",SERV_ADDR];
     [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
 }
 

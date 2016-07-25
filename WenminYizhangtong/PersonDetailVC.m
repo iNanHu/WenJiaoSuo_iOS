@@ -148,6 +148,8 @@
     [[WJSDataManager shareInstance]commitDetailUserInfoWithUId:strUid andUsrName:strUserName andSex:strSex andCertiType:strCertiType andCertiNum:strCertiNum andTelPhone:strPhoneNum andAddress:strAddress andBankName:strBankName andAccNum:strBankAccount andBankLoc:strBankAddress andBranchName:strBankBranchName andCertiFrontImg:certiFrontData andCertiBackImg:certiBackData andBankCardImg:bankFrontData andSucc:succBlock andFail:failBlock];
 }
 
+
+
 - (void)personCommitResult:(NSDictionary *) result {
     NSLog(@"提交个人详情成功！");
     NSString *resVal = [result objectForKey:@"msg"];

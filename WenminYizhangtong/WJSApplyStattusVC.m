@@ -6,6 +6,8 @@
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
 #define ApplyStatusCell @"ApplyStatusCell"
+#define ApplyWJSLogo @"logo"
+#define ApplyWJSName @"name"
 #define ApplyWJSId @"wjsid"
 #define ApplyWJSPass @"wjspass"
 #define ApplyWJSStatus @"status"
@@ -26,10 +28,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.title = @"申请进度";
+    
+    [self initData];
     _applyStatusTableView.delegate = self;
     _applyStatusTableView.dataSource = self;
     [_applyStatusTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ApplyStatusCell];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)initData {
@@ -62,23 +67,6 @@
     return _arrApplyStatus.count;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 120)];
-    [headView setBackgroundColor:[UIColor whiteColor]];
-    
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 120)];
-    imgView.image = [UIImage imageNamed:@"home_index1"];
-    [headView addSubview:imgView];
-    
-    UIView *line = [UIView new];
-    line.frame = CGRectMake(0, 119, UI_SCREEN_WIDTH, 0.5);
-    [line setBackgroundColor:RGB(0xC0, 0xC0, 0xC0)];
-    [headView addSubview:line];
-    
-    return headView;
-}
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (_arrApplyStatus.count == 0) return nil;
@@ -101,14 +89,8 @@
     NSInteger nApplyStatus = [[dicInfo objectForKey:ApplyWJSStatus] integerValue];
     NSString *strUserName = [dicInfo objectForKey:ApplyWJSUsrName];
     NSString *strUserPass = [dicInfo objectForKey:ApplyWJSPass];
-    NSString *strImgUrl = nil;
-    NSString *strWjsName = nil;
-    for (NSDictionary *wjsInfo in _arrWJSInfo) {
-        if ([strWjsId isEqualToString:[wjsInfo objectForKey:WJSId]]) {
-            strImgUrl = [wjsInfo objectForKey:WJSLink];
-            strWjsName = [wjsInfo objectForKey:WJSName];
-        }
-    }
+    NSString *strImgUrl = [dicInfo objectForKey:ApplyWJSLogo];
+    NSString *strWjsName = [dicInfo objectForKey:ApplyWJSName];
     NSString *detailInfo = [NSString stringWithFormat:@"开户账号：%@ 密码：%@",strUserName,strUserPass];
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:strImgUrl] placeholderImage:[UIImage imageNamed:@"defCellImg"]];
     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -148,11 +130,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 120.f;
+    return .1f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 1.f;
+    return .1f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

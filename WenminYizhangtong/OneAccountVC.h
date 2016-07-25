@@ -13,7 +13,7 @@
 #define WJSLink @"link"
 #define WJSName @"name"
 #define WJSOneKey @"onekey"
-#define WJSId @"id"
+#define WJSId @"data_id"
 
 @interface OneAccountVC : WJSBaseVC
 

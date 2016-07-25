@@ -68,12 +68,30 @@
         [[WJSDataModel shareInstance] setUId:uId];
         [[WJSDataModel shareInstance]setUserPhone:_nameTextFiled.text];
         [[WJSDataModel shareInstance]setUserPassword:_psdTextFiled.text];
+        [self getUserDetailInfo];
         NSLog(@"登录成功:%@",uId);
         [self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];
         NSLog(@"登录失败，error[%@]",errMsg);
     }
+}
+
+- (void)getUserDetailInfo {
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSString *strResVal = [responseObject objectForKey:@"msg"];
+        if ([strResVal isEqualToString:JSON_RES_SUCC]) {
+            [[WJSDataModel shareInstance]setDicUserInfo:[[NSMutableDictionary alloc]initWithDictionary:[responseObject objectForKey:@"data"]]];
+            NSLog(@"用户信息获取成功:%@");
+        } else {
+            id data = [responseObject objectForKey:@"data"];
+            NSLog(@"用户信息失败:%@",data);
+        }
+    };
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        NSLog(@"error: %@",error);
+    };
+    [[WJSDataManager shareInstance]getUserDetailInfoWithSucc:succBlock andFail:failBlock];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -6,10 +6,16 @@
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
 #define TableViewCellId @"tableViewCellId"
+#define NavToUserAboutVC @"NavToAboutVC"
+#define NavToUserManagerVC @"NavToUserManagerVC"
+#define TableHeaderHeight 80
+#import "WJSTool.h"
 #import "UserCenterVC.h"
+#import "WJSUserManagerVC.h"
 #import "QYTableViewHeader.h"
 #import "WJSCommonDefine.h"
 #import "WJSDataManager.h"
+#import "WJSDataModel.h"
 #import "WJSLoginVC.h"
 #import <UMSocial.h>
 #import <UMSocialQQHandler.h>
@@ -21,6 +27,7 @@
 @property (strong, nonatomic) UIImageView *bigImageView;
 @property (strong, nonatomic) UIButton *userIconBtn;
 @property (strong, nonatomic) NSArray *arrName;
+@property (strong, nonatomic) NSArray *arrImgName;
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) UIActionSheet *myActionSheet;
 @property (nonatomic, strong) UIImage *iconImg;
@@ -38,7 +45,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)initView {
@@ -52,7 +59,7 @@
     UIImage *iconImg = [UIImage imageNamed:@"tx"];
     _userIconBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
     [_userIconBtn setBackgroundImage:iconImg forState:UIControlStateNormal];
-    _userIconBtn.center=CGPointMake(_bigImageView.center.x, _bigImageView.center.y);
+    _userIconBtn.center=CGPointMake(_bigImageView.center.x, _bigImageView.center.y+32);
     _userIconBtn.clipsToBounds=YES;
     _userIconBtn.contentMode=UIViewContentModeScaleAspectFill;
     [_userIconBtn addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
@@ -64,28 +71,21 @@
     _userTableView.delegate = self;
     _userTableView.dataSource = self;
     [_userTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:TableViewCellId];
+    if ([_userTableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [_userTableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([_userTableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [_userTableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+
     [_userTableView setBackgroundColor:RGB(0xF7, 0xF7, 0xF7)];
-    
-    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        NSString *strResVal = [responseObject objectForKey:@"msg"];
-        if ([strResVal isEqualToString:JSON_RES_SUCC]) {
-            id data = [responseObject objectForKey:@"data"];
-            NSLog(@"用户信息获取成功:%@",data);
-        } else {
-            id data = [responseObject objectForKey:@"data"];
-            NSLog(@"用户信息失败:%@",data);
-        }
-    };
-    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
-        NSLog(@"error: %@",error);
-    };
-    [[WJSDataManager shareInstance]getUserDetailInfoWithSucc:succBlock andFail:failBlock];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)viewDidLayoutSubviews {
+    
     [_headView resizeView];
 }
 
@@ -94,30 +94,126 @@
 }
 
 - (void)initData {
-    _arrName = @[@[@"昵称"],@[@"我的等级"],@[@"关于我们",@"我要分享"],@[@"设置",@"退出登录"]];
     
+    _arrName = @[@[@""],@[@"账号管理"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
+    _arrImgName = @[@[@""],@[@"evaluate"],@[@"push_remind",@"feedback",@"about_us",@"check_version",@"share"]];
 }
+
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return nil;
+    }
+    
+    NSString *strName = _arrName[indexPath.section][indexPath.row];
+    NSString *strIconUrl = _arrImgName[indexPath.section][indexPath.row];
+    UITableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:TableViewCellId];
+    cell.textLabel.text= strName;
+    [cell.imageView setImage:[UIImage imageNamed:strIconUrl]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    return cell;
+}
+
+- (void)setBtnLayout:(UIButton *)selBtn {
+    
+    UIImage *image = [UIImage imageNamed:@"my_collection"];
+    CGSize btnSize = [@"会员中心" sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(UI_SCREEN_WIDTH/3, TableHeaderHeight)];
+    
+    selBtn.titleEdgeInsets =UIEdgeInsetsMake(0.5*image.size.height + 10, -0.5*image.size.width, -0.5*image.size.height, 0.5*image.size.width);
+    selBtn.imageEdgeInsets =UIEdgeInsetsMake(-0.5*btnSize.height, 0.5*btnSize.width, 0.5*btnSize.height, -0.5*btnSize.width);
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 5)];
-    [headView setBackgroundColor:[UIColor clearColor]];
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 4, UI_SCREEN_WIDTH, 1.0/UI_MAIN_SCALE)];
-    [lineView setBackgroundColor:RGB(0xA0, 0xA0, 0xA0)];
-    [headView addSubview:lineView];
-    return headView;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *footView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 10.f)];
-    [footView setBackgroundColor:[UIColor clearColor]];
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 1.0/UI_MAIN_SCALE)];
-    [lineView setBackgroundColor:RGB(0xA0, 0xA0, 0xA0)];
-    [footView addSubview:lineView];
-    return footView;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 5.f;
+    if (section == 0) {
+        
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, TableHeaderHeight)];
+        [headView setBackgroundColor:[UIColor whiteColor]];
+
+        UIButton *userCenterBtn = [UIButton new];
+        userCenterBtn.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH/3, TableHeaderHeight);
+        [userCenterBtn setTitle:@"会员中心" forState:UIControlStateNormal];
+        [userCenterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [userCenterBtn setImage:[UIImage imageNamed:@"my_collection"] forState:UIControlStateNormal];
+        userCenterBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [userCenterBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+        [self setBtnLayout:userCenterBtn];
+        [userCenterBtn setBackgroundImage:[WJSTool ImageWithColor:RGB(0xA0, 0xA0, 0xA0) andFrame:userCenterBtn.frame] forState:UIControlStateHighlighted];
+        [userCenterBtn addTarget:self action:@selector(onUserCenter) forControlEvents:UIControlEventTouchUpInside];
+        [headView addSubview:userCenterBtn];
+        
+        UIButton *mySuborBtn = [UIButton new];
+        mySuborBtn.frame = CGRectMake(UI_SCREEN_WIDTH/3, 0, UI_SCREEN_WIDTH/3, TableHeaderHeight);
+        [mySuborBtn setTitle:@"我的下级" forState:UIControlStateNormal];
+        [mySuborBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+        [mySuborBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [mySuborBtn setImage:[UIImage imageNamed:@"fast_open_account"] forState:UIControlStateNormal];
+        mySuborBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [self setBtnLayout:mySuborBtn];
+        [mySuborBtn setBackgroundImage:[WJSTool ImageWithColor:RGB(0xA0, 0xA0, 0xA0) andFrame:userCenterBtn.frame] forState:UIControlStateHighlighted];
+        [mySuborBtn addTarget:self action:@selector(onMySubor) forControlEvents:UIControlEventTouchUpInside];
+        [headView addSubview:mySuborBtn];
+        
+        UIButton *otherBtn = [UIButton new];
+        otherBtn.frame = CGRectMake(2*UI_SCREEN_WIDTH/3, 0, UI_SCREEN_WIDTH/3, TableHeaderHeight);
+        [otherBtn setTitle:@"我的自选" forState:UIControlStateNormal];
+        [otherBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [otherBtn setImage:[UIImage imageNamed:@"self_selector"] forState:UIControlStateNormal];
+        otherBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [otherBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+        [self setBtnLayout:otherBtn];
+        [otherBtn setBackgroundImage:[WJSTool ImageWithColor:RGB(0xA0, 0xA0, 0xA0) andFrame:userCenterBtn.frame] forState:UIControlStateHighlighted];
+        [otherBtn addTarget:self action:@selector(onOptional) forControlEvents:UIControlEventTouchUpInside];
+        [headView addSubview:otherBtn];
+        
+        UIView *lineView = [UIView new];
+        CGFloat lineHegiht = 1.0/UI_MAIN_SCALE;
+        lineView.frame = CGRectMake(0, TableHeaderHeight - lineHegiht, UI_SCREEN_WIDTH, lineHegiht);
+        [lineView setBackgroundColor:RGB(0xC0, 0xC0, 0xC0)];
+        [headView addSubview:lineView];
+        
+        return headView;
+    }
+    return nil;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+        
+    }
+    
+}
+
+- (void)onUserCenter {
+    [self showAlertViewWithTitle:@"功能正在开发中，敬请期待！"];
+}
+
+- (void)onMySubor {
+    [self showAlertViewWithTitle:@"功能正在开发中，敬请期待！"];
+}
+
+- (void)onOptional {
+    [self showAlertViewWithTitle:@"功能正在开发中，敬请期待！"];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0)
+        return  TableHeaderHeight;
+    return 0.1f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -127,8 +223,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSArray *arrDetail = [_arrName objectAtIndex:section];
-    return arrDetail.count;
+    if(section == 0){
+        return 0;
+    } else {
+        NSArray *arrDetail = [_arrName objectAtIndex:section];
+        return arrDetail.count;
+    }
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -142,43 +243,22 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //@[@[@""],@[@"账号管理"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
     
-    if ([_arrName[indexPath.section][indexPath.row] isEqualToString:@"我要分享"]) {
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        self.hidesBottomBarWhenPushed = YES;
+        [self performSegueWithIdentifier:NavToUserManagerVC sender:nil];
+    } else if(indexPath.section == 2 && indexPath.row == 2) {
+        self.hidesBottomBarWhenPushed = YES;
+        [self performSegueWithIdentifier:NavToUserAboutVC sender:nil];
+    } else if(indexPath.section == 2 && indexPath.row == 3) {
         [self shareToSocialApp];
-    } else if([_arrName[indexPath.section][indexPath.row] isEqualToString:@"退出登录"]) {
-        [self Logout];
     }
 }
 
-- (void)Logout{
-    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        [self logoutResult:responseObject];
-    };
-    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
-        
-    };
-    [[WJSDataManager shareInstance]logoutUserAccWithSucc:succBlock andFail:failBlock];
-}
-
-- (void)logoutResult:(NSDictionary *) result {
-    
-    NSString *resVal = [result objectForKey:@"msg"];
-    if ([resVal isEqualToString:JSON_RES_SUCC]) {
-        [[WJSDataModel shareInstance] setUId:@""];
-        NSLog(@"登出成功");
-        [[WJSDataModel shareInstance] setUserPassword:@""];
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        WJSLoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"WJSLoginVC"];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        [self.navigationController pushViewController:loginVC animated:YES];
-    } else {
-        NSString *errMsg = [result objectForKey:@"data"];
-        NSLog(@"登出失败，error[%@]",errMsg);
-    }
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_headView scrollViewDidScroll:scrollView];
     if (scrollView.contentOffset.y<self.bigImageView.frame.size.height-64) {
@@ -188,14 +268,6 @@
         //[self setNavbarBackgroundHidden:NO];
     }
     
-}
-
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *strName = [[_arrName objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    UITableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:TableViewCellId];
-    cell.textLabel.text= strName;
-    return cell;
 }
 
 - (void)openMenu:(id)sender {
@@ -274,16 +346,16 @@
 
 - (void)shareToSocialApp {
     [UMSocialData defaultData].extConfig.title = @"文龙一账通";
-    [UMSocialData defaultData].extConfig.qqData.url = @"http://bilibili.com";
-    [UMSocialData defaultData].extConfig.qzoneData.url = @"http://bilibili.com";
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"http://bilibili.com";
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://bilibili.com";
+    [UMSocialData defaultData].extConfig.qqData.url = @"http://wmyzt.applinzi.com/register.html?invite=e658661f";
+    [UMSocialData defaultData].extConfig.qzoneData.url = @"http://wmyzt.applinzi.com/register.html?invite=e658661f";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"http://wmyzt.applinzi.com/register.html?invite=e658661f";
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://wmyzt.applinzi.com/register.html?invite=e658661f";
     [UMSocialData defaultData].extConfig.wechatTimelineData.shareText = @"我的朋友圈";
     [UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"我的微信";
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"507fcab25270157b37000010"
                                       shareText:@"我快要疯了"
-                                     shareImage:[UIImage imageNamed:@"haha"]
+                                     shareImage:[UIImage imageNamed:@"80"]
                                 shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone]
                                        delegate:self];
 }
@@ -314,6 +386,14 @@
     
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:NavToUserManagerVC]) {
+        WJSUserManagerVC *destVC = segue.destinationViewController;
+        NSDictionary *dicInfo = [[WJSDataModel shareInstance] dicUserInfo];
+        destVC.dicUserInfo = dicInfo;
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
