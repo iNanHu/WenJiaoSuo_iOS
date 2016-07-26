@@ -72,7 +72,7 @@
     NSArray *elements  = [xpathParser searchWithXPathQuery:@"//li"]; // get the title
     NSLog(@"%lu",(unsigned long)[elements count]);
     
-    NSArray *arrTitleName = @[@"上涨藏品数",@"下跌藏品数",@"平盘藏品数",@"交易中藏品",@"藏品总数",@"今日开盘",@"昨日收盘",@"最高指数",@"最低指数",@"成交总量",@"成交总额",@"更新时间"];
+    NSArray *arrTitleName = @[@"上涨数",@"下跌数",@"平盘数",@"交易中藏品",@"藏品总数",@"今日开盘",@"昨日收盘",@"最高指数",@"最低指数",@"成交量",@"成交额",@"更新时间"];
     NSMutableDictionary *dicQuotaion = [[NSMutableDictionary alloc]init];
     [dicQuotaion setObject:[NSNumber numberWithInteger:wjsId] forKey:@"wjsId"];
     for(int i = 0; i < [elements count]; i++) {
