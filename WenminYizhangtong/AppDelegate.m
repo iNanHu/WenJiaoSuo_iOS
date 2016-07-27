@@ -91,7 +91,10 @@
     {
         NSDictionary *dic = [arrQuotaInfo objectAtIndex:i];
         NSString *index = [dic objectForKey:@"index"];
-        NSDictionary *dicQuotation = [WJSTool getQuotationWithServ:QUOTATION_SERV_ADDR andWJSId:[index integerValue]];
+        NSDictionary *dicTemp = [WJSTool getQuotationWithServ:QUOTATION_SERV_ADDR andWJSId:[index integerValue]];
+        NSMutableDictionary *dicQuotation = [NSMutableDictionary dictionaryWithDictionary:dicTemp];
+        [dicQuotation setObject:[dic objectForKey:@"Name"] forKey:@"文交所名称"];
+        
         [arrQuotation addObject:dicQuotation];
     }
     [[WJSDataModel shareInstance]setArrQuotation:arrQuotation];

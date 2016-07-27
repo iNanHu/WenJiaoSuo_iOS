@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7BEC058A1D1199770047A2E3"
-               BuildableName = "WenminYizhangtong.app"
+               BuildableName = "&#x6587;&#x9f99;&#x4e00;&#x8d26;&#x901a;.app"
                BlueprintName = "WenminYizhangtong"
                ReferencedContainer = "container:WenminYizhangtong.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7BEC058A1D1199770047A2E3"
-            BuildableName = "WenminYizhangtong.app"
+            BuildableName = "&#x6587;&#x9f99;&#x4e00;&#x8d26;&#x901a;.app"
             BlueprintName = "WenminYizhangtong"
             ReferencedContainer = "container:WenminYizhangtong.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7BEC058A1D1199770047A2E3"
-            BuildableName = "WenminYizhangtong.app"
+            BuildableName = "&#x6587;&#x9f99;&#x4e00;&#x8d26;&#x901a;.app"
             BlueprintName = "WenminYizhangtong"
             ReferencedContainer = "container:WenminYizhangtong.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7BEC058A1D1199770047A2E3"
-            BuildableName = "WenminYizhangtong.app"
+            BuildableName = "&#x6587;&#x9f99;&#x4e00;&#x8d26;&#x901a;.app"
             BlueprintName = "WenminYizhangtong"
             ReferencedContainer = "container:WenminYizhangtong.xcodeproj">
          </BuildableReference>

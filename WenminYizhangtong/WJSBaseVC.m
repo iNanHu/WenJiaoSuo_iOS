@@ -64,7 +64,7 @@
     [_leftButton setFrame:CGRectMake(0, 0, 40, 40)];
     [_leftButton addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
     //0x2682F1
-    [self.navigationController.navigationBar setBarTintColor:RGB(0x26, 0x82, 0xF1)];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor redColor]];
     [self.view setBackgroundColor:RGB(250, 250, 250)];
     
     self.hidLeftButton = NO;
@@ -186,7 +186,7 @@
 
 -(void)setScrollRefreshView:(UIScrollView *)scrollView {
     if (!_refreshCtrl) {
-        _refreshCtrl = [SHRefreshControl attachToScrollView:scrollView target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:RGB(0x26, 0x82, 0xF1) lineWidth:1.5 dropHeight:80 scale:1 horizontalRandomness:150 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
+        _refreshCtrl = [SHRefreshControl attachToScrollView:scrollView target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:[UIColor redColor] lineWidth:1.5 dropHeight:80 scale:1 horizontalRandomness:150 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
     }
     
 }

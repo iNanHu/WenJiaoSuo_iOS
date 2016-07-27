@@ -80,12 +80,20 @@
 #define JSON_RES_FAIL       @"error"
 
 //行情信息
-#define QUOTA_NAME          @"name"             //文交所名称
-#define QUOTA_STATUS        @"status"           //状态
-#define QUOTA_SALES         @"transaction"      //成交总量
-#define QUOTA_PRICE         @"price"           //成交平均值
-#define QUOTA_ALL_PRICE     @"capitalization" //成交总量
-#define QUOTA_RATE          @"rate"           //成交
+#define QUOTA_NAME          @"文交所名称"             //文交所名称
+#define QUOTA_STATUS        @"文交所状态"           //状态
+#define QUOTA_UPCOUNT       @"上涨数"              //上涨数
+#define QUOTA_DOWNCOUNT     @"下跌数"              //下跌数
+#define QUOTA_PLATECOUNT    @"平盘数"              //平盘数
+#define QUOTA_CJL           @"成交量"
+#define QUOTA_CJE           @"成交额"      //成交总量
+#define QUOTA_ZSZ           @"总市值"           //成交额
+#define QUOTA_JRKP          @"今日开盘" //成交总量
+#define QUOTA_ZGZS          @"最高指数"
+#define QUOTA_ZDZS          @"最低指数"
+#define QUOTA_ZRKP          @"昨日收盘"           //成交
+#define QUOTA_GXSJ          @"更新时间"
+#define QUOTA_CPZS          @"藏品总数"
 
 #define NAV_TO_HOMEVC       @"Nav_To_HomeVC"
 //网络请求的回调信息

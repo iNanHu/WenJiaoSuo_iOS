@@ -8,6 +8,8 @@
 
 #import "QuotationVC.h"
 #import "WJSTool.h"
+#import "QuotationModel.h"
+#import "QuotationCell.h"
 #import "WJSDataManager.h"
 #import "LiuXSegmentView.h"
 
@@ -19,7 +21,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *arrViews;
 @property (nonatomic, strong) NSArray *arrQuotaInfo;
-@property (nonatomic, strong) NSMutableArray *arrListData;
+@property (nonatomic, strong) NSArray *arrListData;
 @end
 
 @implementation QuotationVC
@@ -36,6 +38,7 @@
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"QuotationInfo" ofType:@"plist"];
     NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     _arrQuotaInfo = [NSArray arrayWithArray:[data objectForKey:@"quotationInfoList"]];
+    
     for(int i = 0; i < [_arrQuotaInfo count]; i++)
     {
         NSDictionary *dic = [_arrQuotaInfo objectAtIndex:i];
@@ -51,17 +54,17 @@
 //    NSString *allPrice = [dicInfo objectForKey:QUOTA_ALL_PRICE];
 //    NSString *rate = [dicInfo objectForKey:QUOTA_RATE];
     
-    _arrListData = [[NSMutableArray alloc] init];
+    _arrListData = [[WJSDataModel shareInstance] arrQuotation];
     
-    _arrListData = @[@{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
-                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
-                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
-                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
-                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
-                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
-                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
-                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
-                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"}];
+//    _arrListData = @[@{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
+//                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
+//                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
+//                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
+//                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
+//                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
+//                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
+//                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"},
+//                     @{QUOTA_NAME:@"广顺前邮",QUOTA_STATUS:@"已收盘",QUOTA_SALES:@"9.04亿",QUOTA_PRICE:@"2742.92",QUOTA_ALL_PRICE:@"60.36亿",QUOTA_RATE:@"1.22"}];
     
 }
 - (void)initCtrl {
@@ -105,15 +108,15 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 187;
 }
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (_arrListData.count == 0) return nil;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TABLEVIEWCELLID];
+    QuotationCell *cell = [tableView dequeueReusableCellWithIdentifier:TABLEVIEWCELLID];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TABLEVIEWCELLID];
+        cell = [[QuotationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TABLEVIEWCELLID];
     }
     
     [self setCellModel:cell withInfo:[_arrListData objectAtIndex:indexPath.row]];
@@ -122,64 +125,73 @@
     return cell;
 }
 
-- (void)setCellModel:(UITableViewCell *)cell withInfo:(NSDictionary *)dicInfo {
+- (void)setCellModel:(QuotationCell *)cell withInfo:(NSDictionary *)dicInfo {
     
     if (!dicInfo) return ;
- 
-    NSString *name = [dicInfo objectForKey:QUOTA_NAME];
-    NSString *status = [dicInfo objectForKey:QUOTA_STATUS];
-    NSString *sales = [dicInfo objectForKey:QUOTA_SALES];
-    NSString *price = [dicInfo objectForKey:QUOTA_PRICE];
-    NSString *allPrice = [dicInfo objectForKey:QUOTA_ALL_PRICE];
-    NSString *rate = [dicInfo objectForKey:QUOTA_RATE];
     
-    UILabel *nameLab = (UILabel *)[cell viewWithTag:101];
-    UILabel *statusLab = (UILabel *)[cell viewWithTag:100];
-    UILabel *salesLab = (UILabel *)[cell viewWithTag:102];
-    UILabel *priceLab = (UILabel *)[cell viewWithTag:103];
-    UILabel *allPriceLab = (UILabel *)[cell viewWithTag:104];
-    UILabel *rateLab = (UILabel *)[cell viewWithTag:105];
+    NSArray *arrWJSList = [[WJSDataModel shareInstance] arrWJSList];
+    QuotationModel *model = [[QuotationModel alloc] init];
+    model.strWjsName = [dicInfo objectForKey:QUOTA_NAME];
+    model.strUpCount = [NSString stringWithFormat:@"上涨数：%@",[dicInfo objectForKey:QUOTA_UPCOUNT] ];
+    model.strDownCount = [NSString stringWithFormat:@"下跌数：%@",[dicInfo objectForKey:QUOTA_DOWNCOUNT] ];
+    model.strPlateCount = [NSString stringWithFormat:@"平盘数：%@",[dicInfo objectForKey:QUOTA_PLATECOUNT] ];
+    model.strTrading = [NSString stringWithFormat:@"成交量：%@",[dicInfo objectForKey:QUOTA_CJL] ];
+    model.strTransactions = [NSString stringWithFormat:@"成交额：%@",[dicInfo objectForKey:QUOTA_CJE] ];
+    model.strMarketCapitalisation = [NSString stringWithFormat:@"总市值：%@",[dicInfo objectForKey:QUOTA_ZSZ] ];
+    model.strMoneyIn = [NSString stringWithFormat:@"今日开盘：%@",[dicInfo objectForKey:QUOTA_JRKP] ];
+    model.strMoneyOut = [NSString stringWithFormat:@"最高指数：%@",[dicInfo objectForKey:QUOTA_ZGZS] ];
+    model.strInflows = [NSString stringWithFormat:@"下最低指数：%@",[dicInfo objectForKey:QUOTA_ZDZS] ];
     
-    if (!nameLab || !statusLab || !salesLab || !priceLab || !allPriceLab || !rateLab) return ;
+    [cell setQuotationModel:model];
     
-    [nameLab setFont:[UIFont boldSystemFontOfSize:16.f]];
-    [nameLab setTextColor:[UIColor blackColor]];
-    [nameLab setText:name];
     
-    NSString *strStatus = @"";
-    for (int i = 0; i < status.length - 1; i++) {
-        strStatus = [strStatus stringByAppendingFormat:@"%@\n",[status substringWithRange:NSMakeRange(i, 1)]];
-    }
-    strStatus = [strStatus stringByAppendingFormat:@"%@",[status substringWithRange:NSMakeRange(status.length-1, 1)]];
-    
-    [statusLab setFont:[UIFont systemFontOfSize:14.f]];
-    [statusLab setTextColor:RGB(0xB0, 0xB0, 0xB0)];
-    [statusLab setText:strStatus];
-    [statusLab setTextAlignment:NSTextAlignmentCenter];
-    statusLab.numberOfLines = [statusLab.text length];
-    
-    [salesLab setFont:[UIFont systemFontOfSize:14.f]];
-    [salesLab setTextColor:RGB(0xB0, 0xB0, 0xB0)];
-    [salesLab setText:[NSString stringWithFormat:@"成交额:%@",sales]];
-    
-    [priceLab setFont:[UIFont systemFontOfSize:16.f]];
-    [priceLab setTextAlignment:NSTextAlignmentRight];
-    [priceLab setText:price];
-    
-    [allPriceLab setFont:[UIFont systemFontOfSize:14.f]];
-    [allPriceLab setTextColor:RGB(0xB0, 0xB0, 0xB0)];
-    [allPriceLab setTextAlignment:NSTextAlignmentRight];
-    [allPriceLab setText:[NSString stringWithFormat:@"市值:%@",allPrice]];
-    
-    [rateLab setText:rate];
-    [rateLab setTextColor:[UIColor whiteColor]];
-    [rateLab setFont:[UIFont systemFontOfSize:16.f]];
-    rateLab.layer.cornerRadius = 5.f;
-    CGFloat rateF = [rate floatValue];
-    if (rateF > 0.0)
-        [rateLab setBackgroundColor:[UIColor redColor]];
-    else
-        [rateLab setBackgroundColor:[UIColor greenColor]];
+//    UILabel *nameLab = (UILabel *)[cell viewWithTag:101];
+//    UILabel *statusLab = (UILabel *)[cell viewWithTag:100];
+//    UILabel *salesLab = (UILabel *)[cell viewWithTag:102];
+//    UILabel *priceLab = (UILabel *)[cell viewWithTag:103];
+//    UILabel *allPriceLab = (UILabel *)[cell viewWithTag:104];
+//    UILabel *rateLab = (UILabel *)[cell viewWithTag:105];
+//    
+//    if (!nameLab || !statusLab || !salesLab || !priceLab || !allPriceLab || !rateLab) return ;
+//    
+//    [nameLab setFont:[UIFont boldSystemFontOfSize:16.f]];
+//    [nameLab setTextColor:[UIColor blackColor]];
+//    [nameLab setText:name];
+//    
+//    NSString *strStatus = @"";
+//    for (int i = 0; i < status.length - 1; i++) {
+//        strStatus = [strStatus stringByAppendingFormat:@"%@\n",[status substringWithRange:NSMakeRange(i, 1)]];
+//    }
+//    strStatus = [strStatus stringByAppendingFormat:@"%@",[status substringWithRange:NSMakeRange(status.length-1, 1)]];
+//    
+//    [statusLab setFont:[UIFont systemFontOfSize:14.f]];
+//    [statusLab setTextColor:RGB(0xB0, 0xB0, 0xB0)];
+//    [statusLab setText:strStatus];
+//    [statusLab setTextAlignment:NSTextAlignmentCenter];
+//    statusLab.numberOfLines = [statusLab.text length];
+//    
+//    [salesLab setFont:[UIFont systemFontOfSize:14.f]];
+//    [salesLab setTextColor:RGB(0xB0, 0xB0, 0xB0)];
+//    [salesLab setText:[NSString stringWithFormat:@"成交额:%@",sales]];
+//    
+//    [priceLab setFont:[UIFont systemFontOfSize:16.f]];
+//    [priceLab setTextAlignment:NSTextAlignmentRight];
+//    [priceLab setText:price];
+//    
+//    [allPriceLab setFont:[UIFont systemFontOfSize:14.f]];
+//    [allPriceLab setTextColor:RGB(0xB0, 0xB0, 0xB0)];
+//    [allPriceLab setTextAlignment:NSTextAlignmentRight];
+//    [allPriceLab setText:[NSString stringWithFormat:@"市值:%@",allPrice]];
+//    
+//    [rateLab setText:rate];
+//    [rateLab setTextColor:[UIColor whiteColor]];
+//    [rateLab setFont:[UIFont systemFontOfSize:16.f]];
+//    rateLab.layer.cornerRadius = 5.f;
+//    CGFloat rateF = [rate floatValue];
+//    if (rateF > 0.0)
+//        [rateLab setBackgroundColor:[UIColor redColor]];
+//    else
+//        [rateLab setBackgroundColor:[UIColor greenColor]];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
