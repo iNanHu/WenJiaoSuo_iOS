@@ -11,6 +11,7 @@
 
 #define WJSLogo @"logo"
 #define WJSLink @"link"
+#define WJSTutorialLink @"tutorial_link"
 #define WJSName @"name"
 #define WJSOneKey @"onekey"
 #define WJSId @"data_id"

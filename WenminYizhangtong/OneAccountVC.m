@@ -16,12 +16,14 @@
 #import "WJSDataManager.h"
 #import "RegAccountVC.h"
 #import "OneAccountVC.h"
+#import "WJSTutotialVC.h"
 #import "WJSCommonDefine.h"
 
 @interface OneAccountVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIButton *personDetailBtn;
 @property (weak, nonatomic) IBOutlet UITableView *wjsTableView;
-@property (strong, nonatomic) NSMutableArray *arrWJSInfo;
+@property (strong, nonatomic) NSMutableArray *arrWJSOnekeyInfo; //一键
+@property (strong, nonatomic) NSMutableArray *arrWJSHandInfo;   //手动
 @end
 
 @implementation OneAccountVC
@@ -77,7 +79,7 @@
 
 - (void)rightAction {
     
-    [self performSegueWithIdentifier:NavToApplyStatus sender:_arrWJSInfo];
+    [self performSegueWithIdentifier:NavToApplyStatus sender:_arrWJSOnekeyInfo];
 }
 
 - (void)initData {
@@ -86,7 +88,13 @@
         NSString *resVal = [responseObject objectForKey:@"msg"];
         if ([resVal isEqualToString:JSON_RES_SUCC]) {
             NSArray *arrTemp = [responseObject objectForKey:@"data"];
-            _arrWJSInfo = [NSMutableArray arrayWithArray:arrTemp];
+            for (NSDictionary *dicInfo in arrTemp) {
+                NSInteger oneKey = [[dicInfo objectForKey:WJSOneKey]integerValue];
+                if (oneKey == 1)
+                    [_arrWJSOnekeyInfo addObject:dicInfo];
+                else
+                    [_arrWJSHandInfo addObject:dicInfo];
+            }
             NSLog(@"getWJSInfoList 返回成功");
             [self.wjsTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         } else {
@@ -102,12 +110,15 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return _arrWJSInfo.count;
+    if (section == 0)
+        return _arrWJSOnekeyInfo.count;
+    else
+        return _arrWJSHandInfo.count;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -129,14 +140,15 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (_arrWJSInfo.count == 0) return nil;
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:AccountInfoCell];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AccountInfoCell];
     }
     cell.tag = indexPath.row;
-    [self setCellModel:cell withInfo:[_arrWJSInfo objectAtIndex:indexPath.row]];
+    if(indexPath.section == 0)
+        [self setCellModel:cell withInfo:[_arrWJSOnekeyInfo objectAtIndex:indexPath.row]];
+    else
+        [self setCellModel:cell withInfo:[_arrWJSHandInfo objectAtIndex:indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -156,17 +168,38 @@
     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [cell.textLabel setText:strTitleName];
     
-    UIButton *onekeyBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 95, 15, 80, 30)];
+    UIButton *goldActiveBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 155, 15, 70, 30)];
+    NSString *strGoldActive = @"入金激活";
+    goldActiveBtn.tag = cell.tag;
+    [goldActiveBtn setTitle:strGoldActive forState:UIControlStateNormal];
+    [goldActiveBtn addTarget:self action:@selector(onGoldActiveAction:) forControlEvents:UIControlEventTouchUpInside];
+    goldActiveBtn.layer.cornerRadius = 3.0f;
+    goldActiveBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
+    [goldActiveBtn.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
+    [goldActiveBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    goldActiveBtn.layer.borderColor = [UIColor redColor].CGColor;
+    [cell addSubview:goldActiveBtn];
+    
+    UIButton *onekeyBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 80, 15, 70, 30)];
     NSString *strOneKey = oneKey == 1?@"一键开户":@"立即开户";
     onekeyBtn.tag = cell.tag;
     [onekeyBtn setTitle:strOneKey forState:UIControlStateNormal];
     [onekeyBtn addTarget:self action:@selector(registerAccount:) forControlEvents:UIControlEventTouchUpInside];
     onekeyBtn.layer.cornerRadius = 3.0f;
     onekeyBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
-    [onekeyBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
+    [onekeyBtn.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
     [onekeyBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     onekeyBtn.layer.borderColor = [UIColor redColor].CGColor;
     [cell addSubview:onekeyBtn];
+}
+
+- (void)onGoldActiveAction:(UIButton *)sender {
+    
+    NSDictionary *userInfo = [_arrWJSInfo objectAtIndex:sender.tag];
+    NSString *strTutorialLink = [userInfo objectForKey:WJSTutorialLink];
+    if (strTutorialLink) {
+        [self performSegueWithIdentifier:NAV_TO_TUTORIALVC sender:userInfo];
+    }
 }
 
 - (void)registerAccount:(UIButton *)sender {
@@ -249,6 +282,12 @@
     } else if([segue.identifier isEqualToString:NavToApplyStatus]) {
         WJSApplyStattusVC *destVC = (WJSApplyStattusVC *)segue.destinationViewController;
         destVC.arrWJSInfo = sender;
+    } else if([segue.identifier isEqualToString:NAV_TO_TUTORIALVC]) {
+        WJSTutotialVC *destVC = (WJSTutotialVC *)segue.destinationViewController;
+        NSDictionary *userInfo = (NSDictionary *)sender;
+        NSString *strLink = [userInfo objectForKey:WJSLink];
+        destVC.strLinkUrl = strLink;
+        destVC.strName = @"入金激活";
     }
 }
 

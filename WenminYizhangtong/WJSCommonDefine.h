@@ -96,6 +96,7 @@
 #define QUOTA_CPZS          @"藏品总数"
 
 #define NAV_TO_HOMEVC       @"Nav_To_HomeVC"
+#define NAV_TO_TUTORIALVC @"SegToTutorialVC"
 //网络请求的回调信息
 typedef void (^SuccBlock)(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject);
 typedef void (^FailBlock)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error);

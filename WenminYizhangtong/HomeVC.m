@@ -178,7 +178,6 @@
     [_homeTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:WJSHeadCellId];
     _homeTableView.dataSource = self;
     _homeTableView.delegate = self;
-    //[self setRefreshCtrl:_homeTableView];
     [self.view addSubview:_homeTableView];
     
     _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(AutoChangeScrollVIewIndex) userInfo:nil repeats:YES];
