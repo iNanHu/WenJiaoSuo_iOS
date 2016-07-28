@@ -30,8 +30,8 @@
     NSString *strUrl = [NSString stringWithFormat:@"%@user/register",SERV_ADDR];
     NSDictionary *dicParams = @{@"username":userName,
                                 @"email":userEmail,
-                                @"password":userPsd};
-    //strUrl = [strUrl stringByAppendingFormat:@"?username=%@&email=%@&password=%@",userName,userEmail,userPsd];
+                                @"password":userPsd,
+                                @"invite":@"d4ef986a",};
     [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 

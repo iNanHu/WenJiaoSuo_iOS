@@ -8,7 +8,7 @@
 
 #import "HomeDetailVC.h"
 
-@interface HomeDetailVC ()
+@interface HomeDetailVC ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *homeDetailView;
 
 @end
@@ -18,11 +18,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"新闻中心";
+    self.strDetailUrl = @"http://wmyzt.applinzi.com/admin.php?r=article/Content/index&content_id=5";
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.strDetailUrl]];
     [_homeDetailView loadRequest:request];
+    _homeDetailView.delegate = self;
     
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    
+    [webView stringByEvaluatingJavaScriptFromString:@"var script2 = document.createElement('script');"
+     "script.type = 'text/javascript';"
+     "script.text = \"function myFunction() { "
+     "    var share_desc = '';"
+     "    var meta = document.getElementsByTagName('meta');"
+     "    for(i in meta){"
+     "        if(typeof meta[i].name!=\"undefined\"&&meta[i].name.toLowerCase()==\"description\"){"
+     "            share_desc = meta[i].content;"
+     "        }"
+     "    }"
+     "    return share_desc;"
+     "}\";"
+     "document.getElementsByTagName('head')[0].appendChild(script2);"];
+     NSString *strDesc = [webView stringByEvaluatingJavaScriptFromString:@"myFunction();"
+      ];
+    NSString *strText = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    NSString *strDesc0 = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('meta')[0].value"];
+    NSLog(@"webViewDidFinishLoad:%@",strText);
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -31,17 +55,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

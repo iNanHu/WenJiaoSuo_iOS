@@ -7,13 +7,15 @@
 //
 
 #import "QuotationCell.h"
+#import "WJSCommonDefine.h"
 #import <UIImageView+WebCache.h>
 
 @implementation QuotationCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    self.line.layer.borderWidth = 1.0/UI_MAIN_SCALE;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -24,7 +26,7 @@
 
 - (void)setQuotationModel:(QuotationModel *)model {
     
-    [self.wjsIconView sd_setImageWithURL:[NSURL URLWithString:model.strWjsImgUrl]];
+    [self.wjsIconView setImage:[UIImage imageNamed:model.strWjsImgUrl]];
     [self.wjsStateView setImage:[UIImage imageNamed:model.strWjsState]];
     self.labWjsName.text = model.strWjsName;
     self.labUpCount.text = model.strUpCount;

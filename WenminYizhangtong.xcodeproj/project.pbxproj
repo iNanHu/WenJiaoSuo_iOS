@@ -115,6 +115,36 @@
 		7B31B7FC1D4830B4007B63AF /* tabbar_icon_onlie.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B7E41D4830B4007B63AF /* tabbar_icon_onlie.png */; };
 		7B31B7FD1D4830B4007B63AF /* tabbar_icon_onlie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B7E51D4830B4007B63AF /* tabbar_icon_onlie@2x.png */; };
 		7B31B7FE1D4830B4007B63AF /* tabbar_icon_onlie@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B7E61D4830B4007B63AF /* tabbar_icon_onlie@3x.png */; };
+		7B31B85B1D492AE9007B63AF /* 上海文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B83D1D492AE9007B63AF /* 上海文交所.png */; };
+		7B31B85C1D492AE9007B63AF /* 东北邮币卡.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B83E1D492AE9007B63AF /* 东北邮币卡.png */; };
+		7B31B85D1D492AE9007B63AF /* 中南邮交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B83F1D492AE9007B63AF /* 中南邮交所.png */; };
+		7B31B85E1D492AE9007B63AF /* 中国艺交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8401D492AE9007B63AF /* 中国艺交所.png */; };
+		7B31B85F1D492AE9007B63AF /* 九州邮币卡.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8411D492AE9007B63AF /* 九州邮币卡.png */; };
+		7B31B8601D492AE9007B63AF /* 保利邮币卡.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8421D492AE9007B63AF /* 保利邮币卡.png */; };
+		7B31B8611D492AE9007B63AF /* 华中文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8431D492AE9007B63AF /* 华中文交所.png */; };
+		7B31B8621D492AE9007B63AF /* 华夏文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8441D492AE9007B63AF /* 华夏文交所.png */; };
+		7B31B8631D492AE9007B63AF /* 华强文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8451D492AE9007B63AF /* 华强文交所.png */; };
+		7B31B8641D492AE9007B63AF /* 南京文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8461D492AE9007B63AF /* 南京文交所.png */; };
+		7B31B8651D492AE9007B63AF /* 南商所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8471D492AE9007B63AF /* 南商所.png */; };
+		7B31B8661D492AE9007B63AF /* 南方文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8481D492AE9007B63AF /* 南方文交所.png */; };
+		7B31B8671D492AE9007B63AF /* 南昌文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8491D492AE9007B63AF /* 南昌文交所.png */; };
+		7B31B8681D492AE9007B63AF /* 天津文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B84A1D492AE9007B63AF /* 天津文交所.png */; };
+		7B31B8691D492AE9007B63AF /* 宁夏文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B84B1D492AE9007B63AF /* 宁夏文交所.png */; };
+		7B31B86A1D492AE9007B63AF /* 安贵票证.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B84C1D492AE9007B63AF /* 安贵票证.png */; };
+		7B31B86B1D492AE9007B63AF /* 安贵邮币卡.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B84D1D492AE9007B63AF /* 安贵邮币卡.png */; };
+		7B31B86C1D492AE9007B63AF /* 广州邮币卡.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B84E1D492AE9007B63AF /* 广州邮币卡.png */; };
+		7B31B86D1D492AE9007B63AF /* 广西邮币卡.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B84F1D492AE9007B63AF /* 广西邮币卡.png */; };
+		7B31B86E1D492AE9007B63AF /* 成都文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8501D492AE9007B63AF /* 成都文交所.png */; };
+		7B31B86F1D492AE9007B63AF /* 江苏文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8511D492AE9007B63AF /* 江苏文交所.png */; };
+		7B31B8701D492AE9007B63AF /* 河北邮币卡.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8521D492AE9007B63AF /* 河北邮币卡.png */; };
+		7B31B8711D492AE9007B63AF /* 浙江联合.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8531D492AE9007B63AF /* 浙江联合.png */; };
+		7B31B8721D492AE9007B63AF /* 湖南华艺.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8541D492AE9007B63AF /* 湖南华艺.png */; };
+		7B31B8731D492AE9007B63AF /* 湖南文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8551D492AE9007B63AF /* 湖南文交所.png */; };
+		7B31B8741D492AE9007B63AF /* 湖南联合.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8561D492AE9007B63AF /* 湖南联合.png */; };
+		7B31B8751D492AE9007B63AF /* 福丽特.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8571D492AE9007B63AF /* 福丽特.png */; };
+		7B31B8761D492AE9007B63AF /* 赵涌牛.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8581D492AE9007B63AF /* 赵涌牛.png */; };
+		7B31B8771D492AE9007B63AF /* 金陵文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8591D492AE9007B63AF /* 金陵文交所.png */; };
+		7B31B8781D492AE9007B63AF /* 金马甲.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B85A1D492AE9007B63AF /* 金马甲.png */; };
 		7B9403291D22CAEF00DBA882 /* WJSInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B9403281D22CAEF00DBA882 /* WJSInfoCell.xib */; };
 		7B94032D1D22D60D00DBA882 /* defCellImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B94032C1D22D60D00DBA882 /* defCellImg.png */; };
 		7B9403301D22D77700DBA882 /* WJSHomeTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B94032F1D22D77700DBA882 /* WJSHomeTabBarVC.m */; };
@@ -288,6 +318,36 @@
 		7B31B7E41D4830B4007B63AF /* tabbar_icon_onlie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_icon_onlie.png; sourceTree = "<group>"; };
 		7B31B7E51D4830B4007B63AF /* tabbar_icon_onlie@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_icon_onlie@2x.png"; sourceTree = "<group>"; };
 		7B31B7E61D4830B4007B63AF /* tabbar_icon_onlie@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_icon_onlie@3x.png"; sourceTree = "<group>"; };
+		7B31B83D1D492AE9007B63AF /* 上海文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上海文交所.png"; sourceTree = "<group>"; };
+		7B31B83E1D492AE9007B63AF /* 东北邮币卡.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "东北邮币卡.png"; sourceTree = "<group>"; };
+		7B31B83F1D492AE9007B63AF /* 中南邮交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "中南邮交所.png"; sourceTree = "<group>"; };
+		7B31B8401D492AE9007B63AF /* 中国艺交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "中国艺交所.png"; sourceTree = "<group>"; };
+		7B31B8411D492AE9007B63AF /* 九州邮币卡.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "九州邮币卡.png"; sourceTree = "<group>"; };
+		7B31B8421D492AE9007B63AF /* 保利邮币卡.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "保利邮币卡.png"; sourceTree = "<group>"; };
+		7B31B8431D492AE9007B63AF /* 华中文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "华中文交所.png"; sourceTree = "<group>"; };
+		7B31B8441D492AE9007B63AF /* 华夏文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "华夏文交所.png"; sourceTree = "<group>"; };
+		7B31B8451D492AE9007B63AF /* 华强文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "华强文交所.png"; sourceTree = "<group>"; };
+		7B31B8461D492AE9007B63AF /* 南京文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "南京文交所.png"; sourceTree = "<group>"; };
+		7B31B8471D492AE9007B63AF /* 南商所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "南商所.png"; sourceTree = "<group>"; };
+		7B31B8481D492AE9007B63AF /* 南方文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "南方文交所.png"; sourceTree = "<group>"; };
+		7B31B8491D492AE9007B63AF /* 南昌文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "南昌文交所.png"; sourceTree = "<group>"; };
+		7B31B84A1D492AE9007B63AF /* 天津文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "天津文交所.png"; sourceTree = "<group>"; };
+		7B31B84B1D492AE9007B63AF /* 宁夏文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "宁夏文交所.png"; sourceTree = "<group>"; };
+		7B31B84C1D492AE9007B63AF /* 安贵票证.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "安贵票证.png"; sourceTree = "<group>"; };
+		7B31B84D1D492AE9007B63AF /* 安贵邮币卡.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "安贵邮币卡.png"; sourceTree = "<group>"; };
+		7B31B84E1D492AE9007B63AF /* 广州邮币卡.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "广州邮币卡.png"; sourceTree = "<group>"; };
+		7B31B84F1D492AE9007B63AF /* 广西邮币卡.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "广西邮币卡.png"; sourceTree = "<group>"; };
+		7B31B8501D492AE9007B63AF /* 成都文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "成都文交所.png"; sourceTree = "<group>"; };
+		7B31B8511D492AE9007B63AF /* 江苏文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "江苏文交所.png"; sourceTree = "<group>"; };
+		7B31B8521D492AE9007B63AF /* 河北邮币卡.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "河北邮币卡.png"; sourceTree = "<group>"; };
+		7B31B8531D492AE9007B63AF /* 浙江联合.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "浙江联合.png"; sourceTree = "<group>"; };
+		7B31B8541D492AE9007B63AF /* 湖南华艺.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "湖南华艺.png"; sourceTree = "<group>"; };
+		7B31B8551D492AE9007B63AF /* 湖南文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "湖南文交所.png"; sourceTree = "<group>"; };
+		7B31B8561D492AE9007B63AF /* 湖南联合.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "湖南联合.png"; sourceTree = "<group>"; };
+		7B31B8571D492AE9007B63AF /* 福丽特.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "福丽特.png"; sourceTree = "<group>"; };
+		7B31B8581D492AE9007B63AF /* 赵涌牛.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "赵涌牛.png"; sourceTree = "<group>"; };
+		7B31B8591D492AE9007B63AF /* 金陵文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "金陵文交所.png"; sourceTree = "<group>"; };
+		7B31B85A1D492AE9007B63AF /* 金马甲.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "金马甲.png"; sourceTree = "<group>"; };
 		7B9403271D22BF3C00DBA882 /* WJSCommonDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WJSCommonDefine.h; sourceTree = "<group>"; };
 		7B9403281D22CAEF00DBA882 /* WJSInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJSInfoCell.xib; sourceTree = "<group>"; };
 		7B94032C1D22D60D00DBA882 /* defCellImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defCellImg.png; sourceTree = "<group>"; };
@@ -571,6 +631,43 @@
 			path = icon;
 			sourceTree = "<group>";
 		};
+		7B31B83C1D492AE9007B63AF /* 文交所图片 */ = {
+			isa = PBXGroup;
+			children = (
+				7B31B83D1D492AE9007B63AF /* 上海文交所.png */,
+				7B31B83E1D492AE9007B63AF /* 东北邮币卡.png */,
+				7B31B83F1D492AE9007B63AF /* 中南邮交所.png */,
+				7B31B8401D492AE9007B63AF /* 中国艺交所.png */,
+				7B31B8411D492AE9007B63AF /* 九州邮币卡.png */,
+				7B31B8421D492AE9007B63AF /* 保利邮币卡.png */,
+				7B31B8431D492AE9007B63AF /* 华中文交所.png */,
+				7B31B8441D492AE9007B63AF /* 华夏文交所.png */,
+				7B31B8451D492AE9007B63AF /* 华强文交所.png */,
+				7B31B8461D492AE9007B63AF /* 南京文交所.png */,
+				7B31B8471D492AE9007B63AF /* 南商所.png */,
+				7B31B8481D492AE9007B63AF /* 南方文交所.png */,
+				7B31B8491D492AE9007B63AF /* 南昌文交所.png */,
+				7B31B84A1D492AE9007B63AF /* 天津文交所.png */,
+				7B31B84B1D492AE9007B63AF /* 宁夏文交所.png */,
+				7B31B84C1D492AE9007B63AF /* 安贵票证.png */,
+				7B31B84D1D492AE9007B63AF /* 安贵邮币卡.png */,
+				7B31B84E1D492AE9007B63AF /* 广州邮币卡.png */,
+				7B31B84F1D492AE9007B63AF /* 广西邮币卡.png */,
+				7B31B8501D492AE9007B63AF /* 成都文交所.png */,
+				7B31B8511D492AE9007B63AF /* 江苏文交所.png */,
+				7B31B8521D492AE9007B63AF /* 河北邮币卡.png */,
+				7B31B8531D492AE9007B63AF /* 浙江联合.png */,
+				7B31B8541D492AE9007B63AF /* 湖南华艺.png */,
+				7B31B8551D492AE9007B63AF /* 湖南文交所.png */,
+				7B31B8561D492AE9007B63AF /* 湖南联合.png */,
+				7B31B8571D492AE9007B63AF /* 福丽特.png */,
+				7B31B8581D492AE9007B63AF /* 赵涌牛.png */,
+				7B31B8591D492AE9007B63AF /* 金陵文交所.png */,
+				7B31B85A1D492AE9007B63AF /* 金马甲.png */,
+			);
+			path = "文交所图片";
+			sourceTree = "<group>";
+		};
 		7B9403831D29082100DBA882 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,6 +707,7 @@
 		7BD756171D2172DE000CA7EF /* images */ = {
 			isa = PBXGroup;
 			children = (
+				7B31B83C1D492AE9007B63AF /* 文交所图片 */,
 				7B31B72A1D3E8055007B63AF /* icon */,
 				7B31B7081D3D357F007B63AF /* nav */,
 				7B31B6E71D3D2A2C007B63AF /* usercenter */,
@@ -798,9 +896,13 @@
 				7B31B7301D3E8055007B63AF /* 80.png in Resources */,
 				7B31B6B31D33F661007B63AF /* Address.plist in Resources */,
 				7B31B72F1D3E8055007B63AF /* 58.png in Resources */,
+				7B31B86F1D492AE9007B63AF /* 江苏文交所.png in Resources */,
 				7B31B74F1D427CD6007B63AF /* fast_open_account.png in Resources */,
 				7B31B7E71D4830B4007B63AF /* tabbar_icon_equity_highlight.png in Resources */,
+				7B31B85C1D492AE9007B63AF /* 东北邮币卡.png in Resources */,
+				7B31B86D1D492AE9007B63AF /* 广西邮币卡.png in Resources */,
 				7B31B7F61D4830B4007B63AF /* tabbar_icon_news.png in Resources */,
+				7B31B86E1D492AE9007B63AF /* 成都文交所.png in Resources */,
 				7BEC059E1D1199770047A2E3 /* Assets.xcassets in Resources */,
 				7B31B7391D41134E007B63AF /* AccountInfoCell.xib in Resources */,
 				7B31B7FD1D4830B4007B63AF /* tabbar_icon_onlie@2x.png in Resources */,
@@ -810,52 +912,78 @@
 				7B9403291D22CAEF00DBA882 /* WJSInfoCell.xib in Resources */,
 				7B31B7121D3D357F007B63AF /* nav_back.png in Resources */,
 				7B31B74C1D427CD6007B63AF /* push_remind.png in Resources */,
+				7B31B8671D492AE9007B63AF /* 南昌文交所.png in Resources */,
 				7B31B7EA1D4830B4007B63AF /* tabbar_icon_equity.png in Resources */,
 				7B94038A1D2ADA3600DBA882 /* QuotationInfo.plist in Resources */,
 				7B31B7EB1D4830B4007B63AF /* tabbar_icon_equity@2x.png in Resources */,
 				7B31B7F21D4830B4007B63AF /* tabbar_icon_mine@3x.png in Resources */,
 				7BD756351D21850F000CA7EF /* home_index3.png in Resources */,
+				7B31B86A1D492AE9007B63AF /* 安贵票证.png in Resources */,
 				7B31B6D51D34039A007B63AF /* Info.plist in Resources */,
 				7B31B7F91D4830B4007B63AF /* tabbar_icon_onlie_highlight.png in Resources */,
 				7B31B7F11D4830B4007B63AF /* tabbar_icon_mine@2x.png in Resources */,
 				7B31B7681D432BB7007B63AF /* news_icons.png in Resources */,
+				7B31B85F1D492AE9007B63AF /* 九州邮币卡.png in Resources */,
 				7B31B7691D432BB7007B63AF /* sg_icon.png in Resources */,
+				7B31B85B1D492AE9007B63AF /* 上海文交所.png in Resources */,
+				7B31B8621D492AE9007B63AF /* 华夏文交所.png in Resources */,
 				7B31B7491D427CD6007B63AF /* about_us.png in Resources */,
+				7B31B86B1D492AE9007B63AF /* 安贵邮币卡.png in Resources */,
 				7B31B7EC1D4830B4007B63AF /* tabbar_icon_equity@3x.png in Resources */,
 				7B31B7631D432BB7007B63AF /* agree_icons.png in Resources */,
+				7B31B8731D492AE9007B63AF /* 湖南文交所.png in Resources */,
 				7BD756331D21850F000CA7EF /* home_index1.png in Resources */,
 				7B31B7F51D4830B4007B63AF /* tabbar_icon_news_highlight@3x.png in Resources */,
 				7B31B77B1D47CB1F007B63AF /* QuotationCell.xib in Resources */,
 				7B31B7FB1D4830B4007B63AF /* tabbar_icon_onlie_highlight@3x.png in Resources */,
+				7B31B8701D492AE9007B63AF /* 河北邮币卡.png in Resources */,
 				7B31B74A1D427CD6007B63AF /* check_version.png in Resources */,
 				7B31B7001D3D3331007B63AF /* storehouse.plist in Resources */,
 				7B31B7671D432BB7007B63AF /* icon_xh.png in Resources */,
 				7B31B7F71D4830B4007B63AF /* tabbar_icon_news@2x.png in Resources */,
 				7B31B7FE1D4830B4007B63AF /* tabbar_icon_onlie@3x.png in Resources */,
 				7B31B7E91D4830B4007B63AF /* tabbar_icon_equity_highlight@3x.png in Resources */,
+				7B31B8761D492AE9007B63AF /* 赵涌牛.png in Resources */,
+				7B31B8641D492AE9007B63AF /* 南京文交所.png in Resources */,
+				7B31B8691D492AE9007B63AF /* 宁夏文交所.png in Resources */,
 				7B31B70F1D3D357F007B63AF /* nav_add.png in Resources */,
 				7B31B76C1D434924007B63AF /* ad.jpg in Resources */,
 				7B31B74B1D427CD6007B63AF /* feedback.png in Resources */,
 				7B31B6EA1D3D2A2C007B63AF /* fj.png in Resources */,
 				7B31B7501D427CD6007B63AF /* my_collection.png in Resources */,
+				7B31B8631D492AE9007B63AF /* 华强文交所.png in Resources */,
 				7B31B7101D3D357F007B63AF /* nav_add@2x.png in Resources */,
+				7B31B8681D492AE9007B63AF /* 天津文交所.png in Resources */,
 				7B31B7E81D4830B4007B63AF /* tabbar_icon_equity_highlight@2x.png in Resources */,
+				7B31B8661D492AE9007B63AF /* 南方文交所.png in Resources */,
 				7B31B74D1D427CD6007B63AF /* share.png in Resources */,
 				7BEC05991D1199770047A2E3 /* Main.storyboard in Resources */,
 				7B31B7EF1D4830B4007B63AF /* tabbar_icon_mine_highlight@3x.png in Resources */,
+				7B31B8721D492AE9007B63AF /* 湖南华艺.png in Resources */,
 				7B31B7651D432BB7007B63AF /* icon_gg.png in Resources */,
 				7B31B7EE1D4830B4007B63AF /* tabbar_icon_mine_highlight@2x.png in Resources */,
 				7B31B6EB1D3D2A2C007B63AF /* tx.png in Resources */,
 				7B31B7141D3D357F007B63AF /* nav_back@3x.png in Resources */,
+				7B31B8651D492AE9007B63AF /* 南商所.png in Resources */,
 				7B31B7FC1D4830B4007B63AF /* tabbar_icon_onlie.png in Resources */,
+				7B31B8611D492AE9007B63AF /* 华中文交所.png in Resources */,
 				7B94032D1D22D60D00DBA882 /* defCellImg.png in Resources */,
+				7B31B8751D492AE9007B63AF /* 福丽特.png in Resources */,
+				7B31B8711D492AE9007B63AF /* 浙江联合.png in Resources */,
 				7B31B76A1D432BB7007B63AF /* zx_icons.png in Resources */,
+				7B31B8771D492AE9007B63AF /* 金陵文交所.png in Resources */,
+				7B31B8601D492AE9007B63AF /* 保利邮币卡.png in Resources */,
 				7B31B7341D3FDB00007B63AF /* haha.png in Resources */,
+				7B31B8781D492AE9007B63AF /* 金马甲.png in Resources */,
 				7B31B7641D432BB7007B63AF /* dzp_icon.png in Resources */,
 				7B31B7511D427CD6007B63AF /* self_selector.png in Resources */,
+				7B31B86C1D492AE9007B63AF /* 广州邮币卡.png in Resources */,
 				7B31B7111D3D357F007B63AF /* nav_add@3x.png in Resources */,
+				7B31B85D1D492AE9007B63AF /* 中南邮交所.png in Resources */,
 				7B31B7131D3D357F007B63AF /* nav_back@2x.png in Resources */,
+				7B31B8741D492AE9007B63AF /* 湖南联合.png in Resources */,
 				7B31B72E1D3E8055007B63AF /* 120.png in Resources */,
+				7B31B85E1D492AE9007B63AF /* 中国艺交所.png in Resources */,
 				7BD756341D21850F000CA7EF /* home_index2.png in Resources */,
 				7B31B7ED1D4830B4007B63AF /* tabbar_icon_mine_highlight.png in Resources */,
 				7B31B7F41D4830B4007B63AF /* tabbar_icon_news_highlight@2x.png in Resources */,

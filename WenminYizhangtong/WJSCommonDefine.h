@@ -50,7 +50,7 @@
  *  设备高度
  */
 #define Nav_HEIGHT  64
-#define Tab_HEIGHT  60
+#define Tab_HEIGHT  45
 
 #define TT_FLIP_TRANSITION_DURATION 0.5
 /**

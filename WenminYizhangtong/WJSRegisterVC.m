@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *psdText;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPsdText;
 @property (weak, nonatomic) IBOutlet UIButton *registerBtn;
+@property (weak, nonatomic) IBOutlet UITextField *regIdText;
 
 @end
 

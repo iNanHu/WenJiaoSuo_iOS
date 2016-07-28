@@ -12,6 +12,7 @@
 @interface QuotationCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *wjsIconView;
 @property (weak, nonatomic) IBOutlet UILabel *labWjsName;
+@property (weak, nonatomic) IBOutlet UIView *line;
 @property (weak, nonatomic) IBOutlet UIImageView *wjsStateView;
 @property (weak, nonatomic) IBOutlet UILabel *labUpCount;
 @property (weak, nonatomic) IBOutlet UILabel *labPlatCount;
