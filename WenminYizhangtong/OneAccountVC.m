@@ -12,7 +12,7 @@
 
 #import <SDWebImage/SDImageCache.h>
 #import <UIImageView+WebCache.h>
-#import "WJSApplyStattusVC.h"
+#import "WJSApplyStatusVC.h"
 #import "WJSDataManager.h"
 #import "RegAccountVC.h"
 #import "OneAccountVC.h"
@@ -20,7 +20,6 @@
 #import "WJSCommonDefine.h"
 
 @interface OneAccountVC ()<UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UIButton *personDetailBtn;
 @property (weak, nonatomic) IBOutlet UITableView *wjsTableView;
 @property (strong, nonatomic) NSMutableArray *arrWJSOnekeyInfo; //一键
 @property (strong, nonatomic) NSMutableArray *arrWJSHandInfo;   //手动
@@ -37,9 +36,11 @@
     self.navigationItem.hidesBackButton = YES;
     self.automaticallyAdjustsScrollViewInsets=NO;
     
+    self.wjsTableView.tableHeaderView = [self headerView];
     self.wjsTableView.dataSource = self;
     self.wjsTableView.delegate = self;
     [self.wjsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:AccountInfoCell];
+    
     if ([self.wjsTableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.wjsTableView setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -47,7 +48,7 @@
         [self.wjsTableView setLayoutMargins:UIEdgeInsetsZero];
     }
 
-    [_personDetailBtn addTarget:self action:@selector(onCommitPersonDetail) forControlEvents:UIControlEventTouchUpInside];
+    //[_personDetailBtn addTarget:self action:@selector(onCommitPersonDetail) forControlEvents:UIControlEventTouchUpInside];
     [self initData];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -91,9 +92,9 @@
             for (NSDictionary *dicInfo in arrTemp) {
                 NSInteger oneKey = [[dicInfo objectForKey:WJSOneKey]integerValue];
                 if (oneKey == 1)
-                    [_arrWJSOnekeyInfo addObject:dicInfo];
+                    [self.arrWJSOnekeyInfo addObject:dicInfo];
                 else
-                    [_arrWJSHandInfo addObject:dicInfo];
+                    [self.arrWJSHandInfo addObject:dicInfo];
             }
             NSLog(@"getWJSInfoList 返回成功");
             [self.wjsTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
@@ -106,6 +107,22 @@
         NSLog(@"getWJSInfoList error:%@",error);
     };
     [[WJSDataManager shareInstance]getWJSInfoListWithSucc:succBlock andFail:failBlock];
+}
+
+-(NSMutableArray *)arrWJSHandInfo {
+    
+    if (!_arrWJSHandInfo) {
+        _arrWJSHandInfo = [[NSMutableArray alloc] init];
+    }
+    return _arrWJSHandInfo;
+}
+
+-(NSMutableArray *)arrWJSOnekeyInfo {
+    
+    if (!_arrWJSOnekeyInfo) {
+        _arrWJSOnekeyInfo = [[NSMutableArray alloc] init];
+    }
+    return _arrWJSOnekeyInfo;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -121,11 +138,11 @@
         return _arrWJSHandInfo.count;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+-(UIView *)headerView {
     
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 120)];
     [headView setBackgroundColor:[UIColor whiteColor]];
-
+    
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 120)];
     imgView.image = [UIImage imageNamed:@"home_index1"];
     [headView addSubview:imgView];
@@ -135,6 +152,23 @@
     [line setBackgroundColor:RGB(0xC0, 0xC0, 0xC0)];
     [headView addSubview:line];
     
+    return headView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 30)];
+    [headView setBackgroundColor:RGB(0xff, 0x65, 01)];
+    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 30)];
+    [titleLab setFont:[UIFont systemFontOfSize:15.f]];
+    [titleLab setTextColor:[UIColor whiteColor]];
+    [headView addSubview:titleLab];
+    
+    if(section == 0) {
+        titleLab.text = @"以下合作文交所支持一键开户";
+    } else {
+        titleLab.text = @"以下暂未合作的文交所需要自行开户";
+    }
     return headView;
 }
 
@@ -172,7 +206,12 @@
     NSString *strGoldActive = @"入金激活";
     goldActiveBtn.tag = cell.tag;
     [goldActiveBtn setTitle:strGoldActive forState:UIControlStateNormal];
-    [goldActiveBtn addTarget:self action:@selector(onGoldActiveAction:) forControlEvents:UIControlEventTouchUpInside];
+    if (oneKey == 1) {
+        [goldActiveBtn addTarget:self action:@selector(onGoldActiveOneKeyAction:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [goldActiveBtn addTarget:self action:@selector(onGoldActiveHandAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     goldActiveBtn.layer.cornerRadius = 3.0f;
     goldActiveBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
     [goldActiveBtn.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
@@ -193,9 +232,18 @@
     [cell addSubview:onekeyBtn];
 }
 
-- (void)onGoldActiveAction:(UIButton *)sender {
+- (void)onGoldActiveOneKeyAction:(UIButton *)sender {
     
-    NSDictionary *userInfo = [_arrWJSInfo objectAtIndex:sender.tag];
+    NSDictionary *userInfo = [_arrWJSOnekeyInfo objectAtIndex:sender.tag];
+    NSString *strTutorialLink = [userInfo objectForKey:WJSTutorialLink];
+    if (strTutorialLink) {
+        [self performSegueWithIdentifier:NAV_TO_TUTORIALVC sender:userInfo];
+    }
+}
+
+- (void)onGoldActiveHandAction:(UIButton *)sender {
+    
+    NSDictionary *userInfo = [_arrWJSHandInfo objectAtIndex:sender.tag];
     NSString *strTutorialLink = [userInfo objectForKey:WJSTutorialLink];
     if (strTutorialLink) {
         [self performSegueWithIdentifier:NAV_TO_TUTORIALVC sender:userInfo];
@@ -205,7 +253,7 @@
 - (void)registerAccount:(UIButton *)sender {
     
     NSString *strTitle = sender.titleLabel.text;
-    NSDictionary *userInfo = [_arrWJSInfo objectAtIndex:sender.tag];
+    NSDictionary *userInfo = [_arrWJSHandInfo objectAtIndex:sender.tag];
     if ([strTitle isEqualToString:@"一键开户"]) {//一键开户
         SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
             NSString *resVal = [responseObject objectForKey:@"msg"];
@@ -231,7 +279,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 120.f;
+    
+    return 30.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -280,8 +329,9 @@
         destVC.strLinkUrl = strLink;
         destVC.strName = strName;
     } else if([segue.identifier isEqualToString:NavToApplyStatus]) {
-        WJSApplyStattusVC *destVC = (WJSApplyStattusVC *)segue.destinationViewController;
-        destVC.arrWJSInfo = sender;
+        WJSApplyStatusVC *destVC = (WJSApplyStatusVC *)segue.destinationViewController;
+        NSString *strUid = [[WJSDataModel shareInstance] uId];
+        destVC.strUid = strUid;
     } else if([segue.identifier isEqualToString:NAV_TO_TUTORIALVC]) {
         WJSTutotialVC *destVC = (WJSTutotialVC *)segue.destinationViewController;
         NSDictionary *userInfo = (NSDictionary *)sender;

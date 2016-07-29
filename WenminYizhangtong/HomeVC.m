@@ -299,6 +299,9 @@
     if (indexPath.section == 0) {
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:WJSHeadCellId];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:WJSHeadCellId];
+        }
         
         UIView *headView = [UIView new];
         headView.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH, TableBar_Height);

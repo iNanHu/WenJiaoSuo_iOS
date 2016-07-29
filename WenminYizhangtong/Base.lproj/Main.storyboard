@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="NPu-Df-fKK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="NPu-Df-fKK">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -697,10 +697,10 @@
             </objects>
             <point key="canvasLocation" x="1792.5" y="466.5"/>
         </scene>
-        <!--Apply StattusVC-->
+        <!--Apply StatusVC-->
         <scene sceneID="bD8-wA-ubb">
             <objects>
-                <viewController storyboardIdentifier="WJSApplyStattusVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lGA-BQ-hGC" customClass="WJSApplyStattusVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WJSApplyStatusVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lGA-BQ-hGC" customClass="WJSApplyStatusVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ha2-Ui-OZJ"/>
                         <viewControllerLayoutGuide type="bottom" id="7zn-Ae-LC0"/>
@@ -813,6 +813,7 @@
                         <outlet property="userTableView" destination="LzU-8y-Bwg" id="lEP-nm-lA7"/>
                         <segue destination="oSB-WQ-okI" kind="push" identifier="NavToUserManagerVC" id="Qu4-bD-yC6"/>
                         <segue destination="Vd1-u9-ebC" kind="push" identifier="NavToAboutVC" id="Rg0-r9-dO5"/>
+                        <segue destination="6sD-Um-bQL" kind="push" identifier="NavToMyFansVC" id="1ev-kd-iHF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ov0-4r-Vdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -887,7 +888,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6uL-EH-Byw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1344.5" y="2419.5"/>
+            <point key="canvasLocation" x="1179.5" y="2419.5"/>
+        </scene>
+        <!--My FansVC-->
+        <scene sceneID="8rx-ud-ciG">
+            <objects>
+                <viewController storyboardIdentifier="MyFansVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6sD-Um-bQL" customClass="MyFansVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kuO-jh-lWG"/>
+                        <viewControllerLayoutGuide type="bottom" id="JU9-zy-lWI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7uj-YP-5oq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4Kz-JP-mME"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="61T-MY-OoX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1626.5" y="2413.5"/>
         </scene>
     </scenes>
 </document>

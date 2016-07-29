@@ -109,6 +109,9 @@
     NSString *strName = _arrName[indexPath.section][indexPath.row];
     NSString *strIconUrl = _arrImgName[indexPath.section][indexPath.row];
     UITableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:TableViewCellId];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TableViewCellId];
+    }
     cell.textLabel.text= strName;
     [cell.imageView setImage:[UIImage imageNamed:strIconUrl]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -146,7 +149,7 @@
         
         UIButton *mySuborBtn = [UIButton new];
         mySuborBtn.frame = CGRectMake(UI_SCREEN_WIDTH/3, 0, UI_SCREEN_WIDTH/3, TableHeaderHeight);
-        [mySuborBtn setTitle:@"我的下级" forState:UIControlStateNormal];
+        [mySuborBtn setTitle:@"我的粉丝" forState:UIControlStateNormal];
         [mySuborBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
         [mySuborBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [mySuborBtn setImage:[UIImage imageNamed:@"fast_open_account"] forState:UIControlStateNormal];
@@ -202,10 +205,12 @@
 }
 
 - (void)onMySubor {
-    [self showAlertViewWithTitle:@"功能正在开发中，敬请期待！"];
+    
+    [self performSegueWithIdentifier:NAV_TO_MYFANSVC sender:nil];
 }
 
 - (void)onOptional {
+    
     [self showAlertViewWithTitle:@"功能正在开发中，敬请期待！"];
 }
 

@@ -28,6 +28,13 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -86,6 +93,9 @@
     
     NSString *strName = _arrName[indexPath.section][indexPath.row];
     UITableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:UserManagerTableCell];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:UserManagerTableCell];
+    }
 
     if (indexPath.section == 0) {
         cell.textLabel.text = strName;

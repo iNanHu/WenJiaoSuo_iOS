@@ -67,7 +67,7 @@
 		7B31B7341D3FDB00007B63AF /* haha.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B7331D3FDB00007B63AF /* haha.png */; };
 		7B31B7391D41134E007B63AF /* AccountInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B7381D41134E007B63AF /* AccountInfoCell.xib */; };
 		7B31B73C1D4124F7007B63AF /* RegAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B31B73B1D4124F7007B63AF /* RegAccountVC.m */; };
-		7B31B73F1D4195C1007B63AF /* WJSApplyStattusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B31B73E1D4195C1007B63AF /* WJSApplyStattusVC.m */; };
+		7B31B73F1D4195C1007B63AF /* WJSApplyStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B31B73E1D4195C1007B63AF /* WJSApplyStatusVC.m */; };
 		7B31B7491D427CD6007B63AF /* about_us.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B7401D427CD6007B63AF /* about_us.png */; };
 		7B31B74A1D427CD6007B63AF /* check_version.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B7411D427CD6007B63AF /* check_version.png */; };
 		7B31B74B1D427CD6007B63AF /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B7421D427CD6007B63AF /* feedback.png */; };
@@ -146,6 +146,8 @@
 		7B31B8761D492AE9007B63AF /* 赵涌牛.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8581D492AE9007B63AF /* 赵涌牛.png */; };
 		7B31B8771D492AE9007B63AF /* 金陵文交所.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8591D492AE9007B63AF /* 金陵文交所.png */; };
 		7B31B8781D492AE9007B63AF /* 金马甲.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B85A1D492AE9007B63AF /* 金马甲.png */; };
+		7B31B87B1D4A4D55007B63AF /* MyFansVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B31B87A1D4A4D55007B63AF /* MyFansVC.m */; };
+		7B31B87E1D4A4F47007B63AF /* MemberCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B31B87D1D4A4F47007B63AF /* MemberCenterVC.m */; };
 		7B9403291D22CAEF00DBA882 /* WJSInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B9403281D22CAEF00DBA882 /* WJSInfoCell.xib */; };
 		7B94032D1D22D60D00DBA882 /* defCellImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B94032C1D22D60D00DBA882 /* defCellImg.png */; };
 		7B9403301D22D77700DBA882 /* WJSHomeTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B94032F1D22D77700DBA882 /* WJSHomeTabBarVC.m */; };
@@ -266,8 +268,8 @@
 		7B31B7381D41134E007B63AF /* AccountInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoCell.xib; sourceTree = "<group>"; };
 		7B31B73A1D4124F7007B63AF /* RegAccountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegAccountVC.h; sourceTree = "<group>"; };
 		7B31B73B1D4124F7007B63AF /* RegAccountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegAccountVC.m; sourceTree = "<group>"; };
-		7B31B73D1D4195C1007B63AF /* WJSApplyStattusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSApplyStattusVC.h; sourceTree = "<group>"; };
-		7B31B73E1D4195C1007B63AF /* WJSApplyStattusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSApplyStattusVC.m; sourceTree = "<group>"; };
+		7B31B73D1D4195C1007B63AF /* WJSApplyStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSApplyStatusVC.h; sourceTree = "<group>"; };
+		7B31B73E1D4195C1007B63AF /* WJSApplyStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSApplyStatusVC.m; sourceTree = "<group>"; };
 		7B31B7401D427CD6007B63AF /* about_us.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_us.png; sourceTree = "<group>"; };
 		7B31B7411D427CD6007B63AF /* check_version.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_version.png; sourceTree = "<group>"; };
 		7B31B7421D427CD6007B63AF /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback.png; sourceTree = "<group>"; };
@@ -351,6 +353,10 @@
 		7B31B8581D492AE9007B63AF /* 赵涌牛.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "赵涌牛.png"; sourceTree = "<group>"; };
 		7B31B8591D492AE9007B63AF /* 金陵文交所.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "金陵文交所.png"; sourceTree = "<group>"; };
 		7B31B85A1D492AE9007B63AF /* 金马甲.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "金马甲.png"; sourceTree = "<group>"; };
+		7B31B8791D4A4D55007B63AF /* MyFansVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansVC.h; sourceTree = "<group>"; };
+		7B31B87A1D4A4D55007B63AF /* MyFansVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansVC.m; sourceTree = "<group>"; };
+		7B31B87C1D4A4F47007B63AF /* MemberCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberCenterVC.h; sourceTree = "<group>"; };
+		7B31B87D1D4A4F47007B63AF /* MemberCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberCenterVC.m; sourceTree = "<group>"; };
 		7B9403271D22BF3C00DBA882 /* WJSCommonDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WJSCommonDefine.h; sourceTree = "<group>"; };
 		7B9403281D22CAEF00DBA882 /* WJSInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJSInfoCell.xib; sourceTree = "<group>"; };
 		7B94032C1D22D60D00DBA882 /* defCellImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defCellImg.png; sourceTree = "<group>"; };
@@ -492,8 +498,8 @@
 				7B31B6AC1D33E0BF007B63AF /* PersonDetailVC.m */,
 				7B31B73A1D4124F7007B63AF /* RegAccountVC.h */,
 				7B31B73B1D4124F7007B63AF /* RegAccountVC.m */,
-				7B31B73D1D4195C1007B63AF /* WJSApplyStattusVC.h */,
-				7B31B73E1D4195C1007B63AF /* WJSApplyStattusVC.m */,
+				7B31B73D1D4195C1007B63AF /* WJSApplyStatusVC.h */,
+				7B31B73E1D4195C1007B63AF /* WJSApplyStatusVC.m */,
 				5A5701821D49D64800F8DF7B /* WJSTutotialVC.h */,
 				5A5701831D49D64800F8DF7B /* WJSTutotialVC.m */,
 			);
@@ -509,6 +515,10 @@
 				7B31B7531D4292A9007B63AF /* WJSUserAboutVC.m */,
 				7B31B7551D429308007B63AF /* WJSUserManagerVC.h */,
 				7B31B7561D429308007B63AF /* WJSUserManagerVC.m */,
+				7B31B8791D4A4D55007B63AF /* MyFansVC.h */,
+				7B31B87A1D4A4D55007B63AF /* MyFansVC.m */,
+				7B31B87C1D4A4F47007B63AF /* MemberCenterVC.h */,
+				7B31B87D1D4A4F47007B63AF /* MemberCenterVC.m */,
 			);
 			name = "个人中心";
 			sourceTree = "<group>";
@@ -1113,7 +1123,7 @@
 				7B31B6DE1D34039A007B63AF /* View+MASAdditions.m in Sources */,
 				7B31B7031D3D3398007B63AF /* UINavigationBar+Awesome.m in Sources */,
 				7B31B6F71D3D31CF007B63AF /* UIViewController+Style.m in Sources */,
-				7B31B73F1D4195C1007B63AF /* WJSApplyStattusVC.m in Sources */,
+				7B31B73F1D4195C1007B63AF /* WJSApplyStatusVC.m in Sources */,
 				7B9403301D22D77700DBA882 /* WJSHomeTabBarVC.m in Sources */,
 				7B0C656B1D163E4000C54B56 /* UserCenterVC.m in Sources */,
 				5A4DFBBA1D24E13C0003CA7A /* WJSLoginVC.m in Sources */,
@@ -1122,7 +1132,9 @@
 				7B31B6DC1D34039A007B63AF /* NSArray+MASAdditions.m in Sources */,
 				7B31B6DD1D34039A007B63AF /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				5A4DFBC01D24E1610003CA7A /* WJSRegisterVC.m in Sources */,
+				7B31B87B1D4A4D55007B63AF /* MyFansVC.m in Sources */,
 				7B31B7541D4292A9007B63AF /* WJSUserAboutVC.m in Sources */,
+				7B31B87E1D4A4F47007B63AF /* MemberCenterVC.m in Sources */,
 				7B31B77E1D47D1B9007B63AF /* QuotationModel.m in Sources */,
 				7B31B7571D429308007B63AF /* WJSUserManagerVC.m in Sources */,
 				7B31B6F51D3D31CF007B63AF /* UINavigationController+Custom.m in Sources */,

@@ -32,25 +32,27 @@
                                 @"email":userEmail,
                                 @"password":userPsd,
                                 @"invite":@"d4ef986a",};
-    [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+    [self postMsg:strUrl withUid:nil withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)loginUserAccWithUserName:(NSString *)userName andUserPsd:(NSString *)userPsd andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     NSString *strUrl = [NSString stringWithFormat:@"%@user/login",SERV_ADDR];
     NSDictionary *dicParams = @{@"name":userName,
                                 @"pass":userPsd};
-    [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+    [self postMsg:strUrl withUid:nil withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)logoutUserAccWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     NSString *strUrl = [NSString stringWithFormat:@"%@user/logout",SERV_ADDR];
-    [self postMsg:strUrl withParams:nil withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self postMsg:strUrl withUid:strUid withParams:nil withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)FindPsdWithUserEmail:(NSString *)userEmail andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     NSString *strUrl = [NSString stringWithFormat:@"%@user/reset_pass",SERV_ADDR];
     NSDictionary *dicParams = @{@"email":userEmail};
-    [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self postMsg:strUrl withUid:strUid withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 
@@ -168,19 +170,22 @@
     
     NSString *strUrl = [NSString stringWithFormat:@"%@user/apply_wjs",SERV_ADDR];
     NSDictionary *dicParams = @{@"wjsid":wjsId};
-    [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self postMsg:strUrl withUid:strUid withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getUserDetailInfoWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
     NSString *strUrl = [NSString stringWithFormat:@"%@user/info",SERV_ADDR];
-    [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self getMsg:strUrl withUid:strUid withParams:nil  withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getQRCodeWithInviteId:(NSString *)inviteId andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     NSString *strUrl = [NSString stringWithFormat:@"%@user/getqr",SERV_ADDR];
     NSDictionary *dicParams = @{@"invite":inviteId};
-    [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self postMsg:strUrl withUid:strUid withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)changeAvatarWithUId:(NSString *)uid andAvatorData:(NSData *)imgData
@@ -188,14 +193,22 @@
     NSString *strUrl = [NSString stringWithFormat:@"%@user/change_avatar",SERV_ADDR];
     NSDictionary *dicParams = @{@"uid":uid,
                                 @"file":imgData};
-    [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self postMsg:strUrl withUid:strUid withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
+- (void)getFansListWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
+    
+    NSString *strUrl = [NSString stringWithFormat:@"%@user/get_fan_list",SERV_ADDR];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self getMsg:strUrl withUid:strUid  withParams:nil  withSuccBlock:succBlock withFailBlock:failBlock];
+}
 //文交所新闻相关接口
 - (void)getWJSInfoListWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock{
     
     NSString *strUrl = [NSString stringWithFormat:@"%@wjs/getlist",SERV_ADDR];
-    [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self getMsg:strUrl withUid:strUid  withParams:nil  withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getNewsListWithCId:(NSString *)cid andOrder:(NSString *)order andPage:(NSString *)page andPageNum:(NSString *)pagenum
@@ -206,36 +219,41 @@
     if(page) [dicParams setObject:page forKey:@"page"];
     if(pagenum) [dicParams setObject:pagenum forKey:@"pagenum"];
     if(order) [dicParams setObject:order forKey:@"order"];
-    [self postMsg:strUrl withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self postMsg:strUrl withUid:strUid  withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
-- (void)getWJSApplyStatus:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
+- (void)getWJSApplyStatusWithUid:(NSString *) strUid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
     NSString *strUrl = [NSString stringWithFormat:@"%@user/get_apply_status",SERV_ADDR];
-    [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
+    [self getMsg:strUrl withUid:strUid  withParams:nil  withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getNewDetailWithId:(NSString *)newsId andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
     NSString *strUrl = [NSString stringWithFormat:@"%@news/detail?id=%@",SERV_ADDR,newsId];
-    [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self getMsg:strUrl withUid:strUid  withParams:nil  withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getNewsCategoryInfoWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
     NSString *strUrl = [NSString stringWithFormat:@"%@news/getcategory",SERV_ADDR];
-    [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self getMsg:strUrl withUid:(NSString *)strUid  withParams:nil  withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getBannerWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
     NSString *strUrl = [NSString stringWithFormat:@"%@news/getbanner",SERV_ADDR];
-    [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self getMsg:strUrl withUid:strUid withParams:nil  withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getWjsNameList:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     NSString *strUrl = [NSString stringWithFormat:@"%@wjs/getlist",SERV_ADDR];
-    [self getMsg:strUrl withSuccBlock:succBlock withFailBlock:failBlock];
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    [self getMsg:strUrl withUid:strUid withParams:nil withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (NSURLSessionUploadTask*)uploadTaskWithImage:(UIImage*)image andImageName:(NSString *)strImgName completion:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionBlock {
@@ -300,7 +318,7 @@
 }
 
 
-- (void)postMsg:(NSString *)url withParams:(id)params
+- (void)postMsg:(NSString *)url withUid:(NSString *)strUid  withParams:(id)params
   withSuccBlock:(SuccBlock) succBlock
   withFailBlock:(FailBlock) failBlock{
     
@@ -313,7 +331,7 @@
                                 @"text/plain",nil];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = acceptContentTypes;
-    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    
     if (strUid && ![strUid isEqualToString:@""]) {
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [manager.requestSerializer setValue:strUid forHTTPHeaderField:@"access-token"];
@@ -337,7 +355,7 @@
     return jsonString;
 }
 
-- (void)getMsg:(NSString *)url withSuccBlock:(SuccBlock) succBlock withFailBlock:(FailBlock) failBlock {
+- (void)getMsg:(NSString *)url withUid:(NSString *)strUid withParams:(id)params withSuccBlock:(SuccBlock) succBlock withFailBlock:(FailBlock) failBlock {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSSet *accetContentTypes = [NSSet setWithObjects:@"application/json",
                                 @"text/html",
@@ -347,13 +365,12 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = accetContentTypes;
     
-    NSString *strUid = [[WJSDataModel shareInstance] uId];
     if (strUid && ![strUid isEqualToString:@""]) {
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [manager.requestSerializer setValue:strUid forHTTPHeaderField:@"access-token"];
     }
     
-    [manager GET:url parameters:nil progress:nil success:succBlock failure:failBlock];
+    [manager GET:url parameters:params progress:nil success:succBlock failure:failBlock];
 }
 
 @end

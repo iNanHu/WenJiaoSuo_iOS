@@ -19,6 +19,7 @@
 @property (nonatomic, copy) NSArray *arrWJSList;
 @property (nonatomic, copy) NSArray *arrShuffInfo; //轮播信息
 @property (nonatomic, copy) NSMutableArray *arrQuotation; //行情信息
+@property (nonatomic, copy) NSMutableArray *arrMyFansList; //粉丝列表
 
 +(id)shareInstance;
 @end

@@ -13,18 +13,18 @@
 #define ApplyWJSStatus @"status"
 #define ApplyWJSUsrName @"wjsusername"
 
-#import "WJSApplyStattusVC.h"
+#import "WJSApplyStatusVC.h"
 #import <UIImageView+WebCache.h>
 #import "OneAccountVC.h"
 #import "WJSDataManager.h"
 #import "WJSDataModel.h"
 
-@interface WJSApplyStattusVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface WJSApplyStatusVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *applyStatusTableView;
 @property (strong, nonatomic) NSMutableArray *arrApplyStatus;
 @end
 
-@implementation WJSApplyStattusVC
+@implementation WJSApplyStatusVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +35,11 @@
     _applyStatusTableView.dataSource = self;
     [_applyStatusTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ApplyStatusCell];
     self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self initData];
 }
 
 - (void)initData {
@@ -54,7 +59,8 @@
     FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
         NSLog(@"getWJSInfoList error:%@",error);
     };
-    [[WJSDataManager shareInstance]getWJSApplyStatus:succBlock andFail:failBlock];
+    
+    [[WJSDataManager shareInstance]getWJSApplyStatusWithUid:_strUid andSucc:succBlock andFail:failBlock];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

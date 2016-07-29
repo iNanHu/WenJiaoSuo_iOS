@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "WJSBaseVC.h"
 
-@interface WJSApplyStattusVC : WJSBaseVC
-@property (nonatomic, strong) NSMutableArray *arrWJSInfo;
+@interface WJSApplyStatusVC : WJSBaseVC
+@property (nonatomic, strong) NSString *strUid; 
 @end
