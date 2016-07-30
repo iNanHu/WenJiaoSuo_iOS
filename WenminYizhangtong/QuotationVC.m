@@ -122,7 +122,7 @@
     model.strWjsImgUrl = [dicInfo objectForKey:QUOTA_NAME];
     model.strUpCount = [NSString stringWithFormat:@"上涨数：%@",[dicInfo objectForKey:QUOTA_UPCOUNT] != nil?[dicInfo objectForKey:QUOTA_UPCOUNT]:@"--" ];
     model.strDownCount = [NSString stringWithFormat:@"下跌数：%@",[dicInfo objectForKey:QUOTA_DOWNCOUNT] != nil?[dicInfo objectForKey:QUOTA_DOWNCOUNT]:@"--" ];
-    model.strPlateCount = [NSString stringWithFormat:@"平盘数：%@",[dicInfo objectForKey:QUOTA_PLATECOUNT] != nil?[dicInfo objectForKey:QUOTA_PLATECOUNT]:@"--" ];
+    model.strPlateCount = [NSString stringWithFormat:@"平盘数：%@只",[dicInfo objectForKey:QUOTA_PLATECOUNT] != nil?[dicInfo objectForKey:QUOTA_PLATECOUNT]:@"--" ];
     model.strTrading = [NSString stringWithFormat:@"成交量：%@",[dicInfo objectForKey:QUOTA_CJL] != nil?[dicInfo objectForKey:QUOTA_CJL]:@"--" ];
     model.strTransactions = [NSString stringWithFormat:@"成交额：%@",[dicInfo objectForKey:QUOTA_CJE] != nil?[dicInfo objectForKey:QUOTA_CJE]:@"--" ];
     model.strMarketCapitalisation = [NSString stringWithFormat:@"总市值：%@",[dicInfo objectForKey:QUOTA_ZSZ] != nil?[dicInfo objectForKey:QUOTA_ZSZ]:@"--" ];

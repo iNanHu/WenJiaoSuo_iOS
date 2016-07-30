@@ -53,8 +53,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(10, 5, 100, 30);
-    [rightBtn.titleLabel setFont:[UIFont systemFontOfSize:16.f]];
+    rightBtn.frame = CGRectMake(10, 5, 80, 30);
+    rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [rightBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [rightBtn setTitle:@"进度查询" forState:UIControlStateNormal];
     [rightBtn setBackgroundColor:[UIColor clearColor]];

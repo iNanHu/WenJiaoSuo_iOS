@@ -15,13 +15,18 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.line.layer.borderWidth = 1.0/UI_MAIN_SCALE;
+    //分割线
+    self.line = [[UIView alloc] init];
+    CGRect lineRect = CGRectMake(0, 45, UI_SCREEN_WIDTH, 1.0/UI_MAIN_SCALE);
+    self.line.frame = lineRect;
+    self.line.layer.borderWidth = 0;
+    [self.line setBackgroundColor:RGB(0xA0, 0xA0, 0xA0)];
+    [self addSubview:self.line];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 
 - (void)setQuotationModel:(QuotationModel *)model {

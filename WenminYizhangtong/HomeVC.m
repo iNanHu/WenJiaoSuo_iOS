@@ -151,7 +151,7 @@
     self.navigationItem.hidesBackButton = YES;
     
     UIView *headView = [UIView new];
-    headView.frame = CGRectMake(0, Tab_HEIGHT, UI_SCREEN_WIDTH, SCROLL_HEIGHT);
+    headView.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH, SCROLL_HEIGHT);
     
     //初始化滑动控件pagecontrol
     _homePageCtrl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, SCROLL_HEIGHT - 20, UI_SCREEN_WIDTH, 20)];
@@ -172,7 +172,7 @@
     [headView addSubview:_homePageCtrl];
     
     //tableview
-    _homeTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, Tab_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - Tab_HEIGHT) style:UITableViewStyleGrouped];
+    _homeTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, Nav_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - Tab_HEIGHT) style:UITableViewStyleGrouped];
     [_homeTableView setBackgroundColor:TABLE_BGCLR];
     _homeTableView.tableHeaderView = headView;
     [_homeTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:WJSHeadCellId];
@@ -362,14 +362,14 @@
     
     UIImageView *iconView = [UIImageView new];
     UILabel *titleLab = [UILabel new];
-    UITextView *contentView = [UITextView new];
+    UILabel *contentView = [UILabel new];
     UILabel *vistCountLab = [UILabel new];
     UILabel *timeLab = [UILabel new];
     
     CGRect iconViewRect = CGRectMake(10, 15, 60, 70);
     CGRect titleLabRect = CGRectMake(80, 0, 120, 25);
     CGRect timeLabRect = CGRectMake(UI_SCREEN_WIDTH - 140, 0, 120, 25);
-    CGRect contentViewRect = CGRectMake(80, 20, UI_SCREEN_WIDTH - 100, 60);
+    CGRect contentViewRect = CGRectMake(80, 20, UI_SCREEN_WIDTH - 110, 60);
     CGRect vistCountRect = CGRectMake(UI_SCREEN_WIDTH - 100, 75, 80, 25);
     
     
@@ -386,11 +386,11 @@
     [titleLab setTextColor:[UIColor blackColor]];
     
     [contentView setText:strDetailText];
-    contentView.delegate = self;
-    contentView.editable = NO;
     [contentView resignFirstResponder];
+    contentView.lineBreakMode = UILineBreakModeWordWrap;
     [contentView setFont:[UIFont systemFontOfSize:14.f]];
     [contentView setTextColor:RGB(0xB0, 0xB0, 0xB0)];
+    [contentView setNumberOfLines:0];
     
     [vistCountLab setText:[NSString stringWithFormat:@"访问量: %@",strVistCo]];
     [vistCountLab setTextAlignment:NSTextAlignmentRight];

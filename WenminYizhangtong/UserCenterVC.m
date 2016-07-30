@@ -113,10 +113,23 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TableViewCellId];
     }
     cell.textLabel.text= strName;
-    [cell.imageView setImage:[UIImage imageNamed:strIconUrl]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        UISwitch *switchView = [UISwitch new];
+        cell.accessoryView = switchView;
+        cell.tag = indexPath.row;
+        switchView.on = [[WJSDataModel shareInstance] enablePropel];
+        [switchView addTarget:self action:@selector(switchValChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    [cell.imageView setImage:[UIImage imageNamed:strIconUrl]];
     return cell;
+}
+
+- (void)switchValChanged:(UISwitch *)switchVal {
+    
+    BOOL enableVal = switchVal.on;
+    [[WJSDataModel shareInstance]setEnablePropel:enableVal];
 }
 
 - (void)setBtnLayout:(UIButton *)selBtn {
