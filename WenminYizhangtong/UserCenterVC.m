@@ -5,6 +5,7 @@
 //  Created by sgyaaron on 16/6/19.
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
+#define NavToPersonDetail @"NavToPersonDetail"
 #define TableViewCellId @"tableViewCellId"
 #define NavToUserAboutVC @"NavToAboutVC"
 #define NavToUserManagerVC @"NavToUserManagerVC"
@@ -95,8 +96,14 @@
 
 - (void)initData {
     
-    _arrName = @[@[@""],@[@"账号管理"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
-    _arrImgName = @[@[@""],@[@"evaluate"],@[@"push_remind",@"feedback",@"about_us",@"check_version",@"share"]];
+    NSDictionary *dicUserInfo = [[WJSDataModel shareInstance] dicUserInfo];
+    if (dicUserInfo) {
+        _arrName = @[@[@""],@[@"账号管理"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
+    } else {
+        _arrName = @[@[@""],@[@"账号管理",@"完善信息"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
+    }
+    
+    _arrImgName = @[@[@""],@[@"evaluate",@"user"],@[@"push_remind",@"feedback",@"about_us",@"check_version",@"share"]];
 }
 
 
@@ -112,7 +119,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TableViewCellId];
     }
-    cell.textLabel.text= strName;
+    cell.textLabel.text = strName;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == 2 && indexPath.row == 0) {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -266,14 +273,38 @@
     //@[@[@""],@[@"账号管理"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
     
     if (indexPath.section == 1 && indexPath.row == 0) {
+        
         self.hidesBottomBarWhenPushed = YES;
-        [self performSegueWithIdentifier:NavToUserManagerVC sender:nil];
+        NSString *strUid = [[WJSDataModel shareInstance] uId];
+        if (strUid && ![strUid isEqualToString:@""]) {
+            [self performSegueWithIdentifier:NavToUserManagerVC sender:nil];
+        } else {
+            [self segToLoginVC];
+        }
+        
+    } else if(indexPath.section == 1 && indexPath.row == 1){
+        self.hidesBottomBarWhenPushed = YES;
+        [self performSegueWithIdentifier:NavToPersonDetail sender:nil];
     } else if(indexPath.section == 2 && indexPath.row == 2) {
         self.hidesBottomBarWhenPushed = YES;
         [self performSegueWithIdentifier:NavToUserAboutVC sender:nil];
     } else if(indexPath.section == 2 && indexPath.row == 3) {
         [self shareToSocialApp];
     }
+}
+
+- (void)segToLoginVC {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    WJSLoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"WJSLoginVC"];
+    NSMutableArray *arrViewList = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+        if (![tempVC isEqual:self]) {
+            [arrViewList removeObject:tempVC];
+        }
+    }
+    self.navigationController.viewControllers = arrViewList;
+    [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -363,16 +394,26 @@
 }
 
 - (void)shareToSocialApp {
+    
+    NSString *strRegUrl = [NSString stringWithFormat:@"http://wmyzt.applinzi.com/register.html"];
+    NSDictionary *dicUsesrInfo = [[WJSDataModel shareInstance] dicUserInfo];
+    if (dicUsesrInfo) {
+        NSString *strInviteId = [dicUsesrInfo objectForKey:USRINFO_INVITEID];
+        if (strInviteId && ![strInviteId isEqualToString:@""]) {
+            strRegUrl = [NSString stringWithFormat:@"http://wmyzt.applinzi.com/register.html?invite=%@",strInviteId];
+        }
+    }
+    
     [UMSocialData defaultData].extConfig.title = @"文龙一账通";
-    [UMSocialData defaultData].extConfig.qqData.url = @"http://wmyzt.applinzi.com/register.html?invite=e658661f";
-    [UMSocialData defaultData].extConfig.qzoneData.url = @"http://wmyzt.applinzi.com/register.html?invite=e658661f";
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"http://wmyzt.applinzi.com/register.html?invite=e658661f";
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://wmyzt.applinzi.com/register.html?invite=e658661f";
+    [UMSocialData defaultData].extConfig.qqData.url = strRegUrl;
+    [UMSocialData defaultData].extConfig.qzoneData.url = strRegUrl;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = strRegUrl;
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = strRegUrl;
     [UMSocialData defaultData].extConfig.wechatTimelineData.shareText = @"我的朋友圈";
     [UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"我的微信";
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"507fcab25270157b37000010"
-                                      shareText:@"我快要疯了"
+                                      shareText:@""
                                      shareImage:[UIImage imageNamed:@"80"]
                                 shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone]
                                        delegate:self];

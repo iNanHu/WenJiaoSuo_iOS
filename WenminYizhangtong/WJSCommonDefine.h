@@ -64,6 +64,10 @@
 
 #define TABLE_BGCLR         RGB(0xF7, 0xF7, 0xF7)
 
+//用户信息
+#define USRINFO_INVITEID   @"invite_number"
+#define USRINFO_RANK       @"rank"
+
 //文交所资讯信息
 
 #define WJSINFO_ID          @"content_id"
@@ -86,18 +90,24 @@
 #define QUOTA_DOWNCOUNT     @"下跌数"              //下跌数
 #define QUOTA_PLATECOUNT    @"平盘数"              //平盘数
 #define QUOTA_CJL           @"成交量"
-#define QUOTA_CJE           @"成交额"      //成交总量
-#define QUOTA_ZSZ           @"总市值"           //成交额
-#define QUOTA_JRKP          @"今日开盘" //成交总量
+#define QUOTA_CJE           @"成交额"              //成交总量
+#define QUOTA_ZSZ           @"总市值"              //成交额
+#define QUOTA_JRKP          @"今日开盘"            //成交总量
 #define QUOTA_ZGZS          @"最高指数"
 #define QUOTA_ZDZS          @"最低指数"
-#define QUOTA_ZRKP          @"昨日收盘"           //成交
+#define QUOTA_ZRKP          @"昨日收盘"            //成交
 #define QUOTA_GXSJ          @"更新时间"
 #define QUOTA_CPZS          @"藏品总数"
 
 #define NAV_TO_HOMEVC       @"Nav_To_HomeVC"
 #define NAV_TO_TUTORIALVC   @"SegToTutorialVC"
 #define NAV_TO_MYFANSVC     @"NavToMyFansVC"
+
+//消息通知
+#define NotiGetNewsCategorySucc @"getNewsCategorySucc"
+#define NotiGetUserInfoSucc     @"getUserInfoSucc"
+#define NotiGetNewsDetailSucc   @"getNewsDetailSucc"
+
 //网络请求的回调信息
 typedef void (^SuccBlock)(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject);
 typedef void (^FailBlock)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error);

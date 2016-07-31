@@ -41,6 +41,7 @@
 }
 
 - (void)Logout{
+    
     SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         [self logoutResult:responseObject];
     };
@@ -57,9 +58,16 @@
         [[WJSDataModel shareInstance] setUId:@""];
         NSLog(@"登出成功");
         [[WJSDataModel shareInstance] setUserPassword:@""];
+        [[WJSDataModel shareInstance] setDicUserInfo:nil];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         WJSLoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"WJSLoginVC"];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        NSMutableArray *arrViewList = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+        for (UIViewController *tempVC in self.navigationController.viewControllers) {
+            if (![tempVC isEqual:self]) {
+                [arrViewList removeObject:tempVC];
+            }
+        }
+        self.navigationController.viewControllers = arrViewList;
         [self.navigationController pushViewController:loginVC animated:YES];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];

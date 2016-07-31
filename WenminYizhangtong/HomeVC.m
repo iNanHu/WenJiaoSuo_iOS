@@ -29,7 +29,7 @@
 @property (nonatomic, strong) NSTimer *scrollTimer;
 
 //data
-@property (nonatomic, strong) NSMutableArray *infoArr;
+@property (nonatomic, strong) NSArray *infoArr;
 @property (nonatomic, strong) NSArray *arrTitle;
 @property (nonatomic, strong) NSArray *arrTitleImg;
 @end
@@ -54,8 +54,9 @@
     _arrTitle = @[@[@"电子盘",@"自选",@"申购托管",@"新闻中心"],@[@"开户",@"公告",@"现货",@"活动"]];
     _arrTitleImg = @[@[@"dzp_icon",@"zx_icons",@"sg_icon",@"news_icons"],@[@"agree_icons",@"icon_gg",@"icon_xh",@"icon_hd"]];
     
-    _infoArr = [NSMutableArray arrayWithCapacity:0];
-    [self getNewsList];
+    _infoArr = [[WJSDataModel shareInstance] arrNewsDetailList];
+    [_homeTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewsList) name:NotiGetNewsCategorySucc object:nil];
 }
 
 - (void)getNewsList {
@@ -64,13 +65,13 @@
         for (NSDictionary *dicInfo in arrCategory) {
             NSString *strCId = [dicInfo objectForKey:@"class_id"];
             NSString *strName = [dicInfo objectForKey:@"name"];
-            //if ([strName isEqualToString:@"文章"]) {
-            if (TRUE) {
                 SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
                     NSString *strResVal = [responseObject objectForKey:@"msg"];
                     if ([strResVal isEqualToString:JSON_RES_SUCC]) {
                         NSArray *arr = [responseObject objectForKey:@"data"];
+                        [[WJSDataModel shareInstance]setArrNewsDetailList:arr];
                         _infoArr = [NSMutableArray arrayWithArray:arr];
+                        
                         NSLog(@"新闻列表获取成功！");
                         [_homeTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
                     } else {
@@ -83,10 +84,7 @@
                 [[WJSDataManager shareInstance] getNewsListWithCId:strCId andOrder:nil andPage:nil andPageNum:nil andSucc:succBlock andFail:failBlock];
                 break;
             }
-            
-            //}
         }
-    }
 }
 
 - (void)loadScrollView {
@@ -172,7 +170,7 @@
     [headView addSubview:_homePageCtrl];
     
     //tableview
-    _homeTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, Nav_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - Tab_HEIGHT) style:UITableViewStyleGrouped];
+    _homeTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, Nav_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - Tab_HEIGHT - Nav_HEIGHT) style:UITableViewStyleGrouped];
     [_homeTableView setBackgroundColor:TABLE_BGCLR];
     _homeTableView.tableHeaderView = headView;
     [_homeTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:WJSHeadCellId];

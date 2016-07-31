@@ -5,7 +5,6 @@
 //  Created by sgyaaron on 16/6/19.
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
-#define NavToPersonDetail @"NavToPersonDetail"
 #define NavToRegAccount @"SegToRegAccount"
 #define AccountInfoCell @"AccountInfoCell"
 #define NavToApplyStatus @"SegToApplyStatus"
@@ -31,7 +30,7 @@
     [super viewDidLoad];
     
     //隐藏导航栏左右按钮
-    self.hidLeftButton = NO;
+    self.hidLeftButton = YES;
     self.hidRightButton = YES;
     self.navigationItem.hidesBackButton = YES;
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -48,7 +47,6 @@
         [self.wjsTableView setLayoutMargins:UIEdgeInsetsZero];
     }
 
-    //[_personDetailBtn addTarget:self action:@selector(onCommitPersonDetail) forControlEvents:UIControlEventTouchUpInside];
     [self initData];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -62,6 +60,8 @@
     [rightBtn addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,13 +74,13 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
-- (void)leftAction:(UIButton *)sender {
-    
-    [self performSegueWithIdentifier:NavToPersonDetail sender:nil];
-}
-
 - (void)rightAction {
     
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    if (!strUid || [strUid isEqualToString:@""]) {
+        [self showAlertViewWithTitle:@"您尚未登录!"];
+        return;
+    }
     [self performSegueWithIdentifier:NavToApplyStatus sender:_arrWJSOnekeyInfo];
 }
 
@@ -141,7 +141,7 @@
 
 -(UIView *)headerView {
     
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 120)];
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 120)];
     [headView setBackgroundColor:[UIColor whiteColor]];
     
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 120)];
@@ -253,6 +253,12 @@
 
 - (void)registerAccount:(UIButton *)sender {
     
+    NSString *strUid = [[WJSDataModel shareInstance] uId];
+    if (!strUid || [strUid isEqualToString:@""]) {
+        [self showAlertViewWithTitle:@"您尚未登录!"];
+        return;
+    }
+    
     NSString *strTitle = sender.titleLabel.text;
     NSDictionary *userInfo = [_arrWJSHandInfo objectAtIndex:sender.tag];
     if ([strTitle isEqualToString:@"一键开户"]) {//一键开户
@@ -341,9 +347,4 @@
         destVC.strName = @"入金激活";
     }
 }
-
-- (void)onCommitPersonDetail {
-    [self performSegueWithIdentifier:NavToPersonDetail sender:nil];
-}
-
 @end

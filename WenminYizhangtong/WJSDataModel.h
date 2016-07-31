@@ -16,6 +16,7 @@
 @property (nonatomic, copy) NSString *uId;
 @property (nonatomic, assign) BOOL enablePropel;
 @property (nonatomic, copy) NSArray *arrNewCategory; //分类信息
+@property (nonatomic, copy) NSArray *arrNewsDetailList;//新闻详细信息
 @property (nonatomic, copy) NSMutableDictionary *dicUserInfo;
 @property (nonatomic, copy) NSArray *arrWJSList;
 @property (nonatomic, copy) NSArray *arrShuffInfo; //轮播信息

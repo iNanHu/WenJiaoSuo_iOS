@@ -6,6 +6,9 @@
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
 
+#define NavToDefaultHomeVC @"Nav_To_DHomeVC"
+#define NavToLoginVC @"Nav_To_DHomeVC"
+
 #import "AppDelegate.h"
 #import <JPUSHService.h>
 #import <UMSocial.h>
@@ -18,7 +21,8 @@
 #import <AdSupport/AdSupport.h>
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) NSString *strUserName;
+@property (nonatomic, strong) NSString *strUserPsd;
 @end
 
 @implementation AppDelegate
@@ -64,10 +68,65 @@
     
     [self getNewsCategory];
     
+    [self initMainVC];
+    
     //初始化行情信息
     [self initQuotationInfo];
-    
+
     return YES;
+}
+
+- (void)initMainVC {
+    
+    NSString *strUserName = [[WJSDataModel shareInstance] userPhone];
+    NSString *strUserPsd = [[WJSDataModel shareInstance] userPassword];
+    if (![strUserName isEqualToString:@""] && ![strUserPsd isEqualToString:@""]) {
+        
+        SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+            [self loginResult:responseObject];
+        };
+        FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+            
+        };
+        NSString *strMD5Psd = [WJSTool getMD5Val:strUserPsd];
+        [[WJSDataManager shareInstance]loginUserAccWithUserName:strUserName andUserPsd:strMD5Psd andSucc:succBlock andFail:failBlock];
+    }
+    
+    
+}
+
+- (void)loginResult:(NSDictionary *) result {
+    
+    NSString *resVal = [result objectForKey:@"msg"];
+    if ([resVal isEqualToString:JSON_RES_SUCC]) {
+        NSString *uId = [result objectForKey:@"data"];
+        [[WJSDataModel shareInstance] setUId:uId];
+        [self getUserDetailInfo];
+        NSLog(@"登录成功:%@",uId);
+    } else {
+        NSString *errMsg = [result objectForKey:@"data"];
+        NSLog(@"登录失败，error[%@]",errMsg);
+    }
+}
+
+- (void)getUserDetailInfo {
+    
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSString *strResVal = [responseObject objectForKey:@"msg"];
+        if ([strResVal isEqualToString:JSON_RES_SUCC]) {
+            [[WJSDataModel shareInstance]setDicUserInfo:[[NSMutableDictionary alloc]initWithDictionary:[responseObject objectForKey:@"data"]]];
+            [[NSNotificationCenter defaultCenter]postNotificationName:NotiGetUserInfoSucc object:nil];
+            NSLog(@"用户信息获取成功:%@",strResVal);
+        } else {
+            id data = [responseObject objectForKey:@"data"];
+            NSLog(@"用户信息失败:%@",data);
+        }
+    };
+    
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        NSLog(@"error: %@",error);
+    };
+    [[WJSDataManager shareInstance]getUserDetailInfoWithSucc:succBlock andFail:failBlock];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
@@ -108,6 +167,7 @@
         if ([strResVal isEqualToString:JSON_RES_SUCC]) {
             NSArray *arr = [responseObject objectForKey:@"data"];
             [[WJSDataModel shareInstance] setArrNewCategory:arr];
+            [[NSNotificationCenter defaultCenter]postNotificationName:NotiGetNewsCategorySucc object:nil];
             NSLog(@"新闻类别获取成功！");
         } else {
             NSLog(@"新闻类别获取失败！");
@@ -121,21 +181,24 @@
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    //[application setApplicationIconBadgeNumber:0];
-    //[application cancelAllLocalNotifications];
+    [application setApplicationIconBadgeNumber:0];
+    [application cancelAllLocalNotifications];
 }
+
+//- (void)applicationWillEnterForeground:(UIApplication *)application {
+//    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+//    //[application setApplicationIconBadgeNumber:0];
+//    //[application cancelAllLocalNotifications];
+//}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
