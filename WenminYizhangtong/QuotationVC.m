@@ -28,10 +28,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.hidesBackButton = YES;
     [self initData];
     [self initCtrl];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+}
+
 - (void)initData {
     
     _segDataArr = [NSMutableArray arrayWithCapacity:0];
@@ -55,19 +61,12 @@
     //隐藏导航栏左右按钮
     self.hidLeftButton = YES;
     self.hidRightButton = YES;
-    self.navigationItem.hidesBackButton = YES;
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, Nav_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - Tab_HEIGHT - Nav_HEIGHT) style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [_tableView registerNib:[UINib nibWithNibName:@"QuotationCell" bundle:nil] forCellReuseIdentifier:TABLEVIEWCELLID];
     [self.view addSubview:_tableView];
-//    if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-//        [_tableView setSeparatorInset:UIEdgeInsetsZero];
-//    }
-//    if ([_tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-//        [_tableView setLayoutMargins:UIEdgeInsetsZero];
-//    }
     
     [_tableView setBackgroundColor:RGB(0xF7, 0xF7, 0xF7)];
     

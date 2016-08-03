@@ -6,8 +6,7 @@
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
 
-#define NavToDefaultHomeVC @"Nav_To_DHomeVC"
-#define NavToLoginVC @"Nav_To_DHomeVC"
+
 
 #import "AppDelegate.h"
 #import <JPUSHService.h>
@@ -64,70 +63,30 @@
                  apsForProduction:isProduction
             advertisingIdentifier:advertisingId];
     
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    [self getNewsCategory];
-    
-    [self initMainVC];
-    
-    //初始化行情信息
-    [self initQuotationInfo];
 
     return YES;
 }
 
-- (void)initMainVC {
-    
-    NSString *strUserName = [[WJSDataModel shareInstance] userPhone];
-    NSString *strUserPsd = [[WJSDataModel shareInstance] userPassword];
-    if (![strUserName isEqualToString:@""] && ![strUserPsd isEqualToString:@""]) {
-        
-        SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-            [self loginResult:responseObject];
-        };
-        FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
-            
-        };
-        NSString *strMD5Psd = [WJSTool getMD5Val:strUserPsd];
-        [[WJSDataManager shareInstance]loginUserAccWithUserName:strUserName andUserPsd:strMD5Psd andSucc:succBlock andFail:failBlock];
-    }
-    
-    
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    NSDictionary * userInfo = [notification userInfo];
+    NSString *content = [userInfo valueForKey:@"content"];
+    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
+    NSLog(@"content: %@ extras: %@ custom: %@",userInfo.description,extras.description,customizeField1);
 }
 
-- (void)loginResult:(NSDictionary *) result {
-    
-    NSString *resVal = [result objectForKey:@"msg"];
-    if ([resVal isEqualToString:JSON_RES_SUCC]) {
-        NSString *uId = [result objectForKey:@"data"];
-        [[WJSDataModel shareInstance] setUId:uId];
-        [self getUserDetailInfo];
-        NSLog(@"登录成功:%@",uId);
-    } else {
-        NSString *errMsg = [result objectForKey:@"data"];
-        NSLog(@"登录失败，error[%@]",errMsg);
-    }
+
+-(void)tagsAliasCallback:(int)iResCode
+                    tags:(NSSet*)tags
+                   alias:(NSString*)alias
+{
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 
-- (void)getUserDetailInfo {
-    
-    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        NSString *strResVal = [responseObject objectForKey:@"msg"];
-        if ([strResVal isEqualToString:JSON_RES_SUCC]) {
-            [[WJSDataModel shareInstance]setDicUserInfo:[[NSMutableDictionary alloc]initWithDictionary:[responseObject objectForKey:@"data"]]];
-            [[NSNotificationCenter defaultCenter]postNotificationName:NotiGetUserInfoSucc object:nil];
-            NSLog(@"用户信息获取成功:%@",strResVal);
-        } else {
-            id data = [responseObject objectForKey:@"data"];
-            NSLog(@"用户信息失败:%@",data);
-        }
-    };
-    
-    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
-        NSLog(@"error: %@",error);
-    };
-    [[WJSDataManager shareInstance]getUserDetailInfoWithSucc:succBlock andFail:failBlock];
-}
+
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -138,46 +97,6 @@
     return result;
 }
 
-- (void)initQuotationInfo {
-    
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"QuotationInfo" ofType:@"plist"];
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    NSArray *arrQuotaInfo = [NSArray arrayWithArray:[data objectForKey:@"quotationInfoList"]];
-    
-    NSMutableArray *arrQuotation = [[NSMutableArray alloc] init];
-    
-    for(int i = 0; i < [arrQuotaInfo count]; i++)
-    {
-        NSDictionary *dic = [arrQuotaInfo objectAtIndex:i];
-        NSString *index = [dic objectForKey:@"index"];
-        NSDictionary *dicTemp = [WJSTool getQuotationWithServ:QUOTATION_SERV_ADDR andWJSId:[index integerValue]];
-        NSMutableDictionary *dicQuotation = [NSMutableDictionary dictionaryWithDictionary:dicTemp];
-        [dicQuotation setObject:[dic objectForKey:@"Name"] forKey:@"文交所名称"];
-        
-        [arrQuotation addObject:dicQuotation];
-    }
-    [[WJSDataModel shareInstance]setArrQuotation:arrQuotation];
-    
-}
-
-- (void)getNewsCategory {
-    
-    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        NSString *strResVal = [responseObject objectForKey:@"msg"];
-        if ([strResVal isEqualToString:JSON_RES_SUCC]) {
-            NSArray *arr = [responseObject objectForKey:@"data"];
-            [[WJSDataModel shareInstance] setArrNewCategory:arr];
-            [[NSNotificationCenter defaultCenter]postNotificationName:NotiGetNewsCategorySucc object:nil];
-            NSLog(@"新闻类别获取成功！");
-        } else {
-            NSLog(@"新闻类别获取失败！");
-        }
-    };
-    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
-        NSLog(@"error: %@",error);
-    };
-    [[WJSDataManager shareInstance] getNewsCategoryInfoWithSucc:succBlock andFail:failBlock];
-}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -292,6 +211,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [NSString stringWithFormat:@"%@", deviceToken];
     NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
     [JPUSHService registerDeviceToken:deviceToken];
+    [JPUSHService setTags:nil alias:@"13616502532" fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
+        NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, iTags, iAlias);
+    }];
 }
 
 - (void)application:(UIApplication *)application

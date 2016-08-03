@@ -150,6 +150,8 @@
 		7B31B87E1D4A4F47007B63AF /* MemberCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B31B87D1D4A4F47007B63AF /* MemberCenterVC.m */; };
 		7B31B8811D4D1CB8007B63AF /* psw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B87F1D4D1CB8007B63AF /* psw@2x.png */; };
 		7B31B8821D4D1CB8007B63AF /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B31B8801D4D1CB8007B63AF /* user@2x.png */; };
+		7B31B8AB1D4FA054007B63AF /* DefaultNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B31B8AA1D4FA054007B63AF /* DefaultNav.m */; };
+		7B31B8AF1D4FA351007B63AF /* LaunchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B31B8AE1D4FA351007B63AF /* LaunchVC.m */; };
 		7B9403291D22CAEF00DBA882 /* WJSInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B9403281D22CAEF00DBA882 /* WJSInfoCell.xib */; };
 		7B94032D1D22D60D00DBA882 /* defCellImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B94032C1D22D60D00DBA882 /* defCellImg.png */; };
 		7B9403301D22D77700DBA882 /* WJSHomeTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B94032F1D22D77700DBA882 /* WJSHomeTabBarVC.m */; };
@@ -361,6 +363,10 @@
 		7B31B87D1D4A4F47007B63AF /* MemberCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberCenterVC.m; sourceTree = "<group>"; };
 		7B31B87F1D4D1CB8007B63AF /* psw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "psw@2x.png"; sourceTree = "<group>"; };
 		7B31B8801D4D1CB8007B63AF /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
+		7B31B8A91D4FA054007B63AF /* DefaultNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultNav.h; sourceTree = "<group>"; };
+		7B31B8AA1D4FA054007B63AF /* DefaultNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultNav.m; sourceTree = "<group>"; };
+		7B31B8AD1D4FA351007B63AF /* LaunchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchVC.h; sourceTree = "<group>"; };
+		7B31B8AE1D4FA351007B63AF /* LaunchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchVC.m; sourceTree = "<group>"; };
 		7B9403271D22BF3C00DBA882 /* WJSCommonDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WJSCommonDefine.h; sourceTree = "<group>"; };
 		7B9403281D22CAEF00DBA882 /* WJSInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJSInfoCell.xib; sourceTree = "<group>"; };
 		7B94032C1D22D60D00DBA882 /* defCellImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defCellImg.png; sourceTree = "<group>"; };
@@ -448,6 +454,10 @@
 				5A4DFBBC1D24E1500003CA7A /* WJSFindPsdVC.m */,
 				5A4DFBBE1D24E1610003CA7A /* WJSRegisterVC.h */,
 				5A4DFBBF1D24E1610003CA7A /* WJSRegisterVC.m */,
+				7B31B8A91D4FA054007B63AF /* DefaultNav.h */,
+				7B31B8AA1D4FA054007B63AF /* DefaultNav.m */,
+				7B31B8AD1D4FA351007B63AF /* LaunchVC.h */,
+				7B31B8AE1D4FA351007B63AF /* LaunchVC.m */,
 			);
 			name = "登录注册";
 			sourceTree = "<group>";
@@ -1122,6 +1132,7 @@
 				7B31B6D71D34039A007B63AF /* MASConstraint.m in Sources */,
 				7B31B6DA1D34039A007B63AF /* MASViewAttribute.m in Sources */,
 				7B31B6F61D3D31CF007B63AF /* UIViewController+HUD.m in Sources */,
+				7B31B8AF1D4FA351007B63AF /* LaunchVC.m in Sources */,
 				7B31B6EE1D3D3175007B63AF /* WJSBaseVC.m in Sources */,
 				7B9403861D29082100DBA882 /* LiuXSegmentView.m in Sources */,
 				7B31B7071D3D342D007B63AF /* UIButton+ImageWithLabel.m in Sources */,
@@ -1139,6 +1150,7 @@
 				5A5701841D49D64800F8DF7B /* WJSTutotialVC.m in Sources */,
 				7B31B6DC1D34039A007B63AF /* NSArray+MASAdditions.m in Sources */,
 				7B31B6DD1D34039A007B63AF /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				7B31B8AB1D4FA054007B63AF /* DefaultNav.m in Sources */,
 				5A4DFBC01D24E1610003CA7A /* WJSRegisterVC.m in Sources */,
 				7B31B87B1D4A4D55007B63AF /* MyFansVC.m in Sources */,
 				7B31B7541D4292A9007B63AF /* WJSUserAboutVC.m in Sources */,

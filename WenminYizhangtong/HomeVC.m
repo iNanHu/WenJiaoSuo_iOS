@@ -42,11 +42,14 @@
     [self initData];
     [self initCtrl];
     [self loadScrollView];
+    self.title = @"首页";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    self.navigationItem.hidesBackButton = YES;
+    
 }
 
 - (void)initData {
@@ -55,7 +58,9 @@
     _arrTitleImg = @[@[@"dzp_icon",@"zx_icons",@"sg_icon",@"news_icons"],@[@"agree_icons",@"icon_gg",@"icon_xh",@"icon_hd"]];
     
     _infoArr = [[WJSDataModel shareInstance] arrNewsDetailList];
-    [_homeTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    if (!_infoArr) {
+        [self getNewsList];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewsList) name:NotiGetNewsCategorySucc object:nil];
 }
 
@@ -146,7 +151,6 @@
     //隐藏导航栏左右按钮
     self.hidLeftButton = YES;
     self.hidRightButton = YES;
-    self.navigationItem.hidesBackButton = YES;
     
     UIView *headView = [UIView new];
     headView.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH, SCROLL_HEIGHT);
@@ -177,6 +181,8 @@
     _homeTableView.dataSource = self;
     _homeTableView.delegate = self;
     [self.view addSubview:_homeTableView];
+    
+    [_homeTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     
     _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(AutoChangeScrollVIewIndex) userInfo:nil repeats:YES];
     
@@ -405,7 +411,6 @@
     [cell addSubview:contentView];
     [cell addSubview:vistCountLab];
     [cell addSubview:timeLab];
-    
 }
 
 - (NSString *)getData:(NSInteger) curTime {
@@ -441,6 +446,7 @@
     if ([segue.identifier isEqualToString:NavToHomeDetail]) {
         HomeDetailVC *destVC = (HomeDetailVC *)segue.destinationViewController;
         destVC.strDetailUrl = sender;
+        destVC.title = @"新闻中心";
     }
 }
 

@@ -32,7 +32,6 @@
     //隐藏导航栏左右按钮
     self.hidLeftButton = YES;
     self.hidRightButton = YES;
-    self.navigationItem.hidesBackButton = YES;
     self.automaticallyAdjustsScrollViewInsets=NO;
     
     self.wjsTableView.tableHeaderView = [self headerView];

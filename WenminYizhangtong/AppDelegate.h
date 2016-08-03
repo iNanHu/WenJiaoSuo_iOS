@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 
 static NSString *appKey = @"2f73a4898eb89ee109ace824";
-static NSString *channel = @"App Store";
+static NSString *channel = @"13616502532";
 static BOOL isProduction = FALSE;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

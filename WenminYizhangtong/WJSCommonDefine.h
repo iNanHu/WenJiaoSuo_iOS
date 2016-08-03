@@ -102,6 +102,8 @@
 #define NAV_TO_HOMEVC       @"Nav_To_HomeVC"
 #define NAV_TO_TUTORIALVC   @"SegToTutorialVC"
 #define NAV_TO_MYFANSVC     @"NavToMyFansVC"
+#define NAV_TO_REGISTERVC        @"NavToRegisterVC"
+#define NAV_TO_FINDPSDVC    @"NavToFindPsdVC"
 
 //消息通知
 #define NotiGetNewsCategorySucc @"getNewsCategorySucc"
