@@ -100,10 +100,11 @@
     if ([resVal isEqualToString:JSON_RES_SUCC]) {
         NSString *uId = [result objectForKey:@"data"];
         [[WJSDataModel shareInstance] setUId:uId];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];
         NSLog(@"注册失败，error[%@]",errMsg);
+        [self showAlertViewWithTitle:[NSString stringWithFormat:@"注册失败,%@",errMsg]];
     }
 }
 

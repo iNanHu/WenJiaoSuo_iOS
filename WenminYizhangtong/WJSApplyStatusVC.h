@@ -10,5 +10,6 @@
 #import "WJSBaseVC.h"
 
 @interface WJSApplyStatusVC : WJSBaseVC
+@property (nonatomic, assign) BOOL isFansApplyStatus;
 @property (nonatomic, strong) NSString *strUid; 
 @end

@@ -40,13 +40,13 @@
     [super viewDidLoad];
    
     self.hidLeftButton = YES;
-    [self initData];
     [self initView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    [self initData];
 }
 
 - (void)initView {
@@ -97,13 +97,16 @@
 - (void)initData {
     
     NSDictionary *dicUserInfo = [[WJSDataModel shareInstance] dicUserInfo];
-    if (dicUserInfo) {
+    NSString *phoneNum = [dicUserInfo objectForKey:@"telphone"];
+    NSLog(@"UserCenter: %@ phoneNum:%@",dicUserInfo.description,phoneNum);
+    if (dicUserInfo && ![[dicUserInfo objectForKey:@"telphone"]isEqual:[NSNull null]]) {
         _arrName = @[@[@""],@[@"账号管理"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
     } else {
         _arrName = @[@[@""],@[@"账号管理",@"完善信息"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
     }
     
     _arrImgName = @[@[@""],@[@"evaluate",@"user"],@[@"push_remind",@"feedback",@"about_us",@"check_version",@"share"]];
+    [_userTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 
@@ -270,7 +273,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //@[@[@""],@[@"账号管理"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
     
     if (indexPath.section == 1 && indexPath.row == 0) {
         

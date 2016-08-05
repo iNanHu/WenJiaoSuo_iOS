@@ -10,6 +10,7 @@
 #import "WJSTool.h"
 #import "WJSCommonDefine.h"
 #import "WJSDataManager.h"
+#import <JPUSHService.h>
 
 @interface WJSLoginVC ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextFiled;
@@ -127,6 +128,9 @@
         [[WJSDataModel shareInstance] setUId:uId];
         [[WJSDataModel shareInstance]setUserPhone:_nameTextFiled.text];
         [[WJSDataModel shareInstance]setUserPassword:_psdTextFiled.text];
+        [JPUSHService setTags:nil alias:_nameTextFiled.text fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
+            NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, iTags, iAlias);
+        }];
         [self getUserDetailInfo];
         NSLog(@"登录成功:%@",uId);
         [self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
@@ -169,7 +173,7 @@
     [UIView animateWithDuration:0.2 animations:^{
         
         CGRect frame = self.view.frame;
-        frame.origin.y = -120;
+        //frame.origin.y = -120;
         self.view.frame = frame;
     }];
 }

@@ -257,6 +257,11 @@
         [self showAlertViewWithTitle:@"您尚未登录!"];
         return;
     }
+    NSDictionary *dicUserInfo = [[WJSDataModel shareInstance] dicUserInfo];
+    if (!dicUserInfo || [[dicUserInfo objectForKey:@"telphone"]isEqual:[NSNull null]]){
+        [self showAlertViewWithTitle:@"您尚未填写您的详细信息，请在个人中心进行填写!"];
+        return;
+    }
     
     NSString *strTitle = sender.titleLabel.text;
     NSDictionary *userInfo = [_arrWJSHandInfo objectAtIndex:sender.tag];

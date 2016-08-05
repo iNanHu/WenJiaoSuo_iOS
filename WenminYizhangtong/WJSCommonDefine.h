@@ -19,6 +19,12 @@
 
 #define QUOTATION_SERV_ADDR @"http://www.youbicard.com/plus/data/index.php?eid="
 
+#define RunOnMainThread(code)   {dispatch_async(dispatch_get_main_queue(), ^{code;});}
+#define RunInBackground(SEL,PARAMS) \
+{[self performSelectorInBackground:@selector(SEL) withObject:PARAMS];}
+#define RunAsync(code)      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{code;});
+#define Sleep(second)       usleep(second*1000*1000);
+
 #define iOS8                     ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 #define iPhone6                  (([UIScreen mainScreen].bounds.size.width == 750) ? YES : NO)
 #define iPhone6P                 (([UIScreen mainScreen].bounds.size.width == 1080) ? YES : NO)

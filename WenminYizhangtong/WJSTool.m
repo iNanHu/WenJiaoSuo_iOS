@@ -55,7 +55,11 @@
     NSString *strHead = @"<h3 class=\"indextitle\"><a> 总览</a></h3>";
     NSString *strEnd = @"<h3 class=\"indextitle\"><a> 综合指数分时线</a></h3>";
     NSRange rangeHead = [strHtmlData rangeOfString:strHead];
+    if (rangeHead.location == NSNotFound)
+        return nil;
     NSRange rangeEnd = [strHtmlData rangeOfString:strEnd];
+    if (rangeEnd.location == NSNotFound)
+        return nil;
     NSInteger keyStart = rangeHead.location + rangeHead.length;
     NSInteger keyLen = rangeEnd.location - keyStart;
     NSRange rangeKey = NSMakeRange(keyStart, keyLen);

@@ -156,15 +156,35 @@
     if ([resVal isEqualToString:JSON_RES_SUCC]) {
         NSString *uId = [result objectForKey:@"data"];
         NSLog(@"一账通：success[%@]",uId);
-        //[[WJSDataModel shareInstance] setUId:uId];
-        
-        //[self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
+        [self showAlertViewWithTitle:@"提交个人信息成功!"];
+        [self getUserDetailInfo];
+        [self.navigationController popViewControllerAnimated:YES];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];
+        [self showAlertViewWithTitle:[NSString stringWithFormat:@"提交失败%@!",errMsg]];
         NSLog(@"一账通: error[%@]",errMsg);
     }
 }
 
+- (void)getUserDetailInfo {
+    
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        NSString *strResVal = [responseObject objectForKey:@"msg"];
+        if ([strResVal isEqualToString:JSON_RES_SUCC]) {
+            [[WJSDataModel shareInstance]setDicUserInfo:[[NSMutableDictionary alloc]initWithDictionary:[responseObject objectForKey:@"data"]]];
+            [[NSNotificationCenter defaultCenter]postNotificationName:NotiGetUserInfoSucc object:nil];
+            NSLog(@"用户信息获取成功:%@",strResVal);
+        } else {
+            id data = [responseObject objectForKey:@"data"];
+            NSLog(@"用户信息失败:%@",data);
+        }
+    };
+    
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        NSLog(@"error: %@",error);
+    };
+    [[WJSDataManager shareInstance]getUserDetailInfoWithSucc:succBlock andFail:failBlock];
+}
 
 - (void)showSexView {
     

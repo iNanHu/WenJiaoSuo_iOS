@@ -197,11 +197,22 @@
     [self postMsg:strUrl withUid:strUid withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
-- (void)getFansListWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
+- (void)getFansListWithLevel:(NSInteger)levelId andPageSize:(NSInteger)pageSize andPageNum:(NSInteger)pageNum andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
+    NSDictionary *dicParams = @{@"level":[NSString stringWithFormat:@"%ld",(long)levelId],
+                                @"paegsize":[NSString stringWithFormat:@"%ld",(long)pageSize],
+                                @"pagenum":[NSString stringWithFormat:@"%ld",(long)pageNum],};
     NSString *strUrl = [NSString stringWithFormat:@"%@user/get_fan_list",SERV_ADDR];
     NSString *strUid = [[WJSDataModel shareInstance] uId];
-    [self getMsg:strUrl withUid:strUid  withParams:nil  withSuccBlock:succBlock withFailBlock:failBlock];
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicParams
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        [self getMsg:strUrl withUid:strUid  withParams:jsonData withSuccBlock:succBlock withFailBlock:failBlock];
+    }
 }
 //文交所新闻相关接口
 - (void)getWJSInfoListWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock{
@@ -228,6 +239,22 @@
     NSString *strUrl = [NSString stringWithFormat:@"%@user/get_apply_status",SERV_ADDR];
     [self getMsg:strUrl withUid:strUid  withParams:nil  withSuccBlock:succBlock withFailBlock:failBlock];
 }
+
+- (void)getWJSFansApplyStatusWithUid:(NSString *) strUid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
+    
+    NSDictionary *dicParams = @{@"uid":strUid};
+    NSString *strUrl = [NSString stringWithFormat:@"%@user/get_apply_status_byuid",SERV_ADDR];
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicParams
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        [self getMsg:strUrl withUid:strUid  withParams:jsonData withSuccBlock:succBlock withFailBlock:failBlock];
+    }
+}
+
 
 - (void)getNewDetailWithId:(NSString *)newsId andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
@@ -323,7 +350,9 @@
   withFailBlock:(FailBlock) failBlock{
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
+    AFSecurityPolicy *securityPolicy = [[AFSecurityPolicy alloc] init];
+    [securityPolicy setAllowInvalidCertificates:YES];
+    manager.securityPolicy = securityPolicy;
     NSSet *acceptContentTypes = [NSSet setWithObjects:@"application/json",
                                 @"text/html",
                                 @"text/json",
@@ -357,6 +386,9 @@
 
 - (void)getMsg:(NSString *)url withUid:(NSString *)strUid withParams:(id)params withSuccBlock:(SuccBlock) succBlock withFailBlock:(FailBlock) failBlock {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFSecurityPolicy *securityPolicy = [[AFSecurityPolicy alloc] init];
+    [securityPolicy setAllowInvalidCertificates:YES];
+    manager.securityPolicy = securityPolicy;
     NSSet *accetContentTypes = [NSSet setWithObjects:@"application/json",
                                 @"text/html",
                                 @"text/json",

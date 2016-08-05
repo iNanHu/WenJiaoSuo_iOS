@@ -53,7 +53,7 @@
     hud.detailsLabelText = title;
     hud.detailsLabelFont = [UIFont systemFontOfSize:15.f];
     hud.margin = 27.f;
-    hud.yOffset = UI_SCREEN_HEIGHT/2 - 80;
+    hud.yOffset = UI_SCREEN_HEIGHT/2 - 120;
     hud.removeFromSuperViewOnHide = YES;
     [hud hide:YES afterDelay:1];
     

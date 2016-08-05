@@ -37,7 +37,7 @@
 //获取用户二维码链接
 - (void)getQRCodeWithInviteId:(NSString *)inviteId andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //获取下级用户列表
-- (void)getFansListWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
+- (void)getFansListWithLevel:(NSInteger)levelId andPageSize:(NSInteger)pageSize andPageNum:(NSInteger)pageNum andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //改变用户头像
 - (void)changeAvatarWithUId:(NSString *)uid andAvatorData:(NSData *)imgData
                     andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
@@ -46,7 +46,8 @@
 
 //获取用户开户状态
 - (void)getWJSApplyStatusWithUid:(NSString *)strUid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
-
+//获取下级开户状态
+- (void)getWJSFansApplyStatusWithUid:(NSString *) strUid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //获取新闻列表
 - (void)getNewsListWithCId:(NSString *)cid andOrder:(NSString *)order andPage:(NSString *)page andPageNum:(NSString *)pagenum
                    andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;

@@ -59,8 +59,10 @@
     FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
         NSLog(@"getWJSInfoList error:%@",error);
     };
-    
-    [[WJSDataManager shareInstance]getWJSApplyStatusWithUid:_strUid andSucc:succBlock andFail:failBlock];
+    if(!_isFansApplyStatus)
+        [[WJSDataManager shareInstance]getWJSApplyStatusWithUid:_strUid andSucc:succBlock andFail:failBlock];
+    else
+        [[WJSDataManager shareInstance]getWJSFansApplyStatusWithUid:_strUid andSucc:succBlock andFail:failBlock];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

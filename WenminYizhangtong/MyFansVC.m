@@ -18,7 +18,9 @@
 @interface MyFansVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LiuXSegmentView *segmentView;
 @property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *arrFansList;
+@property (nonatomic, strong) NSMutableArray *arrFirstFansList;
+@property (nonatomic, strong) NSMutableArray *arrSecondFansList;
+@property (nonatomic, assign) NSInteger selectedIndex;   //默认选中的索引
 @end
 
 @implementation MyFansVC
@@ -33,14 +35,7 @@
     self.navigationItem.hidesBackButton = YES;
     
     _segmentView = [[LiuXSegmentView alloc] initWithFrame:CGRectMake(0, 20, UI_SCREEN_WIDTH, 45) titles:@[@"一度粉丝",@"二度粉丝"] clickBlick:^void(NSInteger index) {
-        NSArray *arrTemp = [[WJSDataModel shareInstance] arrMyFansList];
-        [self.arrFansList removeAllObjects];
-        for (NSDictionary *dicInfo in arrTemp) {
-            int level = [[dicInfo objectForKey:@"level"] intValue];
-            if (level == index + 1)
-                [self.arrFansList addObject:dicInfo];
-        }
-        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        [self initFansDataWithLevel:index];
     }];
     _segmentView.defaultIndex = 0;
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, Nav_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - Nav_HEIGHT) style:UITableViewStyleGrouped];
@@ -59,31 +54,52 @@
     
     [_tableView setBackgroundColor:RGB(0xF7, 0xF7, 0xF7)];
     
-    [self initData];
+    [self initFansDataWithLevel:1];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
-- (NSMutableArray *)arrFansList {
+- (NSMutableArray *)arrFirstFansList {
     
-    if (!_arrFansList) {
-        _arrFansList = [[NSMutableArray alloc] init];
+    if (!_arrFirstFansList) {
+        _arrFirstFansList = [[NSMutableArray alloc] init];
     }
-    return _arrFansList;
+    return _arrFirstFansList;
 }
 
-- (void)initData {
+- (NSMutableArray *)arrSecondFansList {
+    
+    if (!_arrSecondFansList) {
+        _arrSecondFansList = [[NSMutableArray alloc] init];
+    }
+    return _arrSecondFansList;
+}
+
+- (void)initFansDataWithLevel:(NSInteger)levelId {
     
     SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        [_arrSecondFansList removeAllObjects];
+        [_arrFirstFansList removeAllObjects];
         NSString *resVal = [responseObject objectForKey:@"msg"];
         if ([resVal isEqualToString:JSON_RES_SUCC]) {
             NSArray *arrTemp = [responseObject objectForKey:@"data"];
             for (NSDictionary *dicInfo in arrTemp) {
-                int level = [[dicInfo objectForKey:@"level"] intValue];
-                if (level == 1)
-                    [self.arrFansList addObject:dicInfo];
+                
+                id name = [dicInfo objectForKey:@"realname"];
+                id phoneNum = [dicInfo objectForKey:@"telphone"];
+                id uid = [dicInfo objectForKey:@"uid"];
+                if ((name && ![name isEqual:[NSNull null]])
+                    && (phoneNum && ![phoneNum isEqual:[NSNull null]])
+                    && (uid && ![uid isEqual:[NSNull null]])) {
+                    int level = [[dicInfo objectForKey:@"level"] intValue];
+                    if (level == 1)
+                        [self.arrFirstFansList addObject:dicInfo];
+                    else {
+                        [self.arrSecondFansList addObject:dicInfo];
+                    }
+                }
+                
             }
-            [[WJSDataModel shareInstance] setArrMyFansList:[NSMutableArray arrayWithArray:arrTemp]];
             NSLog(@"getWJSInfoList 返回成功");
             [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         } else {
@@ -94,8 +110,7 @@
     FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
         NSLog(@"getFansList error:%@",error);
     };
-
-    [[WJSDataManager shareInstance] getFansListWithSucc:succBlock andFail:failBlock];
+    [[WJSDataManager shareInstance] getFansListWithLevel:levelId andPageSize:20 andPageNum:0 andSucc:succBlock andFail:failBlock];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -124,8 +139,13 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *dicInfo = self.arrFansList[indexPath.row];
-    NSString *strName = [dicInfo objectForKey:@"name"];
+    NSDictionary *dicInfo = nil;
+    if (_selectedIndex == 0) {
+        dicInfo = self.arrFirstFansList[indexPath.row];
+    } else {
+        dicInfo = self.arrSecondFansList[indexPath.row];
+    }
+    NSString *strName = [dicInfo objectForKey:@"realname"];
     NSString *strPhone = [dicInfo objectForKey:@"telphone"];
     UITableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:TableViewCellId];
     if (!cell) {
@@ -150,7 +170,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.arrFansList.count;
+    if (_selectedIndex == 0) {
+        return self.arrFirstFansList.count;
+    } else {
+        return self.arrSecondFansList.count;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -166,12 +190,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *dicInfo = self.arrFansList[indexPath.row];
+    NSDictionary *dicInfo = nil;
+    if (_selectedIndex == 0) {
+        dicInfo = self.arrFirstFansList[indexPath.row];
+    } else {
+        dicInfo = self.arrSecondFansList[indexPath.row];
+    }
     NSString *strUid = [dicInfo objectForKey:@"uid"];
     if (strUid) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         WJSApplyStatusVC *destVC = [storyBoard instantiateViewControllerWithIdentifier:@"WJSApplyStatusVC"];
-        destVC.strUid = nil;
+        destVC.strUid = strUid;
+        destVC.isFansApplyStatus = YES;
         [self.navigationController pushViewController:destVC animated:YES];
     }
     

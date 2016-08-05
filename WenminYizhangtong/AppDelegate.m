@@ -211,9 +211,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [NSString stringWithFormat:@"%@", deviceToken];
     NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
     [JPUSHService registerDeviceToken:deviceToken];
-    [JPUSHService setTags:nil alias:@"13616502532" fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
-        NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, iTags, iAlias);
-    }];
 }
 
 - (void)application:(UIApplication *)application

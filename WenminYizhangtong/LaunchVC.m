@@ -29,7 +29,8 @@
     
     [self getNewsCategory];
     //初始化行情信息
-    [self initQuotationInfo];
+    RunInBackground(initQuotationInfo, nil);
+    sleep(3);
     [self initMainVC];
 }
 
@@ -153,13 +154,14 @@
         NSDictionary *dic = [arrQuotaInfo objectAtIndex:i];
         NSString *index = [dic objectForKey:@"index"];
         NSDictionary *dicTemp = [WJSTool getQuotationWithServ:QUOTATION_SERV_ADDR andWJSId:[index integerValue]];
-        NSMutableDictionary *dicQuotation = [NSMutableDictionary dictionaryWithDictionary:dicTemp];
-        [dicQuotation setObject:[dic objectForKey:@"Name"] forKey:@"文交所名称"];
-        
-        [arrQuotation addObject:dicQuotation];
+        if (dicTemp) {
+            NSMutableDictionary *dicQuotation = [NSMutableDictionary dictionaryWithDictionary:dicTemp];
+            [dicQuotation setObject:[dic objectForKey:@"Name"] forKey:@"文交所名称"];
+            
+            [arrQuotation addObject:dicQuotation];
+            [[WJSDataModel shareInstance] setArrQuotation:arrQuotation];
+        }
     }
-    [[WJSDataModel shareInstance]setArrQuotation:arrQuotation];
-    
 }
 
 - (void)didReceiveMemoryWarning {

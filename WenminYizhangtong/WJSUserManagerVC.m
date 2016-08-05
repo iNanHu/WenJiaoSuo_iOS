@@ -12,6 +12,7 @@
 #import "WJSDataModel.h"
 #import "WJSDataManager.h"
 #import "WJSLoginVC.h"
+#import <JPUSHService.h>
 
 @interface WJSUserManagerVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *managerTableView;
@@ -56,6 +57,9 @@
     NSString *resVal = [result objectForKey:@"msg"];
     if ([resVal isEqualToString:JSON_RES_SUCC]) {
         [[WJSDataModel shareInstance] setUId:@""];
+        [JPUSHService setTags:nil alias:nil fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
+            NSLog(@"Logout rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, iTags, iAlias);
+        }];
         NSLog(@"登出成功");
         [[WJSDataModel shareInstance] setUserPassword:@""];
         [[WJSDataModel shareInstance] setDicUserInfo:nil];
@@ -107,7 +111,6 @@
 
     if (indexPath.section == 0) {
         cell.textLabel.text = strName;
-        //@[@[@"头像",@"昵称",@"账号",@"性别",@"邮箱",@"修改密码"],@[@"退出登录"]];
         switch (indexPath.row) {
             case 0:
             {

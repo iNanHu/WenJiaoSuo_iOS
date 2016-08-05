@@ -36,24 +36,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    [self initData];
 }
 
 - (void)initData {
     
-    _segDataArr = [NSMutableArray arrayWithCapacity:0];
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"QuotationInfo" ofType:@"plist"];
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    _arrQuotaInfo = [NSArray arrayWithArray:[data objectForKey:@"quotationInfoList"]];
-    
-    for(int i = 0; i < [_arrQuotaInfo count]; i++)
-    {
-        NSDictionary *dic = [_arrQuotaInfo objectAtIndex:i];
-        NSString *name = [dic objectForKey:@"Name"];
-        NSLog(@"name: %@",name);
-        [_segDataArr addObject:name];
-    }
-    
     _arrListData = [[WJSDataModel shareInstance] arrQuotation];
+    [_tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     
 }
 - (void)initCtrl {
