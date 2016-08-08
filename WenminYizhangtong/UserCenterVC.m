@@ -98,7 +98,7 @@
     
     NSDictionary *dicUserInfo = [[WJSDataModel shareInstance] dicUserInfo];
     NSString *phoneNum = [dicUserInfo objectForKey:@"telphone"];
-    NSLog(@"UserCenter: %@ phoneNum:%@",dicUserInfo.description,phoneNum);
+    //NSLog(@"UserCenter: %@ phoneNum:%@",dicUserInfo.description,phoneNum);
     if (dicUserInfo && ![[dicUserInfo objectForKey:@"telphone"]isEqual:[NSNull null]]) {
         _arrName = @[@[@""],@[@"账号管理"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
     } else {

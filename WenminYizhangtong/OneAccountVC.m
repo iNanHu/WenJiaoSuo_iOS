@@ -273,8 +273,8 @@
                 NSLog(@"applyWJSInfo 返回成功");
                 [self.wjsTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             } else {
-                [self showAlertViewWithTitle:@"开户申请失败"];
                 NSString *errMsg = [responseObject objectForKey:@"data"];
+                [self showAlertViewWithTitle:[NSString stringWithFormat:@"开户申请失败,%@",errMsg]];
                 NSLog(@"applyWJSInfo 获取失败，error[%@]",errMsg);
             }
         };

@@ -283,7 +283,18 @@
                     <view key="view" contentMode="scaleToFill" id="jcU-Va-LNK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchImage" translatesAutoresizingMaskIntoConstraints="NO" id="wLs-XK-iun">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wLs-XK-iun" firstAttribute="width" secondItem="jcU-Va-LNK" secondAttribute="width" id="9Bw-3z-aBx"/>
+                            <constraint firstItem="wLs-XK-iun" firstAttribute="centerY" secondItem="jcU-Va-LNK" secondAttribute="centerY" id="JWF-RR-dl0"/>
+                            <constraint firstItem="wLs-XK-iun" firstAttribute="centerX" secondItem="jcU-Va-LNK" secondAttribute="centerX" id="P5m-XO-wd8"/>
+                            <constraint firstItem="wLs-XK-iun" firstAttribute="height" secondItem="jcU-Va-LNK" secondAttribute="height" id="qRQ-Rx-gob"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="exC-Bh-6qo"/>
                     <connections>
@@ -1038,6 +1049,7 @@
     </scenes>
     <resources>
         <image name="80.png" width="80" height="80"/>
+        <image name="launchImage" width="80" height="80"/>
         <image name="psw.png" width="16" height="16"/>
         <image name="user.png" width="16" height="16"/>
     </resources>

@@ -242,6 +242,7 @@
 
 - (void)getWJSFansApplyStatusWithUid:(NSString *) strUid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
+    NSString *uid = [[WJSDataModel shareInstance] uId];
     NSDictionary *dicParams = @{@"uid":strUid};
     NSString *strUrl = [NSString stringWithFormat:@"%@user/get_apply_status_byuid",SERV_ADDR];
     NSError *error;
@@ -251,7 +252,7 @@
     if (! jsonData) {
         NSLog(@"Got an error: %@", error);
     } else {
-        [self getMsg:strUrl withUid:strUid  withParams:jsonData withSuccBlock:succBlock withFailBlock:failBlock];
+        [self getMsg:strUrl withUid:uid withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
     }
 }
 

@@ -20,6 +20,7 @@
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *arrFirstFansList;
 @property (nonatomic, strong) NSMutableArray *arrSecondFansList;
+@property (nonatomic, assign) NSMutableArray *arrFansData;
 @property (nonatomic, assign) NSInteger selectedIndex;   //默认选中的索引
 @end
 
@@ -34,10 +35,20 @@
     
     self.navigationItem.hidesBackButton = YES;
     
-    _segmentView = [[LiuXSegmentView alloc] initWithFrame:CGRectMake(0, 20, UI_SCREEN_WIDTH, 45) titles:@[@"一度粉丝",@"二度粉丝"] clickBlick:^void(NSInteger index) {
-        [self initFansDataWithLevel:index];
+    _segmentView = [[LiuXSegmentView alloc]initWithFrame:CGRectMake(0, 20, UI_SCREEN_WIDTH, 45) titles:@[@"一度粉丝",@"二度粉丝"] clickBlick:^void(NSInteger index) {
+        
+        _selectedIndex = index;
+        if (_selectedIndex == 1) {
+            self.arrFansData = self.arrFirstFansList;
+            [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        }
+        else {
+            self.arrFansData = self.arrSecondFansList;
+            [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        }
+        
     }];
-    _segmentView.defaultIndex = 0;
+    _selectedIndex = 1;
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, Nav_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - Nav_HEIGHT) style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -54,9 +65,17 @@
     
     [_tableView setBackgroundColor:RGB(0xF7, 0xF7, 0xF7)];
     
-    [self initFansDataWithLevel:1];
+    [self initFansData];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)initFansData {
+    
+    //一级粉丝
+    [self initFansDataWithLevel1];
+    //二级粉丝
+    [self performSelector:@selector(initFansDataWithLevel2) withObject:nil afterDelay:1.0];
 }
 
 - (NSMutableArray *)arrFirstFansList {
@@ -75,33 +94,25 @@
     return _arrSecondFansList;
 }
 
-- (void)initFansDataWithLevel:(NSInteger)levelId {
+- (void)initFansDataWithLevel1 {
     
     SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-        [_arrSecondFansList removeAllObjects];
-        [_arrFirstFansList removeAllObjects];
+        
         NSString *resVal = [responseObject objectForKey:@"msg"];
         if ([resVal isEqualToString:JSON_RES_SUCC]) {
             NSArray *arrTemp = [responseObject objectForKey:@"data"];
+            [self.arrFirstFansList removeAllObjects];
             for (NSDictionary *dicInfo in arrTemp) {
-                
-                id name = [dicInfo objectForKey:@"realname"];
-                id phoneNum = [dicInfo objectForKey:@"telphone"];
-                id uid = [dicInfo objectForKey:@"uid"];
-                if ((name && ![name isEqual:[NSNull null]])
-                    && (phoneNum && ![phoneNum isEqual:[NSNull null]])
-                    && (uid && ![uid isEqual:[NSNull null]])) {
-                    int level = [[dicInfo objectForKey:@"level"] intValue];
-                    if (level == 1)
-                        [self.arrFirstFansList addObject:dicInfo];
-                    else {
-                        [self.arrSecondFansList addObject:dicInfo];
-                    }
-                }
-                
+                NSInteger level = [[dicInfo objectForKey:@"level"] integerValue];
+                if (level == 1)
+                    [self.arrFirstFansList addObject:dicInfo];
             }
-            NSLog(@"getWJSInfoList 返回成功");
-            [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            
+            if (_selectedIndex == 1) {
+                self.arrFansData = _arrFirstFansList;
+                [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            }
+            NSLog(@"getWJSInfoList 一度粉丝 返回成功:%ld",self.arrFirstFansList.count);
         } else {
             NSString *errMsg = [responseObject objectForKey:@"data"];
             NSLog(@"getFansList 获取失败，error[%@]",errMsg);
@@ -110,8 +121,39 @@
     FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
         NSLog(@"getFansList error:%@",error);
     };
-    [[WJSDataManager shareInstance] getFansListWithLevel:levelId andPageSize:20 andPageNum:0 andSucc:succBlock andFail:failBlock];
+    [[WJSDataManager shareInstance] getFansListWithLevel:1 andPageSize:100 andPageNum:0 andSucc:succBlock andFail:failBlock];
 }
+
+- (void)initFansDataWithLevel2 {
+    
+    SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        
+        NSString *resVal = [responseObject objectForKey:@"msg"];
+        if ([resVal isEqualToString:JSON_RES_SUCC]) {
+            NSArray *arrTemp = [responseObject objectForKey:@"data"];
+            [self.arrSecondFansList removeAllObjects];
+            for (NSDictionary *dicInfo in arrTemp) {
+                NSInteger level = [[dicInfo objectForKey:@"level"] integerValue];
+                if (level == 2)
+                    [self.arrSecondFansList addObject:dicInfo];
+            }
+          
+            if (_selectedIndex == 2) {
+                    self.arrFansData = _arrSecondFansList;
+                [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            }
+            NSLog(@"getWJSInfoList 二度粉丝 返回成功:%ld",self.arrSecondFansList.count);
+        } else {
+            NSString *errMsg = [responseObject objectForKey:@"data"];
+            NSLog(@"getFansList 获取失败，error[%@]",errMsg);
+        }
+    };
+    FailBlock failBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+        NSLog(@"getFansList error:%@",error);
+    };
+    [[WJSDataManager shareInstance] getFansListWithLevel:2 andPageSize:100 andPageNum:0 andSucc:succBlock andFail:failBlock];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -139,20 +181,34 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *dicInfo = nil;
-    if (_selectedIndex == 0) {
-        dicInfo = self.arrFirstFansList[indexPath.row];
-    } else {
-        dicInfo = self.arrSecondFansList[indexPath.row];
+    NSDictionary *dicInfo = self.arrFansData[indexPath.row];
+
+    if (!dicInfo) return nil;
+    
+    NSString *strName = [NSString stringWithFormat:@"新粉丝%ld",indexPath.row];
+    NSString *strPhone = [dicInfo objectForKey:@"username"];
+    id name = [dicInfo objectForKey:@"realname"];
+    id phoneNum = [dicInfo objectForKey:@"telphone"];
+    
+    if (name && ![name isEqual:[NSNull null]]) {
+        strName = [dicInfo objectForKey:@"realname"];
     }
-    NSString *strName = [dicInfo objectForKey:@"realname"];
-    NSString *strPhone = [dicInfo objectForKey:@"telphone"];
+    if (phoneNum && ![phoneNum isEqual:[NSNull null]]) {
+        strPhone = [dicInfo objectForKey:@"telphone"];
+    }
+        
     UITableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:TableViewCellId];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TableViewCellId];
     }
+    UILabel *phoneLab = [[UILabel alloc] init];
+    phoneLab.frame = CGRectMake(UI_SCREEN_WIDTH - 160, 0, 150, 45.f);
+    phoneLab.textColor = [UIColor blackColor];
+    [phoneLab setFont:[UIFont systemFontOfSize:14.f]];
+    phoneLab.text = strPhone;
+    [cell addSubview:phoneLab];
+    
     cell.textLabel.text= strName;
-    cell.detailTextLabel.text = strPhone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
@@ -170,11 +226,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (_selectedIndex == 0) {
-        return self.arrFirstFansList.count;
-    } else {
-        return self.arrSecondFansList.count;
-    }
+    return [self.arrFansData count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -190,20 +242,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *dicInfo = nil;
-    if (_selectedIndex == 0) {
-        dicInfo = self.arrFirstFansList[indexPath.row];
-    } else {
-        dicInfo = self.arrSecondFansList[indexPath.row];
+    
+    NSDictionary *dicInfo = self.arrFansData[indexPath.row];
+    id uid = [dicInfo objectForKey:@"uid"];
+    if (uid && ![uid isEqual:[NSNull null]]) {
+        NSString *strUid = [dicInfo objectForKey:@"uid"];
+        if (strUid) {
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            WJSApplyStatusVC *destVC = [storyBoard instantiateViewControllerWithIdentifier:@"WJSApplyStatusVC"];
+            destVC.strUid = strUid;
+            destVC.isFansApplyStatus = YES;
+            [self.navigationController pushViewController:destVC animated:YES];
+            return ;
+        }
     }
-    NSString *strUid = [dicInfo objectForKey:@"uid"];
-    if (strUid) {
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        WJSApplyStatusVC *destVC = [storyBoard instantiateViewControllerWithIdentifier:@"WJSApplyStatusVC"];
-        destVC.strUid = strUid;
-        destVC.isFansApplyStatus = YES;
-        [self.navigationController pushViewController:destVC animated:YES];
-    }
+    [self showAlertViewWithTitle:@"该粉丝尚无申请进度"];
     
 }
 

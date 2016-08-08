@@ -30,7 +30,6 @@
     [super viewDidLoad];
     self.title = @"申请进度";
     
-    [self initData];
     _applyStatusTableView.delegate = self;
     _applyStatusTableView.dataSource = self;
     [_applyStatusTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ApplyStatusCell];
