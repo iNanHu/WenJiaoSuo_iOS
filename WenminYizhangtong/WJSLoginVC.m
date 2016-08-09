@@ -30,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.hidden = YES;
     
     self.iconView.layer.cornerRadius = 40.f;
     [self.iconView.layer setMasksToBounds:YES];
@@ -77,7 +76,6 @@
                                                  name:UIKeyboardWillHideNotification object:nil];
     
     [self initData];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)initData {
@@ -95,6 +93,7 @@
     
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
+    self.navigationController.navigationBar.hidden = YES;
 }
 
 
@@ -133,10 +132,13 @@
         }];
         [self getUserDetailInfo];
         NSLog(@"登录成功:%@",uId);
+        [self showAlertViewWithTitle:@"登录成功！"];
         [self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];
         NSLog(@"登录失败，error[%@]",errMsg);
+        [self showAlertViewWithTitle:[NSString stringWithFormat:@"登录失败，%@!",errMsg]];
+        
     }
 }
 
@@ -211,6 +213,7 @@
         
     }
 }
+
 
 
 @end

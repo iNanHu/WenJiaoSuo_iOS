@@ -164,6 +164,7 @@
 		7BC898131D577C230086C78D /* launchImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8980F1D577C230086C78D /* launchImage@3x.png */; };
 		7BC898141D577C230086C78D /* launchImage@5x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC898101D577C230086C78D /* launchImage@5x.png */; };
 		7BC898171D5784B00086C78D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BC898151D5784B00086C78D /* LaunchScreen.storyboard */; };
+		7BC8981B1D58E2550086C78D /* RegTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8981A1D58E2550086C78D /* RegTableViewCell.xib */; };
 		7BD756151D1CB5A7000CA7EF /* WJSTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD756141D1CB5A7000CA7EF /* WJSTool.m */; };
 		7BD756331D21850F000CA7EF /* home_index1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756281D21850F000CA7EF /* home_index1.png */; };
 		7BD756341D21850F000CA7EF /* home_index2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756291D21850F000CA7EF /* home_index2.png */; };
@@ -388,6 +389,7 @@
 		7BC8980F1D577C230086C78D /* launchImage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launchImage@3x.png"; sourceTree = "<group>"; };
 		7BC898101D577C230086C78D /* launchImage@5x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launchImage@5x.png"; sourceTree = "<group>"; };
 		7BC898161D5784B00086C78D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7BC8981A1D58E2550086C78D /* RegTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegTableViewCell.xib; sourceTree = "<group>"; };
 		7BD756131D1CB5A7000CA7EF /* WJSTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSTool.h; sourceTree = "<group>"; };
 		7BD756141D1CB5A7000CA7EF /* WJSTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSTool.m; sourceTree = "<group>"; };
 		7BD756281D21850F000CA7EF /* home_index1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_index1.png; sourceTree = "<group>"; };
@@ -725,6 +727,7 @@
 				7B9403841D29082100DBA882 /* LiuXSegmentView.h */,
 				7B9403851D29082100DBA882 /* LiuXSegmentView.m */,
 				7B31B7381D41134E007B63AF /* AccountInfoCell.xib */,
+				7BC8981A1D58E2550086C78D /* RegTableViewCell.xib */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -935,6 +938,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BC8981B1D58E2550086C78D /* RegTableViewCell.xib in Resources */,
 				7B31B7FA1D4830B4007B63AF /* tabbar_icon_onlie_highlight@2x.png in Resources */,
 				7B31B7661D432BB7007B63AF /* icon_hd.png in Resources */,
 				7B31B7F81D4830B4007B63AF /* tabbar_icon_news@3x.png in Resources */,

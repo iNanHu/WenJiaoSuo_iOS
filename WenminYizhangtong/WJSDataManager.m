@@ -31,7 +31,7 @@
     NSDictionary *dicParams = @{@"username":userName,
                                 @"email":userEmail,
                                 @"password":userPsd,
-                                @"invite":@"d4ef986a",};
+                                @"invite":inviteId,};
     [self postMsg:strUrl withUid:nil withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 

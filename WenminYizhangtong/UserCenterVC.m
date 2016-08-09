@@ -401,18 +401,23 @@
     NSDictionary *dicUsesrInfo = [[WJSDataModel shareInstance] dicUserInfo];
     if (dicUsesrInfo) {
         NSString *strInviteId = [dicUsesrInfo objectForKey:USRINFO_INVITEID];
-        if (strInviteId && ![strInviteId isEqualToString:@""]) {
+        if (strInviteId && ![strInviteId isEqual:[NSNull null]]&& ![strInviteId isEqualToString:@""]) {
             strRegUrl = [NSString stringWithFormat:@"http://wmyzt.applinzi.com/register.html?invite=%@",strInviteId];
+        } else {
+            [self showAlertViewWithTitle:@"您尚未完善您的信息，请在完善信息中进行填写！"];
         }
+    } else {
+        [self showAlertViewWithTitle:@"您尚未完善您的信息，请在完善信息中进行填写！"];
     }
+
     
     [UMSocialData defaultData].extConfig.title = @"文龙一账通";
     [UMSocialData defaultData].extConfig.qqData.url = strRegUrl;
     [UMSocialData defaultData].extConfig.qzoneData.url = strRegUrl;
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = strRegUrl;
     [UMSocialData defaultData].extConfig.wechatSessionData.url = strRegUrl;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.shareText = @"我的朋友圈";
-    [UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"我的微信";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.shareText = @"一键注册";
+    [UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"一键注册";
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"507fcab25270157b37000010"
                                       shareText:@""

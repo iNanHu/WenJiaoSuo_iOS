@@ -6,6 +6,7 @@
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
 #define AboutTableCell @"aboutTableCell"
+#import "WJSTutotialVC.h"
 #define TableHead_Height 160
 #define ICON_SIZE 80
 
@@ -15,6 +16,7 @@
 @interface WJSUserAboutVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *aboutTableView;
 @property (strong, nonatomic) NSArray *arrName;
+@property (strong, nonatomic) NSArray *arrInfoUrl;
 
 @end
 
@@ -58,6 +60,10 @@
 - (void)initData {
     
     _arrName = @[@"联系我们",@"使用帮助",@"商务合作",@"产品介绍"];
+    _arrInfoUrl = @[@"http://wmyzt.applinzi.com/admin.php?r=page/Category/index&class_id=9",
+                    @"http://wmyzt.applinzi.com/admin.php?r=page/Category/index&class_id=8",
+                    @"http://wmyzt.applinzi.com/admin.php?r=page/Category/index&class_id=7",
+                    @"http://wmyzt.applinzi.com/admin.php?r=page/Category/index&class_id=5"];
 }
 
 - (UIView *)headeView {
@@ -144,6 +150,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UIStoryboard *mainStory = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    WJSTutotialVC *destVC = [mainStory instantiateViewControllerWithIdentifier:@"WJSTutotialVC"];
+    destVC.strName = _arrName[indexPath.row];
+    destVC.strLinkUrl = _arrInfoUrl[indexPath.row];
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 

@@ -158,16 +158,16 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 30)];
-    [headView setBackgroundColor:RGB(0xff, 0x65, 01)];
-    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 30)];
-    [titleLab setFont:[UIFont systemFontOfSize:15.f]];
+    [headView setBackgroundColor:RGB(37, 109, 236)];
+    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, UI_SCREEN_WIDTH, 30)];
+    [titleLab setFont:[UIFont systemFontOfSize:13.f]];
     [titleLab setTextColor:[UIColor whiteColor]];
     [headView addSubview:titleLab];
     
     if(section == 0) {
-        titleLab.text = @"以下合作文交所支持一键开户";
+        titleLab.text = @"A. 以下文交所，点击“一键开户”即可体验极速开户一键搞定";
     } else {
-        titleLab.text = @"以下暂未合作的文交所需要自行开户";
+        titleLab.text = @"B. 以下文交所，尚未开通极速体验，开户请点击“立即开户";
     }
     return headView;
 }
@@ -202,7 +202,7 @@
     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [cell.textLabel setText:strTitleName];
     
-    UIButton *goldActiveBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 155, 15, 70, 30)];
+    UIButton *goldActiveBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 80, 15, 70, 30)];
     NSString *strGoldActive = @"入金激活";
     goldActiveBtn.tag = cell.tag;
     [goldActiveBtn setTitle:strGoldActive forState:UIControlStateNormal];
@@ -212,19 +212,19 @@
         [goldActiveBtn addTarget:self action:@selector(onGoldActiveHandAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    goldActiveBtn.layer.cornerRadius = 3.0f;
+    goldActiveBtn.layer.cornerRadius = 5.0f;
     goldActiveBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
     [goldActiveBtn.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
     [goldActiveBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     goldActiveBtn.layer.borderColor = [UIColor redColor].CGColor;
     [cell addSubview:goldActiveBtn];
     
-    UIButton *onekeyBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 80, 15, 70, 30)];
+    UIButton *onekeyBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 165, 15, 70, 30)];
     NSString *strOneKey = oneKey == 1?@"一键开户":@"立即开户";
     onekeyBtn.tag = cell.tag;
     [onekeyBtn setTitle:strOneKey forState:UIControlStateNormal];
     [onekeyBtn addTarget:self action:@selector(registerAccount:) forControlEvents:UIControlEventTouchUpInside];
-    onekeyBtn.layer.cornerRadius = 3.0f;
+    onekeyBtn.layer.cornerRadius = 5.0f;
     onekeyBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
     [onekeyBtn.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
     [onekeyBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];

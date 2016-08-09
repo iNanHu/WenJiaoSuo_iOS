@@ -12,6 +12,7 @@
 
 @interface WJSFindPsdVC ()
 @property (weak, nonatomic) IBOutlet UITextField *regEmailText;
+@property (weak, nonatomic) IBOutlet UIButton *commitBtn;
 
 @end
 
@@ -20,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _commitBtn.layer.cornerRadius = 5.f;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -34,6 +36,7 @@
     NSString *strUserEmail = [[WJSDataModel shareInstance] userEmail];
     if (!strRegEmail || ![strRegEmail isEqualToString:strUserEmail]) {
         NSLog(@"注册邮箱输入错误，请重新输入！");
+        [self showAlertViewWithTitle:@"注册邮箱输入错误，请重新输入！"];
         return ;
     }
     SuccBlock succ = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
@@ -41,6 +44,7 @@
     };
     FailBlock fail = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"返回错误：%@",error);
+        [self showAlertViewWithTitle:[NSString stringWithFormat:@"修改密码失败, %@",error]];
     };
     [[WJSDataManager shareInstance] FindPsdWithUserEmail:strUserEmail andSucc:succ andFail:fail];
 }
@@ -50,9 +54,11 @@
     NSString *resVal = [result objectForKey:@"msg"];
     if ([resVal isEqualToString:JSON_RES_SUCC]) {
         NSLog(@"修改密码成功!");
+        [self showAlertViewWithTitle:@"修改密码成功!"];
         [self.navigationController popToRootViewControllerAnimated:YES];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];
+        [self showAlertViewWithTitle:[NSString stringWithFormat:@"修改密码失败, %@",errMsg]];
         NSLog(@"修改密码失败，error[%@]",errMsg);
     }
 }

@@ -54,8 +54,8 @@
 
 - (void)initData {
     
-    _arrTitle = @[@[@"电子盘",@"自选",@"申购托管",@"新闻中心"],@[@"开户",@"公告",@"现货",@"活动"]];
-    _arrTitleImg = @[@[@"dzp_icon",@"zx_icons",@"sg_icon",@"news_icons"],@[@"agree_icons",@"icon_gg",@"icon_xh",@"icon_hd"]];
+    _arrTitle = @[@[@"大盘行情",@"文交所公告",@"活动专区"],@[@"文民社群",@"文民商学院",@"全民经纪"]];
+    _arrTitleImg = @[@[@"dzp_icon",@"icon_gg",@"icon_hd"],@[@"sg_icon",@"agree_icons",@"icon_xh"]];
     
     _infoArr = [[WJSDataModel shareInstance] arrNewsDetailList];
     if (!_infoArr) {
@@ -177,7 +177,7 @@
     _homeTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, Nav_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - Tab_HEIGHT - Nav_HEIGHT) style:UITableViewStyleGrouped];
     [_homeTableView setBackgroundColor:TABLE_BGCLR];
     _homeTableView.tableHeaderView = headView;
-    [_homeTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:WJSHeadCellId];
+    [_homeTableView registerNib:[UINib nibWithNibName:@"WJSInfoCell" bundle:nil] forCellReuseIdentifier:WJSInfoCellId];
     _homeTableView.dataSource = self;
     _homeTableView.delegate = self;
     [self.view addSubview:_homeTableView];
@@ -312,17 +312,18 @@
         CGFloat btnHeight = TableBar_Height/2;
         CGFloat btnWidth = UI_SCREEN_WIDTH/3;
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 3; j++) {
                 NSString *strImgUrl = _arrTitleImg[i][j];
                 NSString *strTitle = _arrTitle[i][j];
                 CGRect btnFrame = CGRectMake(btnWidth * j, btnHeight * i, btnWidth, btnHeight);
                 UIButton *btn = [UIButton new];
                 btn.frame = btnFrame;
-                btn.tag = i * 4 + j;
+                btn.tag = i * 3 + j;
                 [btn setTitle:strTitle forState:UIControlStateNormal];
                 [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 [btn setImage:[UIImage imageNamed:strImgUrl] forState:UIControlStateNormal];
                 btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+                [btn setTitleColor:RGB(56, 56, 56) forState:UIControlStateNormal];
                 [btn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
                 [self setBtnLayout:btn andTitle:strTitle andImgUrl:strImgUrl];
                 [btn setBackgroundImage:[WJSTool ImageWithColor:RGB(0xA0, 0xA0, 0xA0) andFrame:btn.frame] forState:UIControlStateHighlighted];
@@ -337,7 +338,7 @@
         
         if (_infoArr.count == 0) return nil;
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:WJSHeadCellId];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:WJSInfoCellId];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:WJSInfoCellId];
         }
@@ -364,53 +365,30 @@
     NSString *strTime = [dicInfo objectForKey:WJSINFO_TIME];
     NSString *strVistCo = [dicInfo objectForKey:WJSINFO_VISIT_COUNT];
     
-    UIImageView *iconView = [UIImageView new];
-    UILabel *titleLab = [UILabel new];
-    UILabel *contentView = [UILabel new];
-    UILabel *vistCountLab = [UILabel new];
-    UILabel *timeLab = [UILabel new];
-    
-    CGRect iconViewRect = CGRectMake(10, 15, 60, 70);
-    CGRect titleLabRect = CGRectMake(80, 0, 120, 25);
-    CGRect timeLabRect = CGRectMake(UI_SCREEN_WIDTH - 140, 0, 120, 25);
-    CGRect contentViewRect = CGRectMake(80, 20, UI_SCREEN_WIDTH - 110, 60);
-    CGRect vistCountRect = CGRectMake(UI_SCREEN_WIDTH - 100, 75, 80, 25);
-    
-    
-    iconView.frame = iconViewRect;
-    titleLab.frame = titleLabRect;
-    contentView.frame = contentViewRect;
-    vistCountLab.frame = vistCountRect;
-    timeLab.frame = timeLabRect;
+    UIImageView *iconView = [cell viewWithTag:100];
+    UILabel *titleLab = [cell viewWithTag:101];
+    UILabel *contentView = [cell viewWithTag:102];
+    UILabel *vistCountLab = [cell viewWithTag:104];
+    UILabel *timeLab = [cell viewWithTag:103];
     
     [iconView sd_setImageWithURL:[NSURL URLWithString:strImgUrl]];
     
     [titleLab setText:strTitleName];
-    [titleLab setFont:[UIFont boldSystemFontOfSize:14.f]];
     [titleLab setTextColor:[UIColor blackColor]];
     
     [contentView setText:strDetailText];
-    [contentView resignFirstResponder];
     contentView.lineBreakMode = UILineBreakModeWordWrap;
     [contentView setFont:[UIFont systemFontOfSize:14.f]];
     [contentView setTextColor:RGB(0xB0, 0xB0, 0xB0)];
     [contentView setNumberOfLines:0];
     
-    [vistCountLab setText:[NSString stringWithFormat:@"访问量: %@",strVistCo]];
+    [vistCountLab setText:[NSString stringWithFormat:@"阅读: %@",strVistCo]];
     [vistCountLab setTextAlignment:NSTextAlignmentRight];
-    [vistCountLab setFont:[UIFont systemFontOfSize:14.f]];
     [vistCountLab setTextColor:RGB(0xB0, 0xB0, 0xB0)];
     
     [timeLab setText:[self getData:[strTime integerValue]]];
-    [timeLab setFont:[UIFont systemFontOfSize:14.f]];
     [timeLab setTextAlignment:NSTextAlignmentRight];
     [timeLab setTextColor:RGB(0xB0, 0xB0, 0xB0)];
-    
-    [cell addSubview:iconView];
-    [cell addSubview:titleLab];
-    [cell addSubview:contentView];
-    [cell addSubview:vistCountLab];
-    [cell addSubview:timeLab];
 }
 
 - (NSString *)getData:(NSInteger) curTime {
