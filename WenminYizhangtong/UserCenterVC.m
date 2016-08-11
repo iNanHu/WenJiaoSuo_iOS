@@ -224,7 +224,8 @@
 }
 
 - (void)onUserCenter {
-    [self showAlertViewWithTitle:@"功能正在开发中，敬请期待！"];
+    
+    [self performSegueWithIdentifier:NAV_TO_MEMCENTERVC sender:nil];
 }
 
 - (void)onMySubor {

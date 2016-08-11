@@ -12,6 +12,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "WJSDataManager.h"
 #import "WJSDataModel.h"
+#import "QuotationVC.h"
 #import "WJSTool.h"
 #import "HomeVC.h"
 
@@ -54,7 +55,7 @@
 
 - (void)initData {
     
-    _arrTitle = @[@[@"大盘行情",@"文交所公告",@"活动专区"],@[@"文民社群",@"文民商学院",@"全民经纪"]];
+    _arrTitle = @[@[@"大盘行情",@"文交所公告",@"羊毛专区"],@[@"文民社群",@"文民商学院",@"全民经纪"]];
     _arrTitleImg = @[@[@"dzp_icon",@"icon_gg",@"icon_hd"],@[@"sg_icon",@"agree_icons",@"icon_xh"]];
     
     _infoArr = [[WJSDataModel shareInstance] arrNewsDetailList];
@@ -352,7 +353,44 @@
 }
 
 - (void)onSwithcBtn:(UIButton *)sender {
-    
+    switch (sender.tag) {
+        case 0:
+        {
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            QuotationVC *destVC = [storyBoard instantiateViewControllerWithIdentifier:@"QuotationVC"];
+            if (destVC) {
+                [self.navigationController pushViewController:destVC animated:YES];
+            }
+        }
+            break;
+        case 1:
+        {
+        
+        }
+            break;
+        case 2:
+        {
+            [self.tabBarController setSelectedIndex:1];
+        }
+            break;
+        case 3:
+        {
+        
+        }
+            break;
+        case 4:
+        {
+            
+        }
+            break;
+        case 5:
+        {
+            
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)setCellModel:(UITableViewCell *)cell withInfo:(NSDictionary *)dicInfo {

@@ -16,6 +16,7 @@
 		7B0C65651D163DB000C54B56 /* QuotationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C65641D163DB000C54B56 /* QuotationVC.m */; };
 		7B0C65681D163E2200C54B56 /* OneAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C65671D163E2200C54B56 /* OneAccountVC.m */; };
 		7B0C656B1D163E4000C54B56 /* UserCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C656A1D163E4000C54B56 /* UserCenterVC.m */; };
+		7B1D9FCD1D5B91F700266E89 /* WoolZoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D9FCC1D5B91F700266E89 /* WoolZoneVC.m */; };
 		7B31B69F1D2DD58D007B63AF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B31B69E1D2DD58D007B63AF /* AdSupport.framework */; };
 		7B31B6A11D2DD59A007B63AF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B31B6A01D2DD59A007B63AF /* Security.framework */; };
 		7B31B6A31D2DD5A6007B63AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B31B6A21D2DD5A6007B63AF /* SystemConfiguration.framework */; };
@@ -198,6 +199,8 @@
 		7B0C65671D163E2200C54B56 /* OneAccountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneAccountVC.m; sourceTree = "<group>"; };
 		7B0C65691D163E4000C54B56 /* UserCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterVC.h; sourceTree = "<group>"; };
 		7B0C656A1D163E4000C54B56 /* UserCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterVC.m; sourceTree = "<group>"; };
+		7B1D9FCB1D5B91F700266E89 /* WoolZoneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WoolZoneVC.h; sourceTree = "<group>"; };
+		7B1D9FCC1D5B91F700266E89 /* WoolZoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WoolZoneVC.m; sourceTree = "<group>"; };
 		7B31B69E1D2DD58D007B63AF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		7B31B6A01D2DD59A007B63AF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7B31B6A21D2DD5A6007B63AF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -511,6 +514,8 @@
 				7B31B7791D47CB1F007B63AF /* QuotationCell.xib */,
 				7B31B77C1D47D1B9007B63AF /* QuotationModel.h */,
 				7B31B77D1D47D1B9007B63AF /* QuotationModel.m */,
+				7B1D9FCB1D5B91F700266E89 /* WoolZoneVC.h */,
+				7B1D9FCC1D5B91F700266E89 /* WoolZoneVC.m */,
 			);
 			name = "行情";
 			sourceTree = "<group>";
@@ -1172,6 +1177,7 @@
 				5A4DFBBA1D24E13C0003CA7A /* WJSLoginVC.m in Sources */,
 				5A4DFBC41D24EDB80003CA7A /* WJSDataManager.m in Sources */,
 				5A5701841D49D64800F8DF7B /* WJSTutotialVC.m in Sources */,
+				7B1D9FCD1D5B91F700266E89 /* WoolZoneVC.m in Sources */,
 				7B31B6DC1D34039A007B63AF /* NSArray+MASAdditions.m in Sources */,
 				7B31B6DD1D34039A007B63AF /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				7B31B8AB1D4FA054007B63AF /* DefaultNav.m in Sources */,

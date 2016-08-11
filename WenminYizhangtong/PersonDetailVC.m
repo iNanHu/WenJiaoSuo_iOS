@@ -34,9 +34,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *commitBtn;
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
 @property (weak, nonatomic) IBOutlet UIScrollView *personScrollView;
-@property (weak, nonatomic) IBOutlet UIImageView *certiFrontImgView;
-@property (weak, nonatomic) IBOutlet UIImageView *certiBackImgView;
-@property (weak, nonatomic) IBOutlet UIImageView *bankFrontImgView;
 
 //data
 @property (nonatomic, strong) NSMutableDictionary *dicImgData;
@@ -131,10 +128,9 @@
     } else {
         strSex = @"2";
     }
-    
-    [_certiFrontImgView setImage:certiFrontImg];
-    [_certiBackImgView setImage:certiBackImg];
-    [_bankFrontImgView setImage:bankFrontImg];
+    [_certificateBtn setBackgroundImage:certiFrontImg forState:UIControlStateNormal];
+    [_certiBackBtn setBackgroundImage:certiBackImg forState:UIControlStateNormal];
+    [_bankCardFrontBtn setBackgroundImage:bankFrontImg forState:UIControlStateNormal];
     
     SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         [self personCommitResult:responseObject];

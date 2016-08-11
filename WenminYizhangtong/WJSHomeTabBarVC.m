@@ -31,7 +31,7 @@
     UITabBarItem* item2 = [self.tabBar.items objectAtIndex:1];
     item2.image = IMAGEOF(@"tabbar_icon_equity_highlight");
     item2.selectedImage = IMAGEOF(@"tabbar_icon_equity_highlight");
-    item2.title = @"行情";
+    item2.title = @"羊毛专区";
     
     UITabBarItem* item3 = [self.tabBar.items objectAtIndex:2];
     item3.image = IMAGEOF(@"tabbar_icon_onlie_highlight");

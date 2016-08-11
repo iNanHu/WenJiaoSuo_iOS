@@ -1,31 +1,25 @@
 //
-//  MemberCenterVC.m
+//  WoolZoneVC.m
 //  WenminYizhangtong
 //
-//  Created by sgyaaron on 16/7/28.
+//  Created by sgyaaron on 16/8/11.
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
 
-#import "MemberCenterVC.h"
+#import "WoolZoneVC.h"
 
-@interface MemberCenterVC ()
+@interface WoolZoneVC ()
 
 @end
 
-@implementation MemberCenterVC
+@implementation WoolZoneVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"会员中心";
+    self.hidLeftButton = YES;
+    self.title = @"羊毛专区";
 }
-
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = YES;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
