@@ -17,7 +17,7 @@
 
 //用户相关接口
 //注册账号
-- (void)registerUserAccWithUserName:(NSString *)userName andInviteId:(NSString *)inviteId andUserEmail:(NSString *)userEmail andUserPsd:(NSString *)userPsd andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
+- (void)registerUserAccWithUserName:(NSString *)userName andCheckNum:(NSString *)checkNum andInviteId:(NSString *)inviteId andUserEmail:(NSString *)userEmail andUserPsd:(NSString *)userPsd andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //登录账号
 - (void)loginUserAccWithUserName:(NSString *)userName andUserPsd:(NSString *)userPsd andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //登出账号
@@ -43,6 +43,8 @@
                     andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 //获取文交所列表
 - (void)getWJSInfoListWithSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
+//获取手机验证码
+- (void)getPhoneCheckNumWithPhoneNum:(NSString *)phoneNum andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;
 
 //获取用户开户状态
 - (void)getWJSApplyStatusWithUid:(NSString *)strUid andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock;

@@ -29,4 +29,6 @@
 + (BOOL) validatePassword:(NSString *)passWord;
 //身份证号验证
 + (BOOL) validateIdentityCard: (NSString *)identityCard;
+//手机验证码验证
++ (BOOL)chekSecurityCode:(NSString *) code;
 @end

@@ -25,13 +25,14 @@
 }
 
 //用户相关接口
-- (void)registerUserAccWithUserName:(NSString *)userName andInviteId:(NSString *)inviteId andUserEmail:(NSString *)userEmail andUserPsd:(NSString *)userPsd andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
+- (void)registerUserAccWithUserName:(NSString *)userName andCheckNum:(NSString *)checkNum andInviteId:(NSString *)inviteId andUserEmail:(NSString *)userEmail andUserPsd:(NSString *)userPsd andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
     
     NSString *strUrl = [NSString stringWithFormat:@"%@user/register",SERV_ADDR];
     NSDictionary *dicParams = @{@"username":userName,
                                 @"email":userEmail,
                                 @"password":userPsd,
-                                @"invite":inviteId,};
+                                @"invite":inviteId,
+                                @"code":checkNum,};
     [self postMsg:strUrl withUid:nil withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
@@ -195,6 +196,21 @@
                                 @"file":imgData};
     NSString *strUid = [[WJSDataModel shareInstance] uId];
     [self postMsg:strUrl withUid:strUid withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+}
+
+- (void)getPhoneCheckNumWithPhoneNum:(NSString *)phoneNum andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {
+    
+    NSDictionary *dicParams = @{@"mobile":phoneNum};
+    NSString *strUrl = [NSString stringWithFormat:@"%@user/check_mobile",SERV_ADDR];
+//    NSError *error;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicParams
+//                                                       options:NSJSONWritingPrettyPrinted
+//                                                         error:&error];
+//    if (! jsonData) {
+//        NSLog(@"Got an error: %@", error);
+//    } else {
+        [self getMsg:strUrl withUid:nil  withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
+//    }
 }
 
 - (void)getFansListWithLevel:(NSInteger)levelId andPageSize:(NSInteger)pageSize andPageNum:(NSInteger)pageNum andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {

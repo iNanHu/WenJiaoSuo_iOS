@@ -186,28 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WenminYizhangtong/WJSLoginVC.m"
-            timestampString = "492406897.266657"
+            timestampString = "492752479.506543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "126"
             endingLineNumber = "126"
             landmarkName = "-loginResult:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WenminYizhangtong/WJSLoginVC.m"
-            timestampString = "492406897.266657"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "-Login"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -368,6 +352,38 @@
             startingLineNumber = "104"
             endingLineNumber = "104"
             landmarkName = "-initFansDataWithLevel1"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WenminYizhangtong/WJSDataManager.m"
+            timestampString = "492753964.120025"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "-getPhoneCheckNumWithPhoneNum:andSucc:andFail:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WenminYizhangtong/WJSRegisterVC.m"
+            timestampString = "492753964.120025"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "-getPhoneCheckNum:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

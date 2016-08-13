@@ -17,6 +17,10 @@
 		7B0C65681D163E2200C54B56 /* OneAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C65671D163E2200C54B56 /* OneAccountVC.m */; };
 		7B0C656B1D163E4000C54B56 /* UserCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C656A1D163E4000C54B56 /* UserCenterVC.m */; };
 		7B1D9FCD1D5B91F700266E89 /* WoolZoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D9FCC1D5B91F700266E89 /* WoolZoneVC.m */; };
+		7B1D9FDA1D5CD28700266E89 /* 隆@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D9FD61D5CD28700266E89 /* 隆@2x.png */; };
+		7B1D9FDB1D5CD28700266E89 /* 生@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D9FD71D5CD28700266E89 /* 生@2x.png */; };
+		7B1D9FDC1D5CD28700266E89 /* 兴@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D9FD81D5CD28700266E89 /* 兴@2x.png */; };
+		7B1D9FDD1D5CD28700266E89 /* 意@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D9FD91D5CD28700266E89 /* 意@2x.png */; };
 		7B31B69F1D2DD58D007B63AF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B31B69E1D2DD58D007B63AF /* AdSupport.framework */; };
 		7B31B6A11D2DD59A007B63AF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B31B6A01D2DD59A007B63AF /* Security.framework */; };
 		7B31B6A31D2DD5A6007B63AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B31B6A21D2DD5A6007B63AF /* SystemConfiguration.framework */; };
@@ -167,9 +171,6 @@
 		7BC898171D5784B00086C78D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BC898151D5784B00086C78D /* LaunchScreen.storyboard */; };
 		7BC8981B1D58E2550086C78D /* RegTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8981A1D58E2550086C78D /* RegTableViewCell.xib */; };
 		7BD756151D1CB5A7000CA7EF /* WJSTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD756141D1CB5A7000CA7EF /* WJSTool.m */; };
-		7BD756331D21850F000CA7EF /* home_index1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756281D21850F000CA7EF /* home_index1.png */; };
-		7BD756341D21850F000CA7EF /* home_index2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD756291D21850F000CA7EF /* home_index2.png */; };
-		7BD756351D21850F000CA7EF /* home_index3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD7562A1D21850F000CA7EF /* home_index3.png */; };
 		7BEC05901D1199770047A2E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC058F1D1199770047A2E3 /* main.m */; };
 		7BEC05931D1199770047A2E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC05921D1199770047A2E3 /* AppDelegate.m */; };
 		7BEC05991D1199770047A2E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEC05971D1199770047A2E3 /* Main.storyboard */; };
@@ -201,6 +202,10 @@
 		7B0C656A1D163E4000C54B56 /* UserCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterVC.m; sourceTree = "<group>"; };
 		7B1D9FCB1D5B91F700266E89 /* WoolZoneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WoolZoneVC.h; sourceTree = "<group>"; };
 		7B1D9FCC1D5B91F700266E89 /* WoolZoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WoolZoneVC.m; sourceTree = "<group>"; };
+		7B1D9FD61D5CD28700266E89 /* 隆@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "隆@2x.png"; sourceTree = "<group>"; };
+		7B1D9FD71D5CD28700266E89 /* 生@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "生@2x.png"; sourceTree = "<group>"; };
+		7B1D9FD81D5CD28700266E89 /* 兴@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "兴@2x.png"; sourceTree = "<group>"; };
+		7B1D9FD91D5CD28700266E89 /* 意@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "意@2x.png"; sourceTree = "<group>"; };
 		7B31B69E1D2DD58D007B63AF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		7B31B6A01D2DD59A007B63AF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7B31B6A21D2DD5A6007B63AF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -395,9 +400,6 @@
 		7BC8981A1D58E2550086C78D /* RegTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegTableViewCell.xib; sourceTree = "<group>"; };
 		7BD756131D1CB5A7000CA7EF /* WJSTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSTool.h; sourceTree = "<group>"; };
 		7BD756141D1CB5A7000CA7EF /* WJSTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSTool.m; sourceTree = "<group>"; };
-		7BD756281D21850F000CA7EF /* home_index1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_index1.png; sourceTree = "<group>"; };
-		7BD756291D21850F000CA7EF /* home_index2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_index2.png; sourceTree = "<group>"; };
-		7BD7562A1D21850F000CA7EF /* home_index3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_index3.png; sourceTree = "<group>"; };
 		7BEC058B1D1199770047A2E3 /* 文龙一账通.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "文龙一账通.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BEC058F1D1199770047A2E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7BEC05911D1199770047A2E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -617,6 +619,10 @@
 		7B31B6E71D3D2A2C007B63AF /* usercenter */ = {
 			isa = PBXGroup;
 			children = (
+				7B1D9FD61D5CD28700266E89 /* 隆@2x.png */,
+				7B1D9FD71D5CD28700266E89 /* 生@2x.png */,
+				7B1D9FD81D5CD28700266E89 /* 兴@2x.png */,
+				7B1D9FD91D5CD28700266E89 /* 意@2x.png */,
 				7B31B87F1D4D1CB8007B63AF /* psw@2x.png */,
 				7B31B8801D4D1CB8007B63AF /* user@2x.png */,
 				7B31B76B1D434924007B63AF /* ad.jpg */,
@@ -814,9 +820,6 @@
 				7B31B7621D432BB7007B63AF /* zx_icons.png */,
 				7B31B7331D3FDB00007B63AF /* haha.png */,
 				7B94032C1D22D60D00DBA882 /* defCellImg.png */,
-				7BD756281D21850F000CA7EF /* home_index1.png */,
-				7BD756291D21850F000CA7EF /* home_index2.png */,
-				7BD7562A1D21850F000CA7EF /* home_index3.png */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -969,13 +972,13 @@
 				7B9403291D22CAEF00DBA882 /* WJSInfoCell.xib in Resources */,
 				7B31B7121D3D357F007B63AF /* nav_back.png in Resources */,
 				7B31B74C1D427CD6007B63AF /* push_remind.png in Resources */,
+				7B1D9FDB1D5CD28700266E89 /* 生@2x.png in Resources */,
 				7B31B8671D492AE9007B63AF /* 南昌文交所.png in Resources */,
 				7B31B7EA1D4830B4007B63AF /* tabbar_icon_equity.png in Resources */,
 				7B94038A1D2ADA3600DBA882 /* QuotationInfo.plist in Resources */,
 				7B31B8821D4D1CB8007B63AF /* user@2x.png in Resources */,
 				7B31B7EB1D4830B4007B63AF /* tabbar_icon_equity@2x.png in Resources */,
 				7B31B7F21D4830B4007B63AF /* tabbar_icon_mine@3x.png in Resources */,
-				7BD756351D21850F000CA7EF /* home_index3.png in Resources */,
 				7B31B86A1D492AE9007B63AF /* 安贵票证.png in Resources */,
 				7BC898141D577C230086C78D /* launchImage@5x.png in Resources */,
 				7B31B6D51D34039A007B63AF /* Info.plist in Resources */,
@@ -993,7 +996,6 @@
 				7B31B7EC1D4830B4007B63AF /* tabbar_icon_equity@3x.png in Resources */,
 				7B31B7631D432BB7007B63AF /* agree_icons.png in Resources */,
 				7B31B8731D492AE9007B63AF /* 湖南文交所.png in Resources */,
-				7BD756331D21850F000CA7EF /* home_index1.png in Resources */,
 				7B31B7F51D4830B4007B63AF /* tabbar_icon_news_highlight@3x.png in Resources */,
 				7B31B77B1D47CB1F007B63AF /* QuotationCell.xib in Resources */,
 				7B31B7FB1D4830B4007B63AF /* tabbar_icon_onlie_highlight@3x.png in Resources */,
@@ -1008,6 +1010,7 @@
 				7B31B8761D492AE9007B63AF /* 赵涌牛.png in Resources */,
 				7B31B8641D492AE9007B63AF /* 南京文交所.png in Resources */,
 				7B31B8691D492AE9007B63AF /* 宁夏文交所.png in Resources */,
+				7B1D9FDD1D5CD28700266E89 /* 意@2x.png in Resources */,
 				7B31B70F1D3D357F007B63AF /* nav_add.png in Resources */,
 				7B31B76C1D434924007B63AF /* ad.jpg in Resources */,
 				7B31B74B1D427CD6007B63AF /* feedback.png in Resources */,
@@ -1020,6 +1023,7 @@
 				7B31B8661D492AE9007B63AF /* 南方文交所.png in Resources */,
 				7B31B74D1D427CD6007B63AF /* share.png in Resources */,
 				7BEC05991D1199770047A2E3 /* Main.storyboard in Resources */,
+				7B1D9FDA1D5CD28700266E89 /* 隆@2x.png in Resources */,
 				7B31B7EF1D4830B4007B63AF /* tabbar_icon_mine_highlight@3x.png in Resources */,
 				7B31B8721D492AE9007B63AF /* 湖南华艺.png in Resources */,
 				7B31B7651D432BB7007B63AF /* icon_gg.png in Resources */,
@@ -1038,6 +1042,7 @@
 				7B31B7341D3FDB00007B63AF /* haha.png in Resources */,
 				7B31B8781D492AE9007B63AF /* 金马甲.png in Resources */,
 				7B31B7641D432BB7007B63AF /* dzp_icon.png in Resources */,
+				7B1D9FDC1D5CD28700266E89 /* 兴@2x.png in Resources */,
 				7B31B7511D427CD6007B63AF /* self_selector.png in Resources */,
 				7B31B86C1D492AE9007B63AF /* 广州邮币卡.png in Resources */,
 				7B31B7111D3D357F007B63AF /* nav_add@3x.png in Resources */,
@@ -1046,7 +1051,6 @@
 				7B31B8741D492AE9007B63AF /* 湖南联合.png in Resources */,
 				7B31B72E1D3E8055007B63AF /* 120.png in Resources */,
 				7B31B85E1D492AE9007B63AF /* 中国艺交所.png in Resources */,
-				7BD756341D21850F000CA7EF /* home_index2.png in Resources */,
 				7B31B7ED1D4830B4007B63AF /* tabbar_icon_mine_highlight.png in Resources */,
 				7B31B7F41D4830B4007B63AF /* tabbar_icon_news_highlight@2x.png in Resources */,
 			);

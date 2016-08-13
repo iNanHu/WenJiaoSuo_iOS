@@ -94,7 +94,7 @@
         }
         if (rangeRaw.location == NSNotFound) continue;
         NSString *keyVal = [strRaw substringWithRange:rangeRaw];
-        NSLog(@"keyVal: %@",keyVal);
+        //NSLog(@"keyVal: %@",keyVal);
         [dicQuotaion setObject:keyVal forKey:arrTitleName[i]];
     }
     
@@ -168,8 +168,15 @@
 #pragma 验证码判断
 + (BOOL)chekSecurityCode:(NSString *) code {
     
-    if (code && ![code isEqualToString:@""])
+    if (!code || [code isEqualToString:@""])
+        return NO;
+    
+    NSString * checkNum = @"^[0-9]{4}$";
+    NSPredicate *regCheckNum = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", checkNum];
+    
+    if ([regCheckNum evaluateWithObject:code] == YES)
         return YES;
+    
     return NO;
 }
 
