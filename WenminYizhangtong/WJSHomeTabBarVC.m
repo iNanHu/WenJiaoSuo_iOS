@@ -42,6 +42,14 @@
     item4.image = IMAGEOF(@"tabbar_icon_mine_highlight");
     item4.selectedImage = IMAGEOF(@"tabbar_icon_mine_highlight");
     item4.title = @"个人中心";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SwitchToRegStatus) name:NotiWJSRegStatusFail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SwitchToRegStatus) name:NotiWJSRegStatusSucc object:nil];
+}
+
+- (void)SwitchToRegStatus {
+    self.selectedIndex = 2;
+    //[[NSNotificationCenter defaultCenter]postNotificationName:NotiWJSRegStatusSucc object:nil];
 }
 
 - (void)setTabrItemStyleWithFontSize:(CGFloat)fontSize {

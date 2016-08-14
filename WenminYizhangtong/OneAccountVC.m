@@ -60,6 +60,9 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SwitchToRegStatus) name:NotiWJSRegStatusFail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SwitchToRegStatus) name:NotiWJSRegStatusSucc object:nil];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
@@ -71,6 +74,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+}
+
+- (void)SwitchToRegStatus {
+    
+    [self.tabBarController setSelectedIndex:1];
+    [self rightAction];
 }
 
 - (void)rightAction {
@@ -264,7 +273,7 @@
     }
     
     NSString *strTitle = sender.titleLabel.text;
-    NSDictionary *userInfo = [_arrWJSHandInfo objectAtIndex:sender.tag];
+    NSDictionary *userInfo = [_arrWJSOnekeyInfo objectAtIndex:sender.tag];
     if ([strTitle isEqualToString:@"一键开户"]) {//一键开户
         SuccBlock succBlock = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
             NSString *resVal = [responseObject objectForKey:@"msg"];

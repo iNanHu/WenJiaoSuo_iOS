@@ -6,27 +6,28 @@
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
 
+#define TableHeaderHeight 55
+#define TableCellHeight 80 
+#define TableCellId @"tableViewCellId"
+
 #import "MemberCenterVC.h"
 #import "WJSCommonDefine.h"
 #import "WJSDataModel.h"
 #import "WJSDataManager.h"
 
-@interface MemberCenterVC ()
+@interface MemberCenterVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UIImageView *headIconImgView;
 @property (weak, nonatomic) IBOutlet UIImageView *myDegreeView;
 @property (weak, nonatomic) IBOutlet UILabel *nickLab;
-@property (weak, nonatomic) IBOutlet UIButton *tongBtn;
-@property (weak, nonatomic) IBOutlet UIButton *yinBtn;
-@property (weak, nonatomic) IBOutlet UIButton *jinBtn;
-@property (weak, nonatomic) IBOutlet UIButton *zuanBtn;
-@property (weak, nonatomic) IBOutlet UILabel *detailLab;
-@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UILabel *degreeLab;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 //data
 @property (nonatomic, strong)NSMutableDictionary *dicUserInfo;
 @property (nonatomic, strong)NSArray *arrImg;
 @property (nonatomic, strong)NSArray *arrDetailInfo;
+@property (nonatomic, strong)NSArray *arrTitleInfo;
 @end
 
 @implementation MemberCenterVC
@@ -35,11 +36,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"会员中心";
-    _arrImg = @[@"生",@"意",@"兴",@"隆"];
-    _arrDetailInfo = @[@"荣升标准：一度粉丝与二度粉丝数量之和超过3个。\n恭喜您，铜牌任务已通关！您已经迈上文交经纪人的康庄大道！再接再厉哦！",
-                       @"荣升标准：一度粉丝与二度粉丝数量之和超过36个。\n恭喜您，银牌任务已通关！表现不错哦！即将进入中产阶层！为你加油哦！",
-                       @"荣升标准：一度粉丝与二度粉丝数量之和超过120个。\n恭喜您，金牌任务已通关！您简直太出色了！此时的你，已经实现中产收入，迈向富豪阶层！",
-                       @"荣升标准：一度粉丝与二度粉丝数量之和超过600个。\n恭喜您，荣升为文龙一账通的钻石合伙人！您证实了您是最杰出的！文龙一账通，整合文交全产业链，与您一起开启财富殿堂的大门！您即将年入千万级！请马上与客服联系，与我们正式签约。"];
+    _arrImg = @[@"tong",@"yin",@"jin",@"zuan"];
+    _arrTitleInfo = @[@"铜牌经纪人",@"银牌经纪人",@"金牌经纪人",@"钻石合伙人"];
+    _arrDetailInfo = @[@"3个",@"36个",@"120个",@"600个"];
     _dicUserInfo = [[WJSDataModel shareInstance] dicUserInfo];
     [self initCtrl];
     [self initData];
@@ -52,61 +51,39 @@
     NSString *strRank = [_dicUserInfo objectForKey:@"rank"];
     if ([strRank isEqual:[NSNull null]]) {
         rank = 0;
+    }else {
+        for (int i = 0; i < _arrTitleInfo.count; i++) {
+            if ([strRank isEqualToString:_arrTitleInfo[i]]) {
+                rank = i;
+                break;
+            }
+        }
     }
     
-   _headIconImgView.image = [UIImage imageNamed:@"58"];
+   _headIconImgView.image = [UIImage imageNamed:@"default"];
     _myDegreeView.image = [UIImage imageNamed:_arrImg[rank]];
-    _nickLab.text = [NSString stringWithFormat:@"Hi,%@",strNickName];
-    _detailLab.text = _arrDetailInfo[rank];
+    _nickLab.text = [NSString stringWithFormat:@"Hi，%@",strNickName];
+    _degreeLab.text = [NSString stringWithFormat:@"您当前为%@",_arrTitleInfo[rank]];
 }
 
 - (void)initCtrl {
     
+    _headIconImgView.layer.borderColor = [UIColor whiteColor].CGColor;
+    _headIconImgView.layer.borderWidth = 4.0/UI_MAIN_SCALE;
     _headIconImgView.layer.cornerRadius = 40.f;
+    _headIconImgView.layer.masksToBounds = YES;
     _myDegreeView.layer.cornerRadius = 15.f;
     
-    _tongBtn.layer.cornerRadius = 30.f;
-    _yinBtn.layer.cornerRadius = 30.f;
-    _jinBtn.layer.cornerRadius = 30.f;
-    _zuanBtn.layer.cornerRadius = 30.f;
-    
-    _tongBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
-    _tongBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
-    _yinBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
-    _jinBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
-    _zuanBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
-    
-    _tongBtn.layer.masksToBounds = YES;
-    _tongBtn.layer.masksToBounds = YES;
-    _yinBtn.layer.masksToBounds = YES;
-    _jinBtn.layer.masksToBounds = YES;
-    _zuanBtn.layer.masksToBounds = YES;
-    
-    _tongBtn.tag = 0;
-    _yinBtn.tag = 1;
-    _jinBtn.tag = 2;
-    _zuanBtn.tag = 3;
-    
-    [_tongBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_yinBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_jinBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_zuanBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    _headView.layer.cornerRadius = 5.f;
-    _contentView.layer.cornerRadius = 5.f;
-    _detailLab.textColor = [UIColor whiteColor];
-    _detailLab.font = [UIFont systemFontOfSize:14.f];
-    [_contentView setBackgroundColor:RGB(37, 109, 236)];
-}
-
-- (void)btnAction:(UIButton *)btn {
-    
-    _tongBtn.layer.borderColor = RGB(0x9B, 0x9B, 0x9B).CGColor;
-    _yinBtn.layer.borderColor = RGB(0x9B, 0x9B, 0x9B).CGColor;
-    _jinBtn.layer.borderColor = RGB(0x9B, 0x9B, 0x9B).CGColor;
-    _zuanBtn.layer.borderColor = RGB(0x9B, 0x9B, 0x9B).CGColor;
-    btn.layer.borderColor = RGB(0xC0, 0xC0, 0xC0).CGColor;
-    _detailLab.text = _arrDetailInfo[btn.tag];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    [_tableView registerNib:[UINib nibWithNibName:@"MemberCenterCell" bundle:nil] forCellReuseIdentifier:TableCellId];
+    if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [_tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([_tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [_tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -115,20 +92,106 @@
     self.tabBarController.tabBar.hidden = YES;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0)
+        return  TableHeaderHeight;
+    return 0.1f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    return .1f;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return _arrTitleInfo.count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return TableCellHeight;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, TableHeaderHeight)];
+    [headView setBackgroundColor:[UIColor whiteColor]];
+    
+    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, TableHeaderHeight)];
+    [titleLab setText:@"等级"];
+    [titleLab setFont:[UIFont systemFontOfSize:14.f]];
+    titleLab.textColor = RGB(82, 82, 82);
+    [titleLab setTextAlignment:NSTextAlignmentCenter];
+    [headView addSubview:titleLab];
+    
+    UILabel *contentLab = [[UILabel alloc] initWithFrame:CGRectMake(150, 0, UI_SCREEN_WIDTH - 150, TableHeaderHeight)];
+    [contentLab setText:@"荣升标准\n(一度粉丝与二度粉丝数量之和>=)"];
+    contentLab.textColor = RGB(82, 82, 82);
+    contentLab.lineBreakMode = UILineBreakModeWordWrap;
+    [contentLab setNumberOfLines:0];
+    [contentLab setTextAlignment:NSTextAlignmentCenter];
+    [contentLab setFont:[UIFont systemFontOfSize:14.f]];
+    [headView addSubview:contentLab];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(150, 5, 2.0/UI_MAIN_SCALE, TableHeaderHeight - 10)];
+    [lineView setBackgroundColor:RGB(0xA0, 0xA0, 0xA0)];
+    [headView addSubview:lineView];
+    
+    return headView;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TableCellId forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TableCellId];
+    }
+    UIImageView *iconView = [cell viewWithTag:100];
+    UILabel *iconLab = [cell viewWithTag:101];
+    UILabel *contentLab = [cell viewWithTag:102];
+    [iconView setImage:[UIImage imageNamed:_arrImg[indexPath.row]]];
+    [iconLab setText:_arrTitleInfo[indexPath.row]];
+    [contentLab setText:_arrDetailInfo[indexPath.row]];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+        
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -41,6 +41,7 @@
    
     self.hidLeftButton = YES;
     [self initView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SwitchToMyFans) name:NotiWJSRegStatusSucc object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -85,6 +86,11 @@
     self.navigationItem.hidesBackButton = YES;
 }
 
+- (void)SwitchToMyFans {
+    self.tabBarController.selectedIndex = 3;
+    [self onMySubor];
+}
+
 - (void)viewDidLayoutSubviews {
     
     [_headView resizeView];
@@ -98,7 +104,6 @@
     
     NSDictionary *dicUserInfo = [[WJSDataModel shareInstance] dicUserInfo];
     NSString *phoneNum = [dicUserInfo objectForKey:@"telphone"];
-    //NSLog(@"UserCenter: %@ phoneNum:%@",dicUserInfo.description,phoneNum);
     if (dicUserInfo && ![[dicUserInfo objectForKey:@"telphone"]isEqual:[NSNull null]]) {
         _arrName = @[@[@""],@[@"账号管理"],@[@"推送消息提醒",@"意见反馈",@"关于我们",@"我要分享"]];
     } else {
@@ -224,7 +229,6 @@
 }
 
 - (void)onUserCenter {
-    
     [self performSegueWithIdentifier:NAV_TO_MEMCENTERVC sender:nil];
 }
 

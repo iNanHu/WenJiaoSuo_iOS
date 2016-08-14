@@ -233,7 +233,7 @@
         NSLog(@"fail:%@",error);
     };
     
-    [[WJSDataManager shareInstance]getPhoneCheckNumWithPhoneNum:@"13616502532" andSucc:succBlock andFail:failBlock];
+    [[WJSDataManager shareInstance]getPhoneCheckNumWithPhoneNum:strName andSucc:succBlock andFail:failBlock];
     return;
 }
 

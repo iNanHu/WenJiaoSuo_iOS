@@ -74,8 +74,23 @@
     NSDictionary * userInfo = [notification userInfo];
     NSString *content = [userInfo valueForKey:@"content"];
     NSDictionary *extras = [userInfo valueForKey:@"extras"];
+    NSInteger type = [[extras objectForKey:@"type"] integerValue];
     NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
     NSLog(@"content: %@ extras: %@ custom: %@",userInfo.description,extras.description,customizeField1);
+    switch (type) {
+        case 1: //开户成功
+            
+            break;
+        case 2: //驳回
+            
+            break;
+        case 3: //新粉丝
+            [[NSNotificationCenter defaultCenter]postNotificationName:NotiNewFansJoin object:nil];
+            break;
+        default:
+            break;
+    }
+    
 }
 
 
@@ -251,7 +266,14 @@ fetchCompletionHandler:
     [JPUSHService handleRemoteNotification:userInfo];
     NSLog(@"收到通知:%@", [self logDic:userInfo]);
     //[rootViewController addNotificationCount];
-    
+    NSInteger msgType = [[userInfo objectForKey:@"type"]integerValue];
+    NSDictionary *dicTmep = [userInfo objectForKey:@"aps"];
+    NSString *strAlert = [dicTmep objectForKey:@"alert"];
+    if (msgType == 1) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:NotiWJSRegStatusSucc object:nil];
+    } else if(msgType == 2){
+        [[NSNotificationCenter defaultCenter]postNotificationName:NotiWJSRegStatusFail object:nil];
+    }
     completionHandler(UIBackgroundFetchResultNewData);
 }
 

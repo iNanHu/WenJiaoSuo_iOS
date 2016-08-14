@@ -359,6 +359,7 @@
             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             QuotationVC *destVC = [storyBoard instantiateViewControllerWithIdentifier:@"QuotationVC"];
             if (destVC) {
+                destVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:destVC animated:YES];
             }
         }
