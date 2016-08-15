@@ -60,8 +60,8 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SwitchToRegStatus) name:NotiWJSRegStatusFail object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SwitchToRegStatus) name:NotiWJSRegStatusSucc object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rightAction) name:NotiTabToRegStatusFail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rightAction) name:NotiTabToRegStatusSucc object:nil];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
@@ -76,12 +76,6 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
-- (void)SwitchToRegStatus {
-    
-    [self.tabBarController setSelectedIndex:1];
-    [self rightAction];
-}
-
 - (void)rightAction {
     
     NSString *strUid = [[WJSDataModel shareInstance] uId];
@@ -89,6 +83,15 @@
         [self showAlertViewWithTitle:@"您尚未登录!"];
         return;
     }
+    //禁止重复跳转
+    NSArray *arrViews = self.navigationController.viewControllers;
+    if (arrViews && arrViews.count != 0) {
+        UIViewController *curVc = arrViews[arrViews.count - 1];
+        if ([curVc isKindOfClass:[WJSApplyStatusVC class]]) {
+            return;
+        }
+    }
+    
     [self performSegueWithIdentifier:NavToApplyStatus sender:_arrWJSOnekeyInfo];
 }
 

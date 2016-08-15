@@ -23,7 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userIconView;
 @property (weak, nonatomic) IBOutlet UIImageView *psdIconView;
 @property (weak, nonatomic) IBOutlet UIButton *forgetPsdBtn;
-@property (weak, nonatomic) IBOutlet UIButton *bgBtn;
 @end
 
 @implementation WJSLoginVC
@@ -93,7 +92,7 @@
     
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    self.navigationController.navigationBar.hidden = YES;
+    //self.navigationController.navigationBar.hidden = YES;
 }
 
 
@@ -133,7 +132,7 @@
         [self getUserDetailInfo];
         NSLog(@"登录成功:%@",uId);
         [self showAlertViewWithTitle:@"登录成功！"];
-        [self performSegueWithIdentifier:NAV_TO_HOMEVC sender:nil];
+        [self.navigationController popViewControllerAnimated:YES];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];
         NSLog(@"登录失败，error[%@]",errMsg);

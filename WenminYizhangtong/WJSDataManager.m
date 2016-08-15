@@ -202,15 +202,7 @@
     
     NSDictionary *dicParams = @{@"mobile":phoneNum};
     NSString *strUrl = [NSString stringWithFormat:@"%@user/check_mobile",SERV_ADDR];
-//    NSError *error;
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicParams
-//                                                       options:NSJSONWritingPrettyPrinted
-//                                                         error:&error];
-//    if (! jsonData) {
-//        NSLog(@"Got an error: %@", error);
-//    } else {
-        [self getMsg:strUrl withUid:nil  withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
-//    }
+    [self getMsg:strUrl withUid:nil  withParams:dicParams withSuccBlock:succBlock withFailBlock:failBlock];
 }
 
 - (void)getFansListWithLevel:(NSInteger)levelId andPageSize:(NSInteger)pageSize andPageNum:(NSInteger)pageNum andSucc:(SuccBlock) succBlock andFail:(FailBlock) failBlock {

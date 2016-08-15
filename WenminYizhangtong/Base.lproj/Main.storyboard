@@ -155,12 +155,11 @@
                         <outlet property="psdTextView" destination="plc-uH-G9f" id="gWD-nC-PKy"/>
                         <outlet property="registerBtn" destination="N0d-WA-D5f" id="zfU-ES-zE3"/>
                         <outlet property="userIconView" destination="PGP-Nx-Jwq" id="Yot-Y0-6LU"/>
-                        <segue destination="ka6-ee-RMZ" kind="push" identifier="Nav_To_HomeVC" id="gWy-hp-hSS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1651.5" y="1989.5"/>
+            <point key="canvasLocation" x="2974.5" y="2555.5"/>
         </scene>
         <!--注册-->
         <scene sceneID="BkR-uM-rYj">
@@ -219,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0A-ue-ipu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1929.5" y="2756.5"/>
+            <point key="canvasLocation" x="3478.5" y="3012.5"/>
         </scene>
         <!--Default Nav-->
         <scene sceneID="UOF-HJ-gVR">
@@ -264,7 +263,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="exC-Bh-6qo"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="push" identifier="Nav_To_LoginVC" id="3kB-ET-XrS"/>
                         <segue destination="ka6-ee-RMZ" kind="push" identifier="Nav_To_DHomeVC" id="ElN-NC-4qh"/>
                     </connections>
                 </viewController>
@@ -335,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMK-A1-3Il" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1293.5" y="2756.5"/>
+            <point key="canvasLocation" x="3478.5" y="2286.5"/>
         </scene>
         <!--Home Tab BarVC-->
         <scene sceneID="oUJ-sf-fvq">
@@ -1290,13 +1288,29 @@
                     <view key="view" contentMode="scaleToFill" id="BiT-lG-7K5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kkb-YP-T3E">
+                                <rect key="frame" x="-0.5" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Kkb-YP-T3E" firstAttribute="width" secondItem="BiT-lG-7K5" secondAttribute="width" id="8F2-eU-iTQ"/>
+                            <constraint firstItem="Kkb-YP-T3E" firstAttribute="top" secondItem="Vfo-Xr-Xnd" secondAttribute="bottom" id="DJD-kN-4oE"/>
+                            <constraint firstItem="cL4-VQ-17P" firstAttribute="top" secondItem="Kkb-YP-T3E" secondAttribute="bottom" id="OkP-EU-d7T"/>
+                            <constraint firstItem="Kkb-YP-T3E" firstAttribute="centerX" secondItem="BiT-lG-7K5" secondAttribute="centerX" id="wrm-ln-c42"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zo8-ZR-Qsb"/>
+                    <connections>
+                        <outlet property="tableView" destination="Kkb-YP-T3E" id="f7X-PL-6A5"/>
+                        <segue destination="iBA-3E-5bT" kind="push" identifier="NavToWoolZoneDetail" id="V7Y-u7-PRM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5N-0X-8US" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1013.5" y="46.5"/>
+            <point key="canvasLocation" x="1007.5" y="46.5"/>
         </scene>
         <!--行情-->
         <scene sceneID="PlD-v3-iyK">
@@ -1372,6 +1386,7 @@
                         <segue destination="6sD-Um-bQL" kind="show" identifier="NavToMyFansVC" id="1ev-kd-iHF"/>
                         <segue destination="wIu-GD-nBR" kind="push" identifier="NavToMemberCenterVC" id="OIY-gb-a4M"/>
                         <segue destination="5CP-kC-qx8" kind="push" identifier="NavToPersonDetail" id="SeF-cm-vwQ"/>
+                        <segue destination="BYZ-38-t0r" kind="push" identifier="NavToLoginVC" id="hoE-XC-paN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ov0-4r-Vdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1603,6 +1618,6 @@
         <image name="user.png" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ElN-NC-4qh"/>
+        <segue reference="V7Y-u7-PRM"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -118,7 +118,10 @@
 #define NotiGetNewsDetailSucc   @"getNewsDetailSucc"
 #define NotiWJSRegStatusSucc    @"regWjsStatusSucc"
 #define NotiWJSRegStatusFail    @"regWjsStatusFailed"
+#define NotiTabToRegStatusSucc  @"regTabToStatusSucc"
+#define NotiTabToRegStatusFail  @"regTabToStatusFailed"
 #define NotiNewFansJoin         @"newFansJoin"
+#define NotiTabToNewFansJoin    @"newTabToFansJoin"
 
 //网络请求的回调信息
 typedef void (^SuccBlock)(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject);

@@ -57,22 +57,23 @@
     NSString *resVal = [result objectForKey:@"msg"];
     if ([resVal isEqualToString:JSON_RES_SUCC]) {
         [[WJSDataModel shareInstance] setUId:@""];
-        [JPUSHService setTags:nil alias:nil fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
+        [JPUSHService setTags:nil alias:@"" fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
             NSLog(@"Logout rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, iTags, iAlias);
         }];
         NSLog(@"登出成功");
         [[WJSDataModel shareInstance] setUserPassword:@""];
         [[WJSDataModel shareInstance] setDicUserInfo:nil];
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        WJSLoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"WJSLoginVC"];
-        NSMutableArray *arrViewList = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-        for (UIViewController *tempVC in self.navigationController.viewControllers) {
-            if (![tempVC isEqual:self]) {
-                [arrViewList removeObject:tempVC];
-            }
-        }
-        self.navigationController.viewControllers = arrViewList;
-        [self.navigationController pushViewController:loginVC animated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        WJSLoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"WJSLoginVC"];
+//        NSMutableArray *arrViewList = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+//        for (UIViewController *tempVC in self.navigationController.viewControllers) {
+//            if (![tempVC isEqual:self]) {
+//                [arrViewList removeObject:tempVC];
+//            }
+//        }
+//        self.navigationController.viewControllers = arrViewList;
+//        [self.navigationController pushViewController:loginVC animated:YES];
     } else {
         NSString *errMsg = [result objectForKey:@"data"];
         NSLog(@"登出失败，error[%@]",errMsg);

@@ -5,6 +5,7 @@
 //  Created by sgyaaron on 16/6/19.
 //  Copyright © 2016年 alexyang. All rights reserved.
 //
+#define NavToLoginVC      @"NavToLoginVC"
 #define NavToPersonDetail @"NavToPersonDetail"
 #define TableViewCellId @"tableViewCellId"
 #define NavToUserAboutVC @"NavToAboutVC"
@@ -17,6 +18,7 @@
 #import "WJSCommonDefine.h"
 #import "WJSDataManager.h"
 #import "WJSDataModel.h"
+#import "MyFansVC.h"
 #import "WJSLoginVC.h"
 #import <UMSocial.h>
 #import <UMSocialQQHandler.h>
@@ -41,7 +43,7 @@
    
     self.hidLeftButton = YES;
     [self initView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SwitchToMyFans) name:NotiWJSRegStatusSucc object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onMySubor) name:NotiTabToNewFansJoin object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -84,11 +86,6 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.hidesBackButton = YES;
-}
-
-- (void)SwitchToMyFans {
-    self.tabBarController.selectedIndex = 3;
-    [self onMySubor];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -234,6 +231,15 @@
 
 - (void)onMySubor {
     
+    //禁止重复跳转
+    NSArray *arrViews = self.navigationController.viewControllers;
+    if (arrViews && arrViews.count != 0) {
+        UIViewController *curVc = arrViews[arrViews.count - 1];
+        if ([curVc isKindOfClass:[MyFansVC class]]) {
+            return;
+        }
+    }
+    
     [self performSegueWithIdentifier:NAV_TO_MYFANSVC sender:nil];
 }
 
@@ -286,7 +292,7 @@
         if (strUid && ![strUid isEqualToString:@""]) {
             [self performSegueWithIdentifier:NavToUserManagerVC sender:nil];
         } else {
-            [self segToLoginVC];
+            [self performSegueWithIdentifier:NavToLoginVC sender:nil];
         }
         
     } else if(indexPath.section == 1 && indexPath.row == 1){
@@ -298,20 +304,6 @@
     } else if(indexPath.section == 2 && indexPath.row == 3) {
         [self shareToSocialApp];
     }
-}
-
-- (void)segToLoginVC {
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    WJSLoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"WJSLoginVC"];
-    NSMutableArray *arrViewList = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-    for (UIViewController *tempVC in self.navigationController.viewControllers) {
-        if (![tempVC isEqual:self]) {
-            [arrViewList removeObject:tempVC];
-        }
-    }
-    self.navigationController.viewControllers = arrViewList;
-    [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

@@ -73,7 +73,7 @@
 - (void)initFansData {
     
     //一级粉丝
-    [self initFansDataWithLevel1];
+    //[self initFansDataWithLevel1];
     //二级粉丝
     [self performSelector:@selector(initFansDataWithLevel2) withObject:nil afterDelay:1.0];
 }

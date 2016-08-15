@@ -22,6 +22,7 @@
 @interface AppDelegate ()
 @property (nonatomic, strong) NSString *strUserName;
 @property (nonatomic, strong) NSString *strUserPsd;
+@property (nonatomic, assign) BOOL isEnterBG;   //是否进入后台
 @end
 
 @implementation AppDelegate
@@ -66,17 +67,68 @@
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    //点击消息推送启动APP，针对消息进行相应的处理
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+        NSString *title = [apsInfo objectForKey:@"alert"];
+        NSInteger msgType = [[userInfo objectForKey:@"type"]integerValue];
+        
+        if (application.applicationState == UIApplicationStateActive) {
+            
+            NSInteger msgCount;
+            UILocalNotification *msgNotify = [[UILocalNotification alloc] init];
+            msgNotify.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
+            msgNotify.timeZone = [NSTimeZone defaultTimeZone];
+            msgNotify.alertBody = title;
+            //msgCount = msgNotify.applicationIconBadgeNumber;
+            //msgNotify.applicationIconBadgeNumber = msgCount + 1;
+            msgNotify.alertAction = @"文龙一账通";
+            msgNotify.soundName = UILocalNotificationDefaultSoundName ; // 铃音 默认
+            [[UIApplication sharedApplication] scheduleLocalNotification:msgNotify];
+        }
+        
+        if (msgType == 1) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:NotiWJSRegStatusSucc object:nil];
+        } else if(msgType == 2){
+            [[NSNotificationCenter defaultCenter]postNotificationName:NotiWJSRegStatusFail object:nil];
+        } else if(msgType == 3) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:NotiNewFansJoin object:nil];
+        }
 
+    }
     return YES;
 }
 
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     NSDictionary * userInfo = [notification userInfo];
+    NSString *title = [userInfo objectForKey:@"title"];
     NSString *content = [userInfo valueForKey:@"content"];
     NSDictionary *extras = [userInfo valueForKey:@"extras"];
     NSInteger type = [[extras objectForKey:@"type"] integerValue];
     NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
     NSLog(@"content: %@ extras: %@ custom: %@",userInfo.description,extras.description,customizeField1);
+    
+    if(type == 3) {
+        
+        NSInteger msgCount;
+        UILocalNotification *msgNotify = [[UILocalNotification alloc] init];
+        msgNotify.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
+        msgNotify.timeZone = [NSTimeZone defaultTimeZone];
+        msgNotify.alertBody = content;
+        //msgCount = msgNotify.applicationIconBadgeNumber;
+        //msgNotify.applicationIconBadgeNumber = msgCount + 1;
+        msgNotify.alertAction = title;
+        msgNotify.soundName = UILocalNotificationDefaultSoundName ; // 铃音 默认
+        [[UIApplication sharedApplication] scheduleLocalNotification:msgNotify];
+    }
+    
+    
+    if (_isEnterBG) {
+        return;
+    }
+    
     switch (type) {
         case 1: //开户成功
             
@@ -115,17 +167,19 @@
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
 
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    _isEnterBG = YES;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [application setApplicationIconBadgeNumber:0];
     [application cancelAllLocalNotifications];
+    _isEnterBG = NO;
 }
 
 //- (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -256,7 +310,6 @@ forRemoteNotification:(NSDictionary *)userInfo
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [JPUSHService handleRemoteNotification:userInfo];
     NSLog(@"收到通知:%@", [self logDic:userInfo]);
-    //[rootViewController addNotificationCount];
 }
 
 - (void)application:(UIApplication *)application
@@ -265,10 +318,25 @@ fetchCompletionHandler:
 (void (^)(UIBackgroundFetchResult))completionHandler {
     [JPUSHService handleRemoteNotification:userInfo];
     NSLog(@"收到通知:%@", [self logDic:userInfo]);
-    //[rootViewController addNotificationCount];
+    NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+    NSString *title = [apsInfo objectForKey:@"alert"];
     NSInteger msgType = [[userInfo objectForKey:@"type"]integerValue];
-    NSDictionary *dicTmep = [userInfo objectForKey:@"aps"];
-    NSString *strAlert = [dicTmep objectForKey:@"alert"];
+    
+    if (application.applicationState == UIApplicationStateActive) {
+        
+        UILocalNotification *msgNotify = [[UILocalNotification alloc] init];
+        msgNotify.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
+        msgNotify.timeZone = [NSTimeZone defaultTimeZone];
+        msgNotify.alertBody = title;
+        //msgNotify.applicationIconBadgeNumber = msgCount + 1;
+        msgNotify.alertAction = @"文龙一账通";
+        msgNotify.soundName = UILocalNotificationDefaultSoundName ; // 铃音 默认
+        [[UIApplication sharedApplication] scheduleLocalNotification:msgNotify];
+    }
+    
+    if (_isEnterBG) {
+        return;
+    }
     if (msgType == 1) {
         [[NSNotificationCenter defaultCenter]postNotificationName:NotiWJSRegStatusSucc object:nil];
     } else if(msgType == 2){

@@ -32,7 +32,7 @@
     
     _applyStatusTableView.delegate = self;
     _applyStatusTableView.dataSource = self;
-    [_applyStatusTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ApplyStatusCell];
+    [_applyStatusTableView registerNib:[UINib nibWithNibName:@"ApplyStatusCell" bundle:nil] forCellReuseIdentifier:ApplyStatusCell];
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
@@ -99,12 +99,16 @@
     NSString *strImgUrl = [dicInfo objectForKey:ApplyWJSLogo];
     NSString *strWjsName = [dicInfo objectForKey:ApplyWJSName];
     NSString *detailInfo = [NSString stringWithFormat:@"开户账号：%@ 密码：%@",strUserName,strUserPass];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:strImgUrl] placeholderImage:[UIImage imageNamed:@"defCellImg"]];
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [cell.textLabel setText:strWjsName];
+    UIImageView *iconView = [cell viewWithTag:100];
+    UILabel *titleLab = [cell viewWithTag:101];
+    UILabel *statusLab = [cell viewWithTag:102];
+    UILabel *accLab = [cell viewWithTag:103];
+    [iconView sd_setImageWithURL:[NSURL URLWithString:strImgUrl] placeholderImage:[UIImage imageNamed:@"defCellImg"]];
+    
+    titleLab.text = strWjsName;
     
     if (nApplyStatus == 3) {
-        [cell.detailTextLabel setText:detailInfo];
+        accLab.text = detailInfo;
     }
     
     NSString *applyStatus = @"";
@@ -124,16 +128,12 @@
         default:
             break;
     }
-    
-    UIButton *applyStatusBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 95, 15, 80, 30)];
-    applyStatusBtn.tag = cell.tag;
-    [applyStatusBtn setTitle:applyStatus forState:UIControlStateNormal];
-    applyStatusBtn.layer.cornerRadius = 3.0f;
-    applyStatusBtn.layer.borderWidth = 2.0/UI_MAIN_SCALE;
-    [applyStatusBtn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
-    [applyStatusBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    applyStatusBtn.layer.borderColor = [UIColor redColor].CGColor;
-    [cell addSubview:applyStatusBtn];
+
+    statusLab.text = applyStatus;
+    statusLab.layer.cornerRadius = 3.0f;
+    statusLab.layer.borderWidth = 2.0/UI_MAIN_SCALE;
+    [statusLab setTextColor:[UIColor redColor]];
+    statusLab.layer.borderColor = [UIColor redColor].CGColor;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

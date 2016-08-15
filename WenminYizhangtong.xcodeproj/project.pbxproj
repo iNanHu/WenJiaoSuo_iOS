@@ -24,6 +24,8 @@
 		7B1D9FE81D5F548700266E89 /* yin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D9FE41D5F548700266E89 /* yin@2x.png */; };
 		7B1D9FE91D5F548700266E89 /* zuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D9FE51D5F548700266E89 /* zuan@2x.png */; };
 		7B1D9FEB1D5F8CDF00266E89 /* addImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D9FEA1D5F8CDF00266E89 /* addImage@2x.png */; };
+		7B1D9FED1D60B42100266E89 /* WoolZoonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D9FEC1D60B42100266E89 /* WoolZoonCell.xib */; };
+		7B1D9FEF1D60D34C00266E89 /* ApplyStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D9FEE1D60D34C00266E89 /* ApplyStatusCell.xib */; };
 		7B31B69F1D2DD58D007B63AF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B31B69E1D2DD58D007B63AF /* AdSupport.framework */; };
 		7B31B6A11D2DD59A007B63AF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B31B6A01D2DD59A007B63AF /* Security.framework */; };
 		7B31B6A31D2DD5A6007B63AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B31B6A21D2DD5A6007B63AF /* SystemConfiguration.framework */; };
@@ -212,6 +214,8 @@
 		7B1D9FE41D5F548700266E89 /* yin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yin@2x.png"; sourceTree = "<group>"; };
 		7B1D9FE51D5F548700266E89 /* zuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zuan@2x.png"; sourceTree = "<group>"; };
 		7B1D9FEA1D5F8CDF00266E89 /* addImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addImage@2x.png"; sourceTree = "<group>"; };
+		7B1D9FEC1D60B42100266E89 /* WoolZoonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WoolZoonCell.xib; sourceTree = "<group>"; };
+		7B1D9FEE1D60D34C00266E89 /* ApplyStatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyStatusCell.xib; sourceTree = "<group>"; };
 		7B31B69E1D2DD58D007B63AF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		7B31B6A01D2DD59A007B63AF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7B31B6A21D2DD5A6007B63AF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -524,6 +528,7 @@
 				7B31B77D1D47D1B9007B63AF /* QuotationModel.m */,
 				7B1D9FCB1D5B91F700266E89 /* WoolZoneVC.h */,
 				7B1D9FCC1D5B91F700266E89 /* WoolZoneVC.m */,
+				7B1D9FEC1D60B42100266E89 /* WoolZoonCell.xib */,
 			);
 			name = "行情";
 			sourceTree = "<group>";
@@ -541,6 +546,7 @@
 				7B31B73E1D4195C1007B63AF /* WJSApplyStatusVC.m */,
 				5A5701821D49D64800F8DF7B /* WJSTutotialVC.h */,
 				5A5701831D49D64800F8DF7B /* WJSTutotialVC.m */,
+				7B1D9FEE1D60D34C00266E89 /* ApplyStatusCell.xib */,
 			);
 			name = "一账通";
 			sourceTree = "<group>";
@@ -1000,6 +1006,7 @@
 				7B31B7681D432BB7007B63AF /* news_icons.png in Resources */,
 				7B31B85F1D492AE9007B63AF /* 九州邮币卡.png in Resources */,
 				7B31B7691D432BB7007B63AF /* sg_icon.png in Resources */,
+				7B1D9FED1D60B42100266E89 /* WoolZoonCell.xib in Resources */,
 				7BC898131D577C230086C78D /* launchImage@3x.png in Resources */,
 				7B31B85B1D492AE9007B63AF /* 上海文交所.png in Resources */,
 				7B31B8621D492AE9007B63AF /* 华夏文交所.png in Resources */,
@@ -1048,6 +1055,7 @@
 				7B31B8751D492AE9007B63AF /* 福丽特.png in Resources */,
 				7B31B8711D492AE9007B63AF /* 浙江联合.png in Resources */,
 				7B31B76A1D432BB7007B63AF /* zx_icons.png in Resources */,
+				7B1D9FEF1D60D34C00266E89 /* ApplyStatusCell.xib in Resources */,
 				7B31B8771D492AE9007B63AF /* 金陵文交所.png in Resources */,
 				7B31B8601D492AE9007B63AF /* 保利邮币卡.png in Resources */,
 				7B31B7341D3FDB00007B63AF /* haha.png in Resources */,

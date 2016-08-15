@@ -8,6 +8,7 @@
 
 #import "WJSHomeTabBarVC.h"
 #import "WJSCommonDefine.h"
+#import "WJSApplyStatusVC.h"
 
 @interface WJSHomeTabBarVC ()
 
@@ -45,11 +46,24 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SwitchToRegStatus) name:NotiWJSRegStatusFail object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SwitchToRegStatus) name:NotiWJSRegStatusSucc object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToMyFans) name:NotiNewFansJoin object:nil];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationItem.hidesBackButton = YES;
+}
+
+- (void)switchToMyFans {
+    self.selectedIndex = 3;
+    [[NSNotificationCenter defaultCenter]postNotificationName:NotiTabToNewFansJoin object:nil];
 }
 
 - (void)SwitchToRegStatus {
     self.selectedIndex = 2;
-    //[[NSNotificationCenter defaultCenter]postNotificationName:NotiWJSRegStatusSucc object:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:NotiTabToRegStatusSucc object:nil];
 }
 
 - (void)setTabrItemStyleWithFontSize:(CGFloat)fontSize {

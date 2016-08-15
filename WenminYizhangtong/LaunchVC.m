@@ -54,7 +54,7 @@
         NSString *strMD5Psd = [WJSTool getMD5Val:strUserPsd];
         [[WJSDataManager shareInstance]loginUserAccWithUserName:strUserName andUserPsd:strMD5Psd andSucc:succBlock andFail:failBlock];
     }else {
-        [self performSegueWithIdentifier:NavToLoginVC sender:nil];
+        [self performSegueWithIdentifier:NavToDefaultHomeVC sender:nil];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewsList) name:NotiGetNewsCategorySucc object:nil];
 }
@@ -72,7 +72,7 @@
     } else {
         NSString *errMsg = [result objectForKey:@"data"];
         NSLog(@"登录失败，error[%@]",errMsg);
-        [self performSegueWithIdentifier:NavToLoginVC sender:nil];
+        [self performSegueWithIdentifier:NavToDefaultHomeVC sender:nil];
     }
 }
 

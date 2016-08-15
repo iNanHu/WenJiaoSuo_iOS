@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WJSBaseVC.h"
 #import "UIViewController+HUD.h"
 
-@interface WJSLoginVC : UIViewController
+@interface WJSLoginVC : WJSBaseVC
 
 @end

@@ -50,7 +50,6 @@
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
     self.navigationItem.hidesBackButton = YES;
-    
 }
 
 - (void)initData {
